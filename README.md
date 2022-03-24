@@ -5,7 +5,7 @@
 
   ### I'm Arda, I'm working on html, css and javascript development, I'm sharing my projects here.
 
-  <style> Coffee is how I keep up with `< code />` </style>
+  <span> Coffee is how I keep up with `< code />` </span>
 
 
 ### Connect with me
