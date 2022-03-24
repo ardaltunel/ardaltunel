@@ -5,7 +5,7 @@
 
   ### I'm Arda, I'm working on html, css and javascript development, I'm sharing my projects here.
 
-  <span style="color: green"> Coffee is how I keep up with `< code />` </span>
+  <font color="green"> Coffee is how I keep up with `< code />` </font>
 
 
 ### Connect with me
