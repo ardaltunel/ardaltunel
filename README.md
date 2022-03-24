@@ -8,10 +8,4 @@
   #### Coffee is how I keep up with `< code />`
 
 
-### Connect with me
 
-<p align="left">
-<img src="https://komarev.com/ghpvc/?username=ardaltunel&color=blue" alt="ardaltunel :: Profile Stats"></a>
-<a href="mailto:arifardaaltunel@gmail.com"><img alt="Email" src="https://img.shields.io/badge/Email-click to email-blue?style=flat&logo=gmail"></a>
-<a href="https://www.instagram.com/arda.wqq/"><img alt="Instagram" src="https://img.shields.io/badge/Instagram-arda.wqq-blue?style=flat-flat&logo=instagram"></a>
-</p>
