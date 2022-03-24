@@ -5,7 +5,7 @@
 
   ### I'm Arda, I'm working on html, css and javascript development, I'm sharing my projects here.
 
-  <font color="red"> Coffee is how I keep up with `< code />` </font>
+  <span style="color: green"> Coffee is how I keep up with `< code />` </span>
 
 
 ### Connect with me
@@ -15,5 +15,3 @@
 <a href="mailto:arifardaaltunel@gmail.com"><img alt="Email" src="https://img.shields.io/badge/Email-click to email-blue?style=flat&logo=gmail"></a>
 <a href="https://www.instagram.com/arda.wqq/"><img alt="Instagram" src="https://img.shields.io/badge/Instagram-arda.wqq-blue?style=flat-flat&logo=instagram"></a>
 </p>
-
-
