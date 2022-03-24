@@ -15,3 +15,7 @@
 <a href="mailto:arifardaaltunel@gmail.com"><img alt="Email" src="https://img.shields.io/badge/Email-click to email-blue?style=flat&logo=gmail"></a>
 <a href="https://www.instagram.com/arda.wqq/"><img alt="Instagram" src="https://img.shields.io/badge/Instagram-arda.wqq-blue?style=flat-flat&logo=instagram"></a>
 </p>
+
+<p style='color:red'>This is some red text.</p>
+<font color="red">This is some text!</font>
+These are <b style='color:red'>red words</b>.
