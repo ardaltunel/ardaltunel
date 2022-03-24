@@ -19,4 +19,4 @@
 
 ### My Github Stats
 
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=ardaltunel&layout=compact&theme=dark">
+/*<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=ardaltunel&layout=compact&theme=dark">*/
