@@ -1,7 +1,7 @@
 <h1 align="center">Hi 👋, I'm Arda</h1>
 <h3 align="center">A passionate frontend developer from Turkish</h3>
 
-<img align="right" alt="coding" width="400" src="https://media4.giphy.com/media/qgQUggAC3Pfv687qPC/giphy.gif">
+<img align="right" alt="coding" width="400" src="https://64.media.tumblr.com/27a69fe9243c5d39d83e3a5a88a5c4ba/32a42778a011479f-c1/s1280x1920/04d5ce9ece88f84793d0e397ea6797f9bc768f2e.gifv">
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=ardaltunel&label=Profile%20views&color=0e75b6&style=flat" alt="ardaltunel" /> </p>
 
