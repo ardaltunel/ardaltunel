@@ -1,6 +1,8 @@
 <h1 align="center">Hi 👋, I'm Arda</h1>
 <h3 align="center">Coffee is how I keep up with</h3>
 
+<img data-target="animated-image.replacedImage" alt="Coding" class="AnimatedImagePlayer-animatedImage" src="https://camo.githubusercontent.com/683e2187241c641430216c864ce93fc5a0e0dfb232c5a01d1c54b54d63aa8cb2/68747470733a2f2f63646e2e6472696262626c652e636f6d2f75736572732f313136323037372f73637265656e73686f74732f333834383931342f70726f6772616d6d65722e676966" style="width: 400px; display: block; opacity: 1;">
+
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=ardaltunel&label=Profile%20views&color=0e75b6&style=flat" alt="ardaltunel" /> </p>
 
 <p align="left"> <a href="https://twitter.com/ardavakvak" target="blank"><img src="https://img.shields.io/twitter/follow/ardavakvak?logo=twitter&style=for-the-badge" alt="ardavakvak" /></a> </p>
