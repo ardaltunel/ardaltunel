@@ -7,11 +7,8 @@
 
 
 - 👨‍💻 Some of my projects are available at [Click Me](http://ardaltunel.github.io/)
-
 - 📄 Know about my experiences [Click Me](https://www.linkedin.com/in/ardaltunel/)
-
 - 📫 How to reach me **arifardaaltunel@gmail.com**
-
 - 🌱 I’m currently learning **Full Stack Developer**
 
 
