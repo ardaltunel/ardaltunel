@@ -1,4 +1,4 @@
-<img align="right" alt="coding" width="400" src="https://media3.giphy.com/media/L8K62iTDkzGX6/giphy.gif">
+[![MasterHead](https://media3.giphy.com/media/L8K62iTDkzGX6/giphy.gif)](https://github.com/ardaltunel)
 <h1 align="center">Hi 👋, I'm Arda</h1>
 <h3 align="center">Coffee is how I keep up with</h3>
 <img align="right" alt="coding" width="400" src="https://media4.giphy.com/media/qgQUggAC3Pfv687qPC/giphy.gif">
