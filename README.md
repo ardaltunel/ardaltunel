@@ -3,9 +3,10 @@
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=ardaltunel&label=Profile%20views&color=0e75b6&style=flat" alt="ardaltunel" /> </p>
 
+<img align="right" alt="coding" width="400" src="https://64.media.tumblr.com/27a69fe9243c5d39d83e3a5a88a5c4ba/32a42778a011479f-c1/s1280x1920/04d5ce9ece88f84793d0e397ea6797f9bc768f2e.gifv">
+
 <p align="left"> <a href="https://twitter.com/ardavakvak" target="blank"><img src="https://img.shields.io/twitter/follow/ardavakvak?logo=twitter&style=for-the-badge" alt="ardavakvak" /></a> </p>
 
-<img align="right" alt="coding" width="400" src="https://64.media.tumblr.com/27a69fe9243c5d39d83e3a5a88a5c4ba/32a42778a011479f-c1/s1280x1920/04d5ce9ece88f84793d0e397ea6797f9bc768f2e.gifv">
 
 - 👨‍💻 Some of my projects are available at [Click Me](http://ardaltunel.github.io/)
 
