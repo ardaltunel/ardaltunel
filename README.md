@@ -26,6 +26,6 @@
 
 <p><img align="left" src="https://github-readme-stats.vercel.app/api/top-langs?username=ardaltunel&show_icons=true&locale=en&layout=compact?theme=radical" alt="ardaltunel" /></p>
 
-<p>&nbsp;<img align="center" src="https://github-readme-stats.vercel.app/api?username=ardaltunel&show_icons=true&locale=en?theme=radical" alt="ardaltunel" /></p>
+![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=anuraghazra&show_icons=true&theme=radical)
 
-<p><img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=ardaltunel?theme=radical" alt="ardaltunel" /></p>
+[![GitHub Streak](http://github-readme-streak-stats.herokuapp.com?user=ardaltunel&theme=radical)](https://git.io/streak-stats)
