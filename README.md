@@ -9,9 +9,9 @@
 
 - 📄 Know about my experiences [Click Me](https://www.linkedin.com/in/ardaltunel/)
 
-- 🌱 I’m currently learning **Full Stack Developer**
-
 - 📫 How to reach me **arifardaaltunel@gmail.com**
+
+- 🌱 I’m currently learning **Full Stack Developer**
 
 
 <h3 align="left">Connect with me:</h3>
