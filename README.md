@@ -5,9 +5,9 @@
 
 <p align="left"> <a href="https://twitter.com/ardavakvak" target="blank"><img src="https://img.shields.io/twitter/follow/ardavakvak?logo=twitter&style=for-the-badge" alt="ardavakvak" /></a> </p>
 
-- 🌱 I’m currently learning **Full Stack Developer**
+- 👨‍💻 Some of my projects are available at [Arda Altunel](https://github.com/ardaltunel/ardaltunel.github.io)
 
-- 👨‍💻 Some of my projects are available at [https://github.com/ardaltunel](https://github.com/ardaltunel)
+- 🌱 I’m currently learning **Full Stack Developer**
 
 - 📫 How to reach me **arifardaaltunel@gmail.com**
 
