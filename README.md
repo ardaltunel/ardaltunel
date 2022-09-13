@@ -8,7 +8,7 @@
 
 - 👨‍💻 My personal website [Click Me](https://www.ardaltunel.com/)
 - 📄 Know about my experiences [Click Me](https://www.linkedin.com/in/ardaltunel/)
-- 📫 How to reach me **arifardaaltunel@gmail.com**
+- 📫 How to reach me **ardaltunelmain@gmail.com**
 - 🌱 I’m currently learning **Full Stack Developer**
 
 
