@@ -9,7 +9,7 @@
 <p align="left"> 
   <img src="https://komarev.com/ghpvc/?username=ardaltunel&label=Profile%20views&color=lightgrey&style=for-the-badge" alt="ardaltunel">
   <a href="https://twitter.com/ardavakvak" target="blank">
-    <img src="https://img.shields.io/twitter/follow/ardavakvak?logo=twitter&style=for-the-badge" alt="ardavakvak">
+    <img src="https://img.shields.io/badge/follow-%40ardavakvak-1DA1F2?logo=twitter&style=for-the-badge" alt="ardavakvak">
   </a>
 </p>
 
