@@ -10,7 +10,7 @@
   <img src="https://komarev.com/ghpvc/?username=ardaltunel&label=Profile%20views&color=lightgrey&style=for-the-badge"
        alt="ardaltunel">
   <a target="_blank"
-     href="https://twitter.com/ardavakvak">
+     href="https://twitter.com/ardaltunell">
       <img src="https://img.shields.io/badge/follow-%40ardavakvak-1DA1F2?logo=twitter&style=for-the-badge"
            alt="ardavakvak">
   </a>
