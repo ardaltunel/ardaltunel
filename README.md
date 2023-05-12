@@ -11,8 +11,8 @@
        alt="ardaltunel">
   <a target="_blank"
      href="https://twitter.com/ardaltunell">
-      <img src="https://img.shields.io/badge/follow-%40ardavakvak-1DA1F2?logo=twitter&style=for-the-badge"
-           alt="ardavakvak">
+      <img src="https://img.shields.io/badge/follow-%40ardaltunell-1DA1F2?logo=twitter&style=for-the-badge"
+           alt="ardaltunell">
   </a>
 </p>
 
@@ -41,11 +41,11 @@
              height="30"
              width="40"/>
     </a>
-    <a href="https://twitter.com/ardavakvak"
+    <a href="https://twitter.com/ardaltunell"
        target="blank">
         <img align="center"
              src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/twitter.svg"
-             alt="ardavakvak"
+             alt="ardaltunell"
              height="30"
              width="40"/>
     </a>
