@@ -34,7 +34,7 @@
     <a href="https://dev.to/ardaltunel" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/devto.svg" alt="devto" height="30" width="40"/></a>
 </p>
 
-<h3 align="left">	:hammer: Languages and Tools:</h3>
+<h3 align="left">:hammer: Languages and Tools:</h3>
 <p align="left">
      <a href="https://www.w3schools.com/cs/" 
           target="_blank"
@@ -121,13 +121,8 @@
              height="40"/></a>
 </p>
 
-
-<details>
-  <summary><h3>:bulb: Github Stats</h3></summary>
-
-  [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=ardaltunel&theme=tokyonight)](https://github.com/ardaltunel/github-readme-stats)
-
-  ![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=ardaltunel&show_icons=true&theme=tokyonight)
-
-  [![GitHub Streak](http://github-readme-streak-stats.herokuapp.com?user=ardaltunel&theme=tokyonight)](https://git.io/streak-stats)
-</details>
+<h3>:bulb: Github Stats:</h3>
+<div>
+     <img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=ardaltunel&layout=compact&langs_count=8&hide=css,html&theme=tokyonight">
+     <img height="180em" src="https://github-readme-stats.vercel.app/api?username=ardaltunel&show_icons=true&theme=tokyonight&include_all_commits=true&count_private=true">
+</div>
