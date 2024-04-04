@@ -1,5 +1,5 @@
 <h1 align="center">Hi 👋, I'm Arda</h1>
-<h3 align="center">A passionate Front-End developer from Turkish</h3>
+<h3 align="center">A passionate Front-End developer from Turkey</h3>
 
 <img align="right"
      alt="coding"
