@@ -1617,3 +1617,53 @@ h3 {
         display: none;
     }
 }
+
+.work-band .github-projects {
+    margin-top: 0;
+}
+
+.work-band .github-projects .subsection-heading {
+    display: none;
+}
+
+.github-card {
+    position: relative;
+    overflow: hidden;
+    min-height: 300px;
+    padding: 26px;
+    background:
+        linear-gradient(145deg, rgba(61, 220, 151, 0.10), transparent 34%),
+        linear-gradient(180deg, rgba(255,255,255,0.065), rgba(255,255,255,0.025));
+    box-shadow: 0 24px 70px rgba(0,0,0,0.22);
+}
+
+.github-card::after {
+    content: "Case Study";
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    padding: 6px 10px;
+    border: 1px solid rgba(61, 220, 151, 0.28);
+    border-radius: 999px;
+    color: var(--green);
+    background: rgba(61, 220, 151, 0.08);
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+}
+
+.github-card h3 {
+    margin-top: 6px;
+    font-size: 24px;
+}
+
+.github-card-footer {
+    margin-top: 4px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+}
+
+.github-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(61, 220, 151, 0.44);
+}
