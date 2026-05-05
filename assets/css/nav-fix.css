@@ -1,0 +1,24 @@
+.nav-links a {
+    background: transparent !important;
+    color: var(--muted) !important;
+    transform: none !important;
+}
+
+.nav-links a:hover {
+    background: transparent !important;
+    color: var(--text) !important;
+    transform: none !important;
+}
+
+.nav-links a.is-active,
+.nav-links a.is-active:hover,
+.nav-links a.is-active:focus {
+    background: var(--surface-hover) !important;
+    color: var(--text) !important;
+    transform: translateY(-1px) !important;
+}
+
+.nav-links a:not(.is-active):hover,
+.nav-links a:not(.is-active):focus {
+    background: transparent !important;
+}
