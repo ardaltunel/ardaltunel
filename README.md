@@ -34,18 +34,6 @@ http://127.0.0.1:4173/
 - `index.html` dosyasını yeniden üretir.
 - Değişiklikleri otomatik commit eder.
 
-Deneme sırasında workflow 5 dakikada bir çalışacak şekilde ayarlanmıştır:
-
-```yaml
-cron: "*/5 * * * *"
-```
-
-Canlı kullanımda daha sakin bir aralık için örnek:
-
-```yaml
-cron: "17 */6 * * *"
-```
-
 ## Dosya Yapısı
 
 - `index.html`: GitHub Pages'in yayınladığı statik sayfa.
