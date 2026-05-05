@@ -39,7 +39,7 @@
 
     const setActiveLink = (activeId) => {
         links.forEach((link) => {
-            link.classList.toggle("is-active", link.getAttribute("href") === `#${activeId}`);
+            link.classList.toggle("is-active", Boolean(activeId) && link.getAttribute("href") === `#${activeId}`);
         });
     };
 
@@ -64,7 +64,13 @@
 
         const scrollPoint = window.scrollY + headerOffset() + 30;
         const pageBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
-        let activeId = sections[0].id;
+        const firstSectionTop = sections[0].offsetTop;
+        let activeId = "";
+
+        if (window.scrollY < firstSectionTop - headerOffset() - 80) {
+            setActiveLink("");
+            return;
+        }
 
         if (pageBottom) {
             activeId = sections[sections.length - 1].id;
@@ -144,6 +150,7 @@
             closeMobileNav();
             scrollToTarget(target);
             setActiveLink(targetId.replace("#", ""));
+            window.setTimeout(updateActiveNav, 450);
             cleanHash();
         });
     });
