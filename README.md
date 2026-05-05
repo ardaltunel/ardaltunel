@@ -54,7 +54,3 @@ cron: "17 */6 * * *"
 - `assets/`: CSS, JavaScript, görseller, fontlar ve PDF dosyaları.
 - `cache/`: Son çekilen Bionluk ve GitHub verileri.
 - `.nojekyll`: GitHub Pages'in dosyaları Jekyll işleminden geçirmemesi için.
-
-## Notlar
-
-GitHub Pages PHP çalıştırmadığı için eski `index.php` dosyası kaldırıldı. Apache'ye özel `.htaccess` dosyası da GitHub Pages üzerinde kullanılmadığı için projeden çıkarıldı.
