@@ -1,6 +1,22 @@
 (function () {
     "use strict";
 
+    const navFixStyle = document.createElement("style");
+    navFixStyle.textContent = `
+        .nav-links a:hover:not(.is-active) {
+            background: transparent !important;
+            color: var(--text) !important;
+            transform: none !important;
+        }
+
+        .nav-links a.is-active {
+            color: var(--text) !important;
+            background: var(--surface-hover) !important;
+            transform: translateY(-1px) !important;
+        }
+    `;
+    document.head.appendChild(navFixStyle);
+
     const navToggle = document.querySelector(".nav-toggle");
     const navLinks = document.querySelector(".nav-links");
     const themeToggle = document.querySelector(".theme-toggle");
@@ -46,18 +62,18 @@
             return;
         }
 
-        const scrollPoint = window.scrollY + headerOffset() + 24;
+        const scrollPoint = window.scrollY + headerOffset() + 30;
         const pageBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
         let activeId = sections[0].id;
 
         if (pageBottom) {
             activeId = sections[sections.length - 1].id;
         } else {
-            sections.forEach((section) => {
+            for (const section of sections) {
                 if (section.offsetTop <= scrollPoint) {
                     activeId = section.id;
                 }
-            });
+            }
         }
 
         setActiveLink(activeId);
