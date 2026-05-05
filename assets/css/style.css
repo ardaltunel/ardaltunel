@@ -1617,3 +1617,11 @@ h3 {
         display: none;
     }
 }
+
+.work-band .github-projects {
+    margin-top: 0;
+}
+
+.work-band .github-projects .subsection-heading {
+    display: none;
+}
