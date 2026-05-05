@@ -1,0 +1,68 @@
+[
+  {
+    "name": "own-instagram-data",
+    "description": "A project I developed to use the data of your own instagram account (like, post, comment and username)",
+    "language": "PHP",
+    "color": "#4F5D95",
+    "stars": 3,
+    "forks": 0,
+    "updated": "19.02.2024",
+    "url": "https://github.com/ardaltunel/own-instagram-data",
+    "homepage": ""
+  },
+  {
+    "name": "personal-chess-coach",
+    "description": "An app to help you find the best move you can make",
+    "language": "JavaScript",
+    "color": "#f1e05a",
+    "stars": 3,
+    "forks": 0,
+    "updated": "09.03.2025",
+    "url": "https://github.com/ardaltunel/personal-chess-coach",
+    "homepage": "https://ardaltunel.github.io/personal-chess-coach/"
+  },
+  {
+    "name": "discord-bots-web",
+    "description": "A simple website project to view your discord bots settings",
+    "language": "HTML",
+    "color": "#e34c26",
+    "stars": 2,
+    "forks": 0,
+    "updated": "05.05.2026",
+    "url": "https://github.com/ardaltunel/discord-bots-web",
+    "homepage": "https://ardaltunel.github.io/discord-bots-web/"
+  },
+  {
+    "name": "music-app",
+    "description": "A project where you can upload songs, listen to, delete added songs",
+    "language": "JavaScript",
+    "color": "#f1e05a",
+    "stars": 2,
+    "forks": 0,
+    "updated": "05.05.2026",
+    "url": "https://github.com/ardaltunel/music-app",
+    "homepage": "https://ardaltunel.github.io/music-app/"
+  },
+  {
+    "name": "translate-app",
+    "description": "A \"translation\" app that works just like google translate",
+    "language": "HTML",
+    "color": "#e34c26",
+    "stars": 2,
+    "forks": 0,
+    "updated": "05.05.2026",
+    "url": "https://github.com/ardaltunel/translate-app",
+    "homepage": "https://ardaltunel.github.io/translate-app/"
+  },
+  {
+    "name": "weather-app",
+    "description": "A javascript project developed to learn the weather conditions of your desired location.",
+    "language": "JavaScript",
+    "color": "#f1e05a",
+    "stars": 2,
+    "forks": 0,
+    "updated": "05.05.2026",
+    "url": "https://github.com/ardaltunel/weather-app",
+    "homepage": "https://ardaltunel.github.io/weather-app/"
+  }
+]

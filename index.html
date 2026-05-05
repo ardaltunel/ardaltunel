@@ -1,597 +1,723 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
-    <title>GitHub - Arda Altunel</title>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <title>Arda Altunel | Full Stack Developer</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/>
-    <style>
-        @import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
+    <meta name="description"
+          content="Arda Altunel - Istanbul based full stack developer focused on accessible, fast and polished web interfaces.">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Arda Altunel">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Arda Altunel | Full Stack Developer">
+    <meta property="og:description"
+          content="Istanbul based full stack developer focused on accessible, fast and polished web interfaces.">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://cdn.ardaltunel.com/favicon/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.ardaltunel.com/favicon/apple-icon-180x180.png">
 
-        * {
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: #fff;
-            font-family: "Lato", sans-serif;
-            font-weight: 400;
-            font-style: normal;
-        }
-
-        section {
-            padding-block: min(20vh, 2rem);
-            width: calc(min(76.5rem, 90%));
-            margin-inline: auto;
-            color: #111;
-        }
-
-        section h2 {
-            text-transform: capitalize;
-            letter-spacing: 0.025em;
-            font-size: clamp(2rem, 1.8125rem + 0.75vw, 2.6rem);
-        }
-
-        section a {
-            display: inline-block;
-            text-decoration: none;
-        }
-
-        section .container {
-            margin-top: 3em;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(23rem, 1fr));
-            gap: 2rem;
-        }
-
-        section .container .card:nth-child(3n+1) .box .icon .iconBox {
-            background: #d3b19a;
-        }
-
-        section .container .card:nth-child(3n+2) .box .icon .iconBox {
-            background: #70b3b1;
-        }
-
-        section .container .card:nth-child(3n+3) .box .icon .iconBox {
-            background: #d05fa2;
-        }
-
-        section .container .card ul {
-            margin: 0;
-            padding: 0;
-            list-style-type: none;
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 0.625rem;
-        }
-
-        section .container .card ul li {
-            text-transform: uppercase;
-            background: var(--clr-tag);
-            color: #282828;
-            font-weight: 700;
-            font-size: 0.8rem;
-            padding: 0.375rem 0.625rem;
-            border-radius: 0.188rem;
-        }
-
-        section .container .card ul .branding {
-            color: #704a31;
-        }
-
-        section .container .card ul .packaging {
-            color: #1e3938;
-        }
-
-        section .container .card ul .marketing {
-            color: #4d1637;
-        }
-
-        section .container .card .content {
-            padding: 0.938rem 0.625rem;
-        }
-
-        section .container .card .content h3 {
-            text-transform: capitalize;
-            font-size: clamp(1.5rem, 1.3909rem + 0.4364vw, 1.8rem);
-        }
-
-        section .container .card .content p {
-            margin: 0.625rem 0 1.25rem;
-            color: #565656;
-        }
-
-        section .container .card-inner {
-            position: relative;
-            width: inherit;
-            height: 18.75rem;
-            background: var(--clr);
-            border-radius: 1.25rem;
-            border-bottom-right-radius: 0;
-            overflow: hidden;
-        }
-
-        section .container .card-inner .box {
-            width: 100%;
-            height: 100%;
-            background: #fff;
-            border-radius: 1.25rem;
-            overflow: hidden;
-        }
-
-        section .container .card-inner .box .imgBox {
-            position: absolute;
-            inset: 0;
-        }
-
-        section .container .card-inner .box .imgBox img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        section .container .card-inner .box .icon {
-            position: absolute;
-            bottom: -0.375rem;
-            right: -0.375rem;
-            width: 6rem;
-            height: 6rem;
-            background: var(--clr);
-            border-top-left-radius: 50%;
-        }
-
-        section .container .card-inner .box .icon:hover .iconBox {
-            transform: scale(1.1);
-        }
-
-        section .container .card-inner .box .icon::before {
-            position: absolute;
-            content: "";
-            bottom: 0.375rem;
-            left: -1.25rem;
-            background: transparent;
-            width: 1.25rem;
-            height: 1.25rem;
-            border-bottom-right-radius: 1.25rem;
-            box-shadow: 0.313rem 0.313rem 0 0.313rem #fff;
-        }
-
-        section .container .card-inner .box .icon::after {
-            position: absolute;
-            content: "";
-            top: -1.25rem;
-            right: 0.375rem;
-            background: transparent;
-            width: 1.25rem;
-            height: 1.25rem;
-            border-bottom-right-radius: 1.25rem;
-            box-shadow: 0.313rem 0.313rem 0 0.313rem var(--clr);
-        }
-
-        section .container .card-inner .box .icon .iconBox {
-            position: absolute;
-            inset: 0.625rem;
-            background: #282828;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: 0.3s;
-        }
-
-        section .container .card-inner .box .icon .iconBox span {
-            color: #fff;
-            font-size: 1.5rem;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="assets/font/fonts.css">
+    <link rel="stylesheet" type="text/css"
+          href="assets/vendor/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css"
+          href="assets/css/style.css">
 </head>
+
 <body>
-<section>
-    <h2>My GitHub<br/>web projects</h2>
-    <div class="container">
-        <div class="card">
-            <div class="card-inner" style="--clr:#fff;">
-                <div class="box">
-                    <div class="imgBox">
-                        <img src="https://github.com/ardaltunel/ardaltunel.github.io/assets/35379428/3b5f9ce1-acbe-40f0-883b-dc19818f7c73" alt="personal-chess-coach">
-                    </div>
-                    <div class="icon">
-                        <a href="https://github.com/ardaltunel/advanced-xox-game" class="iconBox">
-                            <span class="material-symbols-outlined">arrow_outward</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="content">
-                <h3>advanced xox game</h3>
-                <p>A slightly more advanced version of the familiar xox game</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-inner" style="--clr:#fff;">
-                <div class="box">
-                    <div class="imgBox">
-                        <img src="https://github.com/ardaltunel/ardaltunel.github.io/assets/35379428/74b9adcc-e180-4880-aa59-7ad58018aa0b" alt="personal-chess-coach">
-                    </div>
-                    <div class="icon">
-                        <a href="https://github.com/ardaltunel/personal-chess-coach" class="iconBox">
-                            <span class="material-symbols-outlined">arrow_outward</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="content">
-                <h3>personal chess coach</h3>
-                <p>An app to help you find the best move you can make</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-inner" style="--clr:#fff;">
-                <div class="box">
-                    <div class="imgBox">
-                        <img src="https://github.com/ardaltunel/ardaltunel.github.io/assets/35379428/e473f47d-9ff2-40fd-99cd-f14ea0d3e354" alt="valorant-crosshair-copy">
-                    </div>
-                    <div class="icon">
-                        <a href="https://github.com/ardaltunel/valorant-crosshair-copy" class="iconBox">
-                            <span class="material-symbols-outlined">arrow_outward</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="content">
-                <h3>valorant crosshair copy</h3>
-                <p>Valorant is a web application that visually displays the various crosshair settings used in the game and allows users to easily copy these settings.</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-inner" style="--clr:#fff;">
-                <div class="box">
-                    <div class="imgBox">
-                        <img src="https://github.com/ardaltunel/ardaltunel.github.io/assets/35379428/0a5df31a-0108-4891-b682-8463c14a236f" alt="phantaso-bot-site">
-                    </div>
-                    <div class="icon">
-                        <a href="https://github.com/ardaltunel/phantaso-bot-site" class="iconBox">
-                            <span class="material-symbols-outlined">arrow_outward</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="content">
-                <h3>phantaso bot site</h3>
-                <p>Phantaso is a multifunctional bot designed specifically for your discord server spicing up your server with fun and moderation features, phantaso now has its own website!</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-inner" style="--clr:#fff;">
-                <div class="box">
-                    <div class="imgBox">
-                        <img src="https://github.com/ardaltunel/ardaltunel.github.io/assets/35379428/dfdaec16-14af-416c-a8ec-969d866aeffd" alt="first-projencts-exhibition">
-                    </div>
-                    <div class="icon">
-                        <a href="https://github.com/ardaltunel/first-projencts-exhibition" class="iconBox">
-                            <span class="material-symbols-outlined">arrow_outward</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="content">
-                <h3>first projencts exhibition</h3>
-                <p>When I started coding, I wanted to keep a few projects I used during the learning process as a memory</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-inner" style="--clr:#fff;">
-                <div class="box">
-                    <div class="imgBox">
-                        <img src="https://github.com/ardaltunel/ardaltunel.github.io/assets/35379428/a9a1836b-53af-48e3-8537-7eff637a98a8" alt="discord-bots-site">
-                    </div>
-                    <div class="icon">
-                        <a href="https://github.com/ardaltunel/discord-bots-site" class="iconBox">
-                            <span class="material-symbols-outlined">arrow_outward</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="content">
-                <h3>discord bots site</h3>
-                <p>A simple website project to view your discord bots settings</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-inner" style="--clr:#fff;">
-                <div class="box">
-                    <div class="imgBox">
-                        <img src="https://github.com/ardaltunel/ardaltunel.github.io/assets/35379428/8d39d71b-376e-4526-9659-1e6efb25d912" alt="social-links">
-                    </div>
-                    <div class="icon">
-                        <a href="https://github.com/ardaltunel/social-links" class="iconBox">
-                            <span class="material-symbols-outlined">arrow_outward</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="content">
-                <h3>social links</h3>
-                <p>Made to collect all of your social media accounts in one place</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-inner" style="--clr:#fff;">
-                <div class="box">
-                    <div class="imgBox">
-                        <img src="https://github.com/ardaltunel/ardaltunel.github.io/assets/35379428/60090991-c59a-49de-b327-0070f766cc5a" alt="breakout-game">
-                    </div>
-                    <div class="icon">
-                        <a href="https://github.com/ardaltunel/breakout-game" class="iconBox">
-                            <span class="material-symbols-outlined">arrow_outward</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="content">
-                <h3>breakout game</h3>
-                <p>A fun game made with javascript</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-inner" style="--clr:#fff;">
-                <div class="box">
-                    <div class="imgBox">
-                        <img src="https://github.com/ardaltunel/ardaltunel.github.io/assets/35379428/699c50df-45ef-4c48-8c8e-eb68d5b87b58" alt="github-api">
-                    </div>
-                    <div class="icon">
-                        <a href="https://github.com/ardaltunel/github-api" class="iconBox">
-                            <span class="material-symbols-outlined">arrow_outward</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="content">
-                <h3>github api</h3>
-                <p>Made using github api reviewing a study can be good for your development</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-inner" style="--clr:#fff;">
-                <div class="box">
-                    <div class="imgBox">
-                        <img src="https://github.com/ardaltunel/ardaltunel.github.io/assets/35379428/e568980a-1817-4f8a-9e47-9aaeeca60f63" alt="crypto-price-app">
-                    </div>
-                    <div class="icon">
-                        <a href="https://github.com/ardaltunel/crypto-price-app" class="iconBox">
-                            <span class="material-symbols-outlined">arrow_outward</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="content">
-                <h3>crypto price app</h3>
-                <p>An application where you can currently track crypto money</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-inner" style="--clr:#fff;">
-                <div class="box">
-                    <div class="imgBox">
-                        <img src="https://github.com/ardaltunel/ardaltunel.github.io/assets/35379428/287e7ce3-539e-4e75-853c-983dc783d960" alt="text-to-speech-app">
-                    </div>
-                                       <div class="icon">
-                        <a href="https://github.com/ardaltunel/text-to-speech-app" class="iconBox">
-                            <span class="material-symbols-outlined">arrow_outward</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="content">
-                <h3>text to speech app</h3>
-                <p>A simple text-to-speech application</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-inner" style="--clr:#fff;">
-                <div class="box">
-                    <div class="imgBox">
-                        <img src="https://github.com/ardaltunel/ardaltunel.github.io/assets/35379428/9ab55b15-f189-4bb8-ad66-54e22099b034" alt="type-test-app">
-                    </div>
-                    <div class="icon">
-                        <a href="https://github.com/ardaltunel/type-test-app" class="iconBox">
-                            <span class="material-symbols-outlined">arrow_outward</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="content">
-                <h3>type test app</h3>
-                <p>An application to test your typing speed</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-inner" style="--clr:#fff;">
-                <div class="box">
-                    <div class="imgBox">
-                        <img src="https://github.com/ardaltunel/ardaltunel.github.io/assets/35379428/7a094723-a53b-40e8-bf5c-002d44743821" alt="qr-code-generator">
-                    </div>
-                    <div class="icon">
-                        <a href="https://github.com/ardaltunel/qr-code-generator" class="iconBox">
-                            <span class="material-symbols-outlined">arrow_outward</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="content">
-                <h3>qr code generator</h3>
-                <p>A simple QR code generator</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-inner" style="--clr:#fff;">
-                <div class="box">
-                    <div class="imgBox">
-                        <img src="https://github.com/ardaltunel/ardaltunel.github.io/assets/35379428/bfaea691-9034-4b3d-ad88-404c7ed8ae55" alt="wordle">
-                    </div>
-                    <div class="icon">
-                        <a href="https://github.com/ardaltunel/wordle" class="iconBox">
-                            <span class="material-symbols-outlined">arrow_outward</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="content">
-                <h3>wordle</h3>
-                <p>A word guessing game similar to the popular Wordle game</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-inner" style="--clr:#fff;">
-                <div class="box">
-                    <div class="imgBox">
-                        <img src="https://github.com/ardaltunel/ardaltunel.github.io/assets/35379428/59ea2751-3f23-4443-8d34-9ba68102d1b6" alt="gradient-generator">
-                    </div>
-                    <div class="icon">
-                        <a href="https://github.com/ardaltunel/gradient-generator" class="iconBox">
-                            <span class="material-symbols-outlined">arrow_outward</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="content">
-                <h3>gradient generator</h3>
-                <p>An application to generate CSS gradients</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-inner" style="--clr:#fff;">
-                <div class="box">
-                    <div class="imgBox">
-                        <img src="https://github.com/ardaltunel/ardaltunel.github.io/assets/35379428/bc3822fd-e5aa-4ba2-a989-797e2aead348" alt="chess">
-                    </div>
-                    <div class="icon">
-                        <a href="https://github.com/ardaltunel/chess" class="iconBox">
-                            <span class="material-symbols-outlined">arrow_outward</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="content">
-                <h3>chess</h3>
-                <p>A simple chess game implementation</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-inner" style="--clr:#fff;">
-                <div class="box">
-                    <div class="imgBox">
-                        <img src="https://github.com/ardaltunel/ardaltunel.github.io/assets/35379428/fa251359-72a1-4314-a02c-62a79d3a2b38" alt="tower-blocks">
-                    </div>
-                    <div class="icon">
-                        <a href="https://github.com/ardaltunel/tower-blocks" class="iconBox">
-                            <span class="material-symbols-outlined">arrow_outward</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="content">
-                <h3>tower blocks</h3>
-                <p>A game where you stack blocks to build the tallest tower possible</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-inner" style="--clr:#fff;">
-                <div class="box">
-                    <div class="imgBox">
-                        <img src="https://github.com/ardaltunel/ardaltunel.github.io/assets/35379428/d95edcf6-3b9b-44bd-9fed-c210083e0861" alt="numble">
-                    </div>
-                    <div class="icon">
-                        <a href="https://github.com/ardaltunel/numble" class="iconBox">
-                            <span class="material-symbols-outlined">arrow_outward</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="content">
-                <h3>numble</h3>
-                <p>A number guessing game similar to Wordle but with numbers</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-inner" style="--clr:#fff;">
-                <div class="box">
-                    <div class="imgBox">
-                        <img src="https://github.com/ardaltunel/ardaltunel.github.io/assets/35379428/268de5a1-c6c9-458c-b898-de41ab6b1b54" alt="billiards-pool">
-                    </div>
-                    <div class="icon">
-                        <a href="https://github.com/ardaltunel/billiards-pool" class="iconBox">
-                            <span class="material-symbols-outlined">arrow_outward</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="content">
-                <h3>billiards pool</h3>
-                <p>A simple billiards pool game</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-inner" style="--clr:#fff;">
-                <div class="box">
-                    <div class="imgBox">
-                        <img src="https://github.com/ardaltunel/ardaltunel.github.io/assets/35379428/111d2d49-fcbe-4752-9d5b-0f45212ba617" alt="pass-generator">
-                    </div>
-                    <div class="icon">
-                        <a href="https://github.com/ardaltunel/pass-generator" class="iconBox">
-                            <span class="material-symbols-outlined">arrow_outward</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="content">
-                <h3>password generator</h3>
-                <p>A simple password generator application</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-inner" style="--clr:#fff;">
-                <div class="box">
-                    <div class="imgBox">
-                        <img src="https://github.com/ardaltunel/ardaltunel.github.io/assets/35379428/c4927dde-3697-4f7d-8061-9a80c2fe1da1" alt="no-hello">
-                    </div>
-                    <div class="icon">
-                        <a href="https://github.com/ardaltunel/no-hello" class="iconBox">
-                            <span class="material-symbols-outlined">arrow_outward</span>
+<script>
+    document.body.dataset.theme = localStorage.getItem("theme") || (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+</script>
+<div class="cursor-glow" aria-hidden="true"></div>
+<header class="site-header" id="top">
+    <nav class="nav-shell" aria-label="Ana navigasyon">
+        <a class="brand" href="#top" aria-label="Arda Altunel ana sayfa">
+            <span class="brand-mark">AA</span>
+            <span>Arda Altunel</span>
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="#about">Profil</a></li>
+            <li><a href="#work">Projeler</a></li>
+            <li><a href="#services">Hizmetler</a></li>
+            <li><a href="#stack">Yetenekler</a></li>
+            <li><a href="#experience">Deneyim</a></li>
+            <li><a href="#contact">İletişim</a></li>
+        </ul>
+
+        <button class="theme-toggle" type="button" aria-label="Açık temaya geç" aria-pressed="false">
+            <i class="bi bi-sun"></i>
+        </button>
+
+        <button class="nav-toggle" type="button" aria-label="Menüyü aç" aria-expanded="false">
+            <i class="bi bi-list"></i>
+        </button>
+    </nav>
+</header>
+
+<main>
+    <section class="hero section-band" aria-labelledby="hero-title">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-copy">
+                    <p class="eyebrow">Full Stack Developer · İstanbul</p>
+                    <h1 id="hero-title">Modern, hızlı ve yönetilebilir web siteleri geliştiriyorum.</h1>
+                    <p class="hero-text">
+                        HTML, CSS, JavaScript ve PHP ile kurumsal web siteleri, portfolyolar, landing page'ler
+                        ve içerik odaklı projeler geliştiriyorum.
+                    </p>
+                    <div class="hero-action-dock">
+                        <div class="hero-actions">
+                            <a class="btn-primary" href="#work">
+                                <i class="bi bi-window-stack"></i>
+                                Projeleri İncele
                             </a>
+                            <a class="btn-secondary" href="/assets/pdf/arda-altunel-cv.pdf" target="_blank" rel="nofollow">
+                                <i class="bi bi-file-earmark-person"></i>
+                                CV
+                            </a>
+                        </div>
+                        <div class="social-row" aria-label="Sosyal bağlantılar">
+                            <a href="https://linkedin.com/in/ardaltunel/" target="_blank" rel="nofollow" aria-label="LinkedIn">
+                                <i class="bi bi-linkedin"></i>
+                            </a>
+                            <a href="https://github.com/ardaltunel/" target="_blank" rel="nofollow" aria-label="GitHub">
+                                <i class="bi bi-github"></i>
+                            </a>
+                            <a href="https://instagram.com/ardaltunel/" target="_blank" rel="nofollow" aria-label="Instagram">
+                                <i class="bi bi-instagram"></i>
+                            </a>
+                            <a href="mailto:ardaltunelmain@gmail.com" aria-label="E-posta">
+                                <i class="bi bi-envelope"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="content">
-                <h3>no hello</h3>
-                <p>Simple Website Project for Practice</p>
+
+                <aside class="hero-panel" aria-label="Kısa profil">
+                    <div class="code-window" aria-label="Geliştirici çalışma özeti">
+                        <div class="window-bar">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <pre><code>const developer = {
+  name: "Arda Altunel",
+  focus: ["Full Stack", "UI", "PHP"],
+  output: "fast, clean, responsive"
+};</code></pre>
+                    </div>
+                    <div class="availability">
+                        <span></span>
+                        Freelance bazlı çalışmalar için uygun
+                    </div>
+                    <dl class="quick-facts">
+                        <div>
+                            <dt>Odak</dt>
+                            <dd>Full stack web siteleri, responsive UI & UX, PHP tabanlı web siteleri</dd>
+                        </div>
+                        <div>
+                            <dt>Konum</dt>
+                            <dd>İstanbul, Türkiye</dd>
+                        </div>
+                        <div>
+                            <dt>Çalışma</dt>
+                            <dd>Sade arayüz, düzenli kod, yayın desteği</dd>
+                        </div>
+                    </dl>
+                </aside>
             </div>
         </div>
-        <div class="card">
-            <div class="card-inner" style="--clr:#fff;">
-                <div class="box">
-                    <div class="imgBox">
-                        <img src="https://github.com/ardaltunel/ardaltunel.github.io/assets/35379428/1aa1b776-e4a6-4b56-abcc-4c1dc69470d8" alt="snake-game">
-                    </div>
-                    <div class="icon">
-                        <a href="https://github.com/ardaltunel/snake-game" class="iconBox">
-                            <span class="material-symbols-outlined">arrow_outward</span>
+    </section>
+
+    <section class="section-band" id="about" aria-labelledby="about-title">
+        <div class="container">
+            <div class="section-heading">
+                <p class="eyebrow">Profil</p>
+                <h2 id="about-title">Sade tasarım, anlaşılır yapı ve temiz kod.</h2>
+            </div>
+
+            <div class="about-layout">
+                <div class="lead-block">
+                    <p>
+                        Ben Arda Altunel. Web sitelerinde görsel düzeni, performansı ve sürdürülebilir kodu birlikte
+                        düşünmeyi seven bir full stack geliştiriciyim. Bir sayfanın iyi görünmesi kadar kolay
+                        kullanılmasına ve sonradan yönetilebilir olmasına da önem veriyorum.
+                    </p>
+                    <p>
+                        Projelerde gereksiz kalabalık yerine net navigasyon, okunabilir içerik, güçlü mobil deneyim
+                        ve bakımı kolay bir yapı kurmaya odaklanıyorum.
+                    </p>
+                </div>
+
+                <div class="value-grid">
+                    <article>
+                        <i class="bi bi-layout-text-window-reverse"></i>
+                        <h3>UI Uygulama</h3>
+                        <p>Mevcut tasarım diline uygun, responsive ve tutarlı arayüzler.</p>
+                    </article>
+                    <article>
+                        <i class="bi bi-speedometer2"></i>
+                        <h3>Performans</h3>
+                        <p>Hızlı açılan, gereksiz yüklerden arındırılmış ve okunabilir sayfalar.</p>
+                    </article>
+                    <article>
+                        <i class="bi bi-code-square"></i>
+                        <h3>Full Stack</h3>
+                        <p>PHP, MySQL ve temel yayın süreçleriyle uçtan uca web geliştirme.</p>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-band work-band" id="work" aria-labelledby="work-title">
+        <div class="container">
+            <div class="section-heading split-heading">
+                <div>
+                    <p class="eyebrow">Seçilmiş işler</p>
+                    <h2 id="work-title">Öne çıkarmak istediğim bazı web arayüzleri.</h2>
+                </div>
+                <a class="text-link" href="https://github.com/ardaltunel/" target="_blank" rel="nofollow">
+                    GitHub
+                    <i class="bi bi-arrow-up-right"></i>
+                </a>
+            </div>
+
+            <div class="project-grid">
+                <article class="project-card case-card">
+                    <a href="https://cdn.ardaltunel.com/projects/web/frolic" target="_blank" rel="nofollow"
+                       aria-label="Frolic projesini aç">
+                        <img src="assets/img/projects-images/frolic.png"
+                             alt="Frolic web arayüzü" loading="lazy">
+                    </a>
+                    <div class="project-content">
+                        <span>Creative Website</span>
+                        <h3>Frolic</h3>
+                        <p>Büyük görseller, net başlangıç alanı ve dikkat çeken sayfa akışıyla hazırlanmış web
+                            arayüzü.</p>
+                        <a href="https://cdn.ardaltunel.com/projects/web/frolic" target="_blank" rel="nofollow">
+                            Canlı Önizleme
+                            <i class="bi bi-arrow-up-right"></i>
                         </a>
                     </div>
-                </div>
+                </article>
+
+                <article class="project-card case-card case-card-reverse">
+                    <a class="project-media media-marvio" href="https://cdn.ardaltunel.com/projects/web/marvio" target="_blank"
+                       rel="nofollow" aria-label="Marvio projesini aç">
+                        <img src="assets/img/projects-images/marvio.png"
+                             alt="Marvio web arayüzü" loading="lazy">
+                    </a>
+                    <div class="project-content">
+                        <span>Agency</span>
+                        <h3>Marvio</h3>
+                        <p>Kişisel/yaratıcı portfolyo dili taşıyan, görsel ağırlığı yüksek ve modern bir arayüz
+                            çalışması.</p>
+                        <a href="https://cdn.ardaltunel.com/projects/web/marvio" target="_blank" rel="nofollow">
+                            Canlı Önizleme
+                            <i class="bi bi-arrow-up-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="project-card case-card">
+                    <a href="https://cdn.ardaltunel.com/projects/web/gilber" target="_blank" rel="nofollow"
+                       aria-label="Gilber projesini aç">
+                        <img src="assets/img/projects-images/gilber.png"
+                             alt="Gilber web arayüzü" loading="lazy">
+                    </a>
+                    <div class="project-content">
+                        <span>Portfolio</span>
+                        <h3>Gilber</h3>
+                        <p>Portfolyo sunumu için net tipografi, sade bölüm geçişleri ve güçlü görsel alanlar.</p>
+                        <a href="https://cdn.ardaltunel.com/projects/web/gilber" target="_blank" rel="nofollow">
+                            Canlı Önizleme
+                            <i class="bi bi-arrow-up-right"></i>
+                        </a>
+                    </div>
+                </article>
             </div>
-            <div class="content">
-                <h3>snake game</h3>
-                <p>A simple snake game implemented using HTML, CSS, and JavaScript</p>
+
+                                <div class="github-projects">
+                    <div class="subsection-heading">
+                        <p class="eyebrow">GitHub</p>
+                        <h3>GitHub profilimde pinlediğim projeler.</h3>
+                    </div>
+
+                    <div class="github-grid">
+                            <article class="github-card">
+                                <div class="github-card-top">
+                                    <i class="bi bi-git"></i>
+                                    <span>Public Repo</span>
+                                </div>
+                                <h3>own-instagram-data</h3>
+                                <p>A project I developed to use the data of your own instagram account (like, post, comment and username)</p>
+                                <div class="github-meta">
+                                    <span>
+                                        <i style="background: #4F5D95"></i>
+                                        PHP
+                                    </span>
+                                    <span><i class="bi bi-star"></i>3</span>
+                                    <span><i class="bi bi-diagram-2"></i>0</span>
+                                </div>
+                                <div class="github-card-footer">
+                                    <span>Güncelleme: 19.02.2024</span>
+                                    <a href="https://github.com/ardaltunel/own-instagram-data" target="_blank" rel="nofollow">
+                                        GitHub
+                                        <i class="bi bi-arrow-up-right"></i>
+                                    </a>
+                                </div>
+                            </article>
+                            <article class="github-card">
+                                <div class="github-card-top">
+                                    <i class="bi bi-git"></i>
+                                    <span>Public Repo</span>
+                                </div>
+                                <h3>personal-chess-coach</h3>
+                                <p>An app to help you find the best move you can make</p>
+                                <div class="github-meta">
+                                    <span>
+                                        <i style="background: #f1e05a"></i>
+                                        JavaScript
+                                    </span>
+                                    <span><i class="bi bi-star"></i>3</span>
+                                    <span><i class="bi bi-diagram-2"></i>0</span>
+                                </div>
+                                <div class="github-card-footer">
+                                    <span>Güncelleme: 09.03.2025</span>
+                                    <a href="https://github.com/ardaltunel/personal-chess-coach" target="_blank" rel="nofollow">
+                                        GitHub
+                                        <i class="bi bi-arrow-up-right"></i>
+                                    </a>
+                                </div>
+                            </article>
+                            <article class="github-card">
+                                <div class="github-card-top">
+                                    <i class="bi bi-git"></i>
+                                    <span>Public Repo</span>
+                                </div>
+                                <h3>discord-bots-web</h3>
+                                <p>A simple website project to view your discord bots settings</p>
+                                <div class="github-meta">
+                                    <span>
+                                        <i style="background: #e34c26"></i>
+                                        HTML
+                                    </span>
+                                    <span><i class="bi bi-star"></i>2</span>
+                                    <span><i class="bi bi-diagram-2"></i>0</span>
+                                </div>
+                                <div class="github-card-footer">
+                                    <span>Güncelleme: 05.05.2026</span>
+                                    <a href="https://github.com/ardaltunel/discord-bots-web" target="_blank" rel="nofollow">
+                                        GitHub
+                                        <i class="bi bi-arrow-up-right"></i>
+                                    </a>
+                                </div>
+                            </article>
+                            <article class="github-card">
+                                <div class="github-card-top">
+                                    <i class="bi bi-git"></i>
+                                    <span>Public Repo</span>
+                                </div>
+                                <h3>music-app</h3>
+                                <p>A project where you can upload songs, listen to, delete added songs</p>
+                                <div class="github-meta">
+                                    <span>
+                                        <i style="background: #f1e05a"></i>
+                                        JavaScript
+                                    </span>
+                                    <span><i class="bi bi-star"></i>2</span>
+                                    <span><i class="bi bi-diagram-2"></i>0</span>
+                                </div>
+                                <div class="github-card-footer">
+                                    <span>Güncelleme: 05.05.2026</span>
+                                    <a href="https://github.com/ardaltunel/music-app" target="_blank" rel="nofollow">
+                                        GitHub
+                                        <i class="bi bi-arrow-up-right"></i>
+                                    </a>
+                                </div>
+                            </article>
+                            <article class="github-card">
+                                <div class="github-card-top">
+                                    <i class="bi bi-git"></i>
+                                    <span>Public Repo</span>
+                                </div>
+                                <h3>translate-app</h3>
+                                <p>A &quot;translation&quot; app that works just like google translate</p>
+                                <div class="github-meta">
+                                    <span>
+                                        <i style="background: #e34c26"></i>
+                                        HTML
+                                    </span>
+                                    <span><i class="bi bi-star"></i>2</span>
+                                    <span><i class="bi bi-diagram-2"></i>0</span>
+                                </div>
+                                <div class="github-card-footer">
+                                    <span>Güncelleme: 05.05.2026</span>
+                                    <a href="https://github.com/ardaltunel/translate-app" target="_blank" rel="nofollow">
+                                        GitHub
+                                        <i class="bi bi-arrow-up-right"></i>
+                                    </a>
+                                </div>
+                            </article>
+                            <article class="github-card">
+                                <div class="github-card-top">
+                                    <i class="bi bi-git"></i>
+                                    <span>Public Repo</span>
+                                </div>
+                                <h3>weather-app</h3>
+                                <p>A javascript project developed to learn the weather conditions of your desired location.</p>
+                                <div class="github-meta">
+                                    <span>
+                                        <i style="background: #f1e05a"></i>
+                                        JavaScript
+                                    </span>
+                                    <span><i class="bi bi-star"></i>2</span>
+                                    <span><i class="bi bi-diagram-2"></i>0</span>
+                                </div>
+                                <div class="github-card-footer">
+                                    <span>Güncelleme: 05.05.2026</span>
+                                    <a href="https://github.com/ardaltunel/weather-app" target="_blank" rel="nofollow">
+                                        GitHub
+                                        <i class="bi bi-arrow-up-right"></i>
+                                    </a>
+                                </div>
+                            </article>
+                    </div>
+                </div>
+        </div>
+    </section>
+
+    <section class="section-band services-band" id="services" aria-labelledby="services-title">
+        <div class="container">
+            <div class="section-heading split-heading">
+                <div>
+                    <p class="eyebrow">Bionluk</p>
+                    <h2 id="services-title">Bionluk üzerinden sunduğum aktif hizmetler.</h2>
+                </div>
+                <a class="text-link" href="https://bionluk.com/ardaltunel" target="_blank" rel="nofollow">
+                    Profili Aç
+                    <i class="bi bi-arrow-up-right"></i>
+                </a>
+            </div>
+
+                                <div class="service-grid">
+                        <article class="service-card">
+                            <a class="service-media" href="https://bionluk.com/ardaltunel/mobil-uyumlu-blog-sitesi-yaparim-613069" target="_blank"
+                                   rel="nofollow" aria-label="mobil uyumlu blog sitesi yaparım">
+                                    <img src="https://bgcp.bionluk.com/images/portfolio/526x296/4dcef55c-b2dc-4cef-bee3-68ec270d0a53.png"
+                                         alt="mobil uyumlu blog sitesi yaparım" loading="lazy">
+                                </a>
+                            <div class="service-body">
+                                <div class="service-meta">
+                                    <span>2.000TL</span>
+                                    <span>3 günde teslim</span>
+                                    <span>1 revizyon</span>
+                                </div>
+                                <h3>mobil uyumlu blog sitesi yaparım</h3>
+                                <p>Merhaba, Size özel bir blog web sitesi hazırlıyorum. İstediğiniz kategoriye uygun (kişisel, teknoloji, seyahat, yemek vb.) bir blog sitesi...</p>
+                                <a href="https://bionluk.com/ardaltunel/mobil-uyumlu-blog-sitesi-yaparim-613069" target="_blank" rel="nofollow">
+                                    Bionluk'ta İncele
+                                    <i class="bi bi-arrow-up-right"></i>
+                                </a>
+                            </div>
+                        </article>
+                        <article class="service-card">
+                            <a class="service-media" href="https://bionluk.com/ardaltunel/mobil-uyumlu-portfolio-web-sitesi-yaparim-855157" target="_blank"
+                                   rel="nofollow" aria-label="mobil uyumlu portfolio web sitesi yaparım">
+                                    <img src="https://bgcp.bionluk.com/images/portfolio/526x296/5079d966-1823-4d98-853a-3946783a472d.png"
+                                         alt="mobil uyumlu portfolio web sitesi yaparım" loading="lazy">
+                                </a>
+                            <div class="service-body">
+                                <div class="service-meta">
+                                    <span>1.500TL</span>
+                                    <span>1 günde teslim</span>
+                                    <span>1 revizyon</span>
+                                </div>
+                                <h3>mobil uyumlu portfolio web sitesi yaparım</h3>
+                                <p>Merhaba, Size özel bir portföy (portfolio) web sitesi hazırlıyorum. Kişisel markanızı, çalışmalarınızı ve projelerinizi en iyi şekilde yan...</p>
+                                <a href="https://bionluk.com/ardaltunel/mobil-uyumlu-portfolio-web-sitesi-yaparim-855157" target="_blank" rel="nofollow">
+                                    Bionluk'ta İncele
+                                    <i class="bi bi-arrow-up-right"></i>
+                                </a>
+                            </div>
+                        </article>
+                        <article class="service-card">
+                            <a class="service-media" href="https://bionluk.com/ardaltunel/size-ozel-modern-link-in-bio-sitesi-yaparim-855072" target="_blank"
+                                   rel="nofollow" aria-label="size özel modern link in bio sitesi yaparım">
+                                    <img src="https://bgcp.bionluk.com/images/portfolio/526x296/58da00c5-2abd-4739-b3d8-44dccfd8ae52.png"
+                                         alt="size özel modern link in bio sitesi yaparım" loading="lazy">
+                                </a>
+                            <div class="service-body">
+                                <div class="service-meta">
+                                    <span>750TL</span>
+                                    <span>1 günde teslim</span>
+                                    <span>1 revizyon</span>
+                                </div>
+                                <h3>size özel modern link in bio sitesi yaparım</h3>
+                                <p>Merhaba, Size özel tüm sosyal medyalarınızı tek bir adreste toplayabileceğiniz web sitesi oluşturuyorum. Hazırlanacak site, mobil uyumlu v...</p>
+                                <a href="https://bionluk.com/ardaltunel/size-ozel-modern-link-in-bio-sitesi-yaparim-855072" target="_blank" rel="nofollow">
+                                    Bionluk'ta İncele
+                                    <i class="bi bi-arrow-up-right"></i>
+                                </a>
+                            </div>
+                        </article>
+                        <article class="service-card">
+                            <a class="service-media" href="https://bionluk.com/ardaltunel/web-sitenizdeki-hatalari-tespit-eder-ve-gideririm-536375" target="_blank"
+                                   rel="nofollow" aria-label="web sitenizdeki hataları tespit eder ve gideririm">
+                                    <img src="https://bgcp.bionluk.com/images/portfolio/526x296/cc9fbdc3-6bd4-4537-8f0f-3f6ed95f1822.png"
+                                         alt="web sitenizdeki hataları tespit eder ve gideririm" loading="lazy">
+                                </a>
+                            <div class="service-body">
+                                <div class="service-meta">
+                                    <span>500TL</span>
+                                    <span>1 günde teslim</span>
+                                    <span>Revizyon yok</span>
+                                </div>
+                                <h3>web sitenizdeki hataları tespit eder ve gideririm</h3>
+                                <p>Merhaba, Web sitenizde bulunan hataları tespit ederek gerekli düzenlemeleri yapıyorum. Mevcut sorunları analiz eder, sizin fark ettiğiniz ...</p>
+                                <a href="https://bionluk.com/ardaltunel/web-sitenizdeki-hatalari-tespit-eder-ve-gideririm-536375" target="_blank" rel="nofollow">
+                                    Bionluk'ta İncele
+                                    <i class="bi bi-arrow-up-right"></i>
+                                </a>
+                            </div>
+                        </article>
+                        <article class="service-card">
+                            <a class="service-media" href="https://bionluk.com/ardaltunel/ingilizce-turkce-hizli-ve-dogru-ceviri-yaparim-832906" target="_blank"
+                                   rel="nofollow" aria-label="ingilizce–türkçe hızlı ve doğru çeviri yaparım">
+                                    <img src="https://bgcp.bionluk.com/images/portfolio/526x296/6f325c8a-76d2-49b8-91c4-a60f1728947c.png"
+                                         alt="ingilizce–türkçe hızlı ve doğru çeviri yaparım" loading="lazy">
+                                </a>
+                            <div class="service-body">
+                                <div class="service-meta">
+                                    <span>170TL</span>
+                                    <span>1 günde teslim</span>
+                                    <span>1 revizyon</span>
+                                </div>
+                                <h3>ingilizce–türkçe hızlı ve doğru çeviri yaparım</h3>
+                                <p>Merhaba, Türkçe ve İngilizce arasında hızlı, doğru ve özenli çeviri hizmeti sunuyorum. Blog yazıları, kısa metinler, sosyal medya içerikle...</p>
+                                <a href="https://bionluk.com/ardaltunel/ingilizce-turkce-hizli-ve-dogru-ceviri-yaparim-832906" target="_blank" rel="nofollow">
+                                    Bionluk'ta İncele
+                                    <i class="bi bi-arrow-up-right"></i>
+                                </a>
+                            </div>
+                        </article>
+                        <article class="service-card">
+                            <a class="service-media" href="https://bionluk.com/ardaltunel/seo-uyumlu-blog-yazisi-yaparim-832900" target="_blank"
+                                   rel="nofollow" aria-label="seo uyumlu blog yazısı yaparım">
+                                    <img src="https://bgcp.bionluk.com/images/portfolio/526x296/2a7d332f-6c3c-474b-aef6-6605a7fc6345.png"
+                                         alt="seo uyumlu blog yazısı yaparım" loading="lazy">
+                                </a>
+                            <div class="service-body">
+                                <div class="service-meta">
+                                    <span>150TL</span>
+                                    <span>1 günde teslim</span>
+                                    <span>1 revizyon</span>
+                                </div>
+                                <h3>seo uyumlu blog yazısı yaparım</h3>
+                                <p>Merhaba, Web siteniz için SEO uyumlu, özgün ve etkileyici blog içerikleri hazırlıyorum. Hedef kitlenizi analiz ederek içerik stratejisi ol...</p>
+                                <a href="https://bionluk.com/ardaltunel/seo-uyumlu-blog-yazisi-yaparim-832900" target="_blank" rel="nofollow">
+                                    Bionluk'ta İncele
+                                    <i class="bi bi-arrow-up-right"></i>
+                                </a>
+                            </div>
+                        </article>
+                </div>
+        </div>
+    </section>
+
+    <section class="section-band" id="stack" aria-labelledby="stack-title">
+        <div class="container">
+            <div class="section-heading">
+                <p class="eyebrow">Yetenekler</p>
+                <h2 id="stack-title">Web projelerinde sık çalıştığım alanlar.</h2>
+            </div>
+
+            <div class="skill-board">
+                <article class="skill-panel">
+                    <div class="skill-panel-header">
+                        <span>Yazılım dilleri</span>
+                        <p>Web projelerinde en sık kullandığım temel teknolojiler.</p>
+                    </div>
+                    <div class="skill-tags">
+                        <span class="skill-tag tag-csharp">C#</span>
+                        <span class="skill-tag tag-python">Python</span>
+                        <span class="skill-tag tag-js">JavaScript</span>
+                        <span class="skill-tag tag-html">HTML</span>
+                        <span class="skill-tag tag-css">CSS</span>
+                        <span class="skill-tag tag-php">PHP</span>
+                        <span class="skill-tag tag-sql">SQL</span>
+                        <span class="skill-tag tag-json">JSON</span>
+                        <span class="skill-tag tag-xml">XML</span>
+                        <span class="skill-tag tag-react">React</span>
+                        <span class="skill-tag tag-jquery">jQuery</span>
+                    </div>
+                </article>
+
+                <article class="skill-panel">
+                    <div class="skill-panel-header">
+                        <span>Kullandığım araçlar</span>
+                        <p>Geliştirme, yayınlama ve bakım tarafında çalıştığım araçlar.</p>
+                    </div>
+                    <div class="skill-tags">
+                        <span class="skill-tag tag-node">Node.js</span>
+                        <span class="skill-tag tag-bootstrap">Bootstrap</span>
+                        <span class="skill-tag tag-sass">Sass</span>
+                        <span class="skill-tag tag-mysql">MySQL</span>
+                        <span class="skill-tag tag-git">Git</span>
+                        <span class="skill-tag tag-linux">Linux</span>
+                        <span class="skill-tag tag-cpanel">cPanel</span>
+                        <span class="skill-tag tag-vscode">VS Code</span>
+                        <span class="skill-tag tag-photoshop">Photoshop</span>
+                    </div>
+                </article>
+
+                <article class="skill-panel skill-panel-wide">
+                    <div class="skill-panel-header">
+                        <span>Çalışma alanları</span>
+                        <p>Bu teknolojileri daha çok şu tip web ihtiyaçlarında kullanıyorum.</p>
+                    </div>
+                    <div class="delivery-grid">
+                        <article>
+                            <i class="bi bi-display"></i>
+                            <h3>Kurumsal Web</h3>
+                            <p>Şirket, kişi veya hizmet tanıtımı için temiz ve hızlı web siteleri.</p>
+                        </article>
+                        <article>
+                            <i class="bi bi-layout-text-window"></i>
+                            <h3>Panel Arayüzleri</h3>
+                            <p>Liste, form ve yönetim ekranlarında düzenli ve okunabilir arayüzler.</p>
+                        </article>
+                        <article>
+                            <i class="bi bi-hdd-network"></i>
+                            <h3>PHP Tabanlı Akışlar</h3>
+                            <p>Form, kayıt, listeleme ve içerik yönetimi gibi PHP tabanlı ihtiyaçlar.</p>
+                        </article>
+                        <article>
+                            <i class="bi bi-phone-landscape"></i>
+                            <h3>Responsive Düzen</h3>
+                            <p>Telefon, tablet ve masaüstünde düzgün çalışan sayfa düzenleri.</p>
+                        </article>
+                    </div>
+                </article>
             </div>
         </div>
+    </section>
+
+    <section class="section-band experience-band" id="experience" aria-labelledby="experience-title">
+        <div class="container">
+            <div class="section-heading">
+                <p class="eyebrow">Deneyim</p>
+                <h2 id="experience-title">Eğitim, sertifika ve freelance çalışmalarla gelişen bir pratik.</h2>
+            </div>
+
+            <div class="timeline">
+                <article>
+                    <div class="timeline-meta">Freelance · Güncel</div>
+                    <h3>Full Stack Developer</h3>
+                    <p>Portfolyo, kurumsal site, landing page ve küçük web uygulamalarında geliştirme ve yayına alma
+                        desteği.</p>
+                </article>
+                <article>
+                    <div class="timeline-meta">Eğitim · Güncel</div>
+                    <h3>Okan Üniversitesi Mobil Teknolojileri</h3>
+                    <p>Web geliştirme, arayüz tasarımı, veritabanı ve temel sistem yönetimi alanlarında uygulamalı
+                        çalışmalar.</p>
+                </article>
+                <article>
+                    <div class="timeline-meta">Sertifika</div>
+                    <h3>Microsoft Certified Solutions</h3>
+                    <p>Sistem yönetimi, temel altyapı mantığı ve problem çözme tarafını güçlendiren eğitim geçmişi.</p>
+                    <a class="inline-link" href="/assets/pdf/microsoft-certified-solutions.pdf" target="_blank"
+                       rel="nofollow">Sertifikayı aç</a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-band notes-band" aria-labelledby="notes-title">
+        <div class="container">
+            <div class="section-heading split-heading">
+                <div>
+                    <p class="eyebrow">Yazılar</p>
+                    <h2 id="notes-title">Not aldığım ve paylaştığım bazı teknik konular.</h2>
+                </div>
+                <a class="text-link" href="https://blog.ardaltunel.com" target="_blank" rel="nofollow">
+                    Blog
+                    <i class="bi bi-arrow-up-right"></i>
+                </a>
+            </div>
+
+            <div class="note-grid">
+                <a href="https://blog.ardaltunel.com/post.php?id=15" target="_blank" rel="nofollow">
+                    <div class="note-icon"><i class="bi bi-diagram-3"></i></div>
+                    <span>DevOps</span>
+                    <strong>DevOps Nedir?</strong>
+                    <p>Geliştirme, yayın ve operasyon süreçlerinin nasıl birlikte çalıştığını sade bir dille
+                        anlatıyorum.</p>
+                    <em>Oku <i class="bi bi-arrow-right"></i></em>
+                </a>
+                <a href="https://blog.ardaltunel.com/post.php?id=19" target="_blank" rel="nofollow">
+                    <div class="note-icon"><i class="bi bi-filetype-php"></i></div>
+                    <span>Backend</span>
+                    <strong>PHP Nedir?</strong>
+                    <p>Sunucu tarafında çalışan PHP'nin web projelerindeki rolünü ve kullanım alanlarını
+                        özetliyorum.</p>
+                    <em>Oku <i class="bi bi-arrow-right"></i></em>
+                </a>
+                <a href="https://blog.ardaltunel.com/post.php?id=17" target="_blank" rel="nofollow">
+                    <div class="note-icon"><i class="bi bi-layout-text-sidebar-reverse"></i></div>
+                    <span>CMS</span>
+                    <strong>CMS Nedir?</strong>
+                    <p>İçerik yönetim sistemlerinin site yönetimini nasıl kolaylaştırdığını pratik örneklerle ele
+                        alıyorum.</p>
+                    <em>Oku <i class="bi bi-arrow-right"></i></em>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-band contact-band" id="contact" aria-labelledby="contact-title">
+        <div class="container">
+            <div class="contact-shell">
+                <div>
+                    <p class="eyebrow">İletişim</p>
+                    <h2 id="contact-title">Bir web projesi için birlikte çalışabiliriz.</h2>
+                    <p style="margin-top: 1rem">
+                        Yeni bir site, mevcut arayüzü yenileme veya küçük bir web uygulaması için bana ulaşabilirsin.
+                        Kısa bir brief ya da referans link göndermen yeterli.
+                    </p>
+                </div>
+
+                <div class="contact-actions">
+                    <a class="btn-primary" href="mailto:ardaltunelmain@gmail.com?subject=Web%20projesi%20hakkında">
+                        <i class="bi bi-envelope"></i>
+                        Mail Gönder
+                    </a>
+                    <a class="btn-secondary" href="https://linkedin.com/in/ardaltunel/" target="_blank" rel="nofollow">
+                        <i class="bi bi-linkedin"></i>
+                        LinkedIn
+                    </a>
+                    <a class="btn-secondary" href="https://github.com/ardaltunel/" target="_blank" rel="nofollow">
+                        <i class="bi bi-github"></i>
+                        GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <div class="container footer-inner">
+        <span>&copy; 2026 Arda Altunel</span>
+        <a href="#top">Yukarı dön</a>
     </div>
-</section>
+</footer>
+
+<script src="assets/js/main.js"></script>
+
 </body>
 </html>
