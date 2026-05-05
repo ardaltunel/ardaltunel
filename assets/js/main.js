@@ -19,6 +19,8 @@
 
     document.documentElement.classList.toggle("is-desktop-safari", isDesktopSafari);
 
+    const headerOffset = () => (siteHeader ? siteHeader.offsetHeight : 0) + 18;
+
     const setActiveLink = (activeId) => {
         links.forEach((link) => {
             link.classList.toggle("is-active", link.getAttribute("href") === `#${activeId}`);
@@ -44,17 +46,15 @@
             return;
         }
 
+        const scrollPoint = window.scrollY + headerOffset() + 24;
         const pageBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
-        const contactSection = document.querySelector("#contact");
-        const contactRect = contactSection ? contactSection.getBoundingClientRect() : null;
-        let activeId = pageBottom ? sections[sections.length - 1].id : "";
-        const activationY = window.scrollY + window.innerHeight * 0.42;
+        let activeId = sections[0].id;
 
-        if (contactRect && contactRect.top <= window.innerHeight * 0.72) {
-            activeId = "contact";
-        } else if (!pageBottom) {
+        if (pageBottom) {
+            activeId = sections[sections.length - 1].id;
+        } else {
             sections.forEach((section) => {
-                if (section.offsetTop <= activationY) {
+                if (section.offsetTop <= scrollPoint) {
                     activeId = section.id;
                 }
             });
@@ -110,6 +110,11 @@
         }
     };
 
+    const scrollToTarget = (target) => {
+        const top = target === document.body ? 0 : target.getBoundingClientRect().top + window.scrollY - headerOffset();
+        window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+    };
+
     anchorLinks.forEach((link) => {
         link.addEventListener("click", (event) => {
             const targetId = link.getAttribute("href");
@@ -121,15 +126,8 @@
 
             event.preventDefault();
             closeMobileNav();
-
-            if (targetId === "#top") {
-                window.scrollTo({ top: 0, behavior: "smooth" });
-            } else {
-                target.scrollIntoView({ behavior: "smooth", block: "start" });
-            }
-
+            scrollToTarget(target);
             setActiveLink(targetId.replace("#", ""));
-
             cleanHash();
         });
     });
@@ -139,7 +137,7 @@
 
         if (initialTarget) {
             window.setTimeout(() => {
-                initialTarget.scrollIntoView({ behavior: "auto", block: "start" });
+                scrollToTarget(initialTarget);
                 updateScrollState();
                 cleanHash();
             }, 0);
@@ -152,29 +150,12 @@
         const hashTarget = window.location.hash ? document.querySelector(window.location.hash) : null;
 
         if (hashTarget) {
-            hashTarget.scrollIntoView({ behavior: "smooth", block: "start" });
+            scrollToTarget(hashTarget);
             window.setTimeout(updateScrollState, 260);
         }
 
         cleanHash();
     });
-
-    const contactSection = document.querySelector("#contact");
-
-    if (contactSection && "IntersectionObserver" in window) {
-        const contactObserver = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    setActiveLink("contact");
-                }
-            });
-        }, {
-            rootMargin: "0px 0px -18% 0px",
-            threshold: 0.18
-        });
-
-        contactObserver.observe(contactSection);
-    }
 
     if (!reduceMotion) {
         const revealItems = [
