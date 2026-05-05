@@ -1,5 +1,3 @@
-name: Update static site data
-
 on:
   workflow_dispatch:
   push:
