@@ -1,3 +1,5 @@
+name: Update static site data
+
 on:
   workflow_dispatch:
   push:
@@ -6,7 +8,6 @@ on:
       - master
   schedule:
     - cron: "17 */6 * * *"
-  workflow_dispatch:
 
 permissions:
   contents: write
@@ -25,92 +26,6 @@ jobs:
         with:
           node-version: 22
 
-      - name: Remove selected work section
-        run: |
-          node <<'NODE'
-          const fs = require('fs');
-
-          function removeWorkSection(file) {
-            let html = fs.readFileSync(file, 'utf8');
-            html = html.replace(/\n\s*<li><a href="#work">Projeler<\/a><\/li>/, '');
-            html = html.replace('href="#work"', 'href="#services"');
-            html = html.replace(/Projeleri\s+\u0130ncele/g, 'Hizmetleri \u0130ncele');
-
-            const start = html.indexOf('    <section class="section-band work-band"');
-            const end = html.indexOf('    <section class="section-band services-band"', start);
-            if (start !== -1 && end !== -1) {
-              html = html.slice(0, start) + html.slice(end);
-            }
-
-            fs.writeFileSync(file, html, 'utf8');
-          }
-
-          for (const file of ['index.template.html', 'index.html']) {
-            removeWorkSection(file);
-          }
-
-          let script = fs.readFileSync('build-static.mjs', 'utf8');
-          script = script.replace(/const githubHeaders = \{[\s\S]*?\};\n\n/, '');
-          script = script.replace(/const githubLanguageColor = \(language\) => \{[\s\S]*?const refreshData = async/, 'const refreshData = async');
-          script = script.replace(/\nconst renderGithubProjects = \(projects\) => \{[\s\S]*?\n\};\n\nconst renderServices =/, '\nconst renderServices =');
-          script = script.replace(/\nconst githubPinnedProjects = await refreshData\([\s\S]*?fetchGithubPinnedProjects\n\);/, '');
-          script = script.replace(/,\n  githubPinnedProjects: githubPinnedProjects\.length/, '');
-          script = script.replace(/\n  \.replace\("<!-- GITHUB_PROJECTS -->", renderGithubProjects\(githubPinnedProjects\)\)/, '');
-          fs.writeFileSync('build-static.mjs', script, 'utf8');
-
-          const readme = `# Arda Altunel Portfolio
-
-GitHub Pages uzerinde yayinlanmak icin hazirlanmis statik portfolio sitesi.
-
-Site HTML, CSS ve JavaScript ile calisir. Bionluk hizmetleri \`build-static.mjs\` ile canli kaynaktan cekilir, \`cache/*.json\` dosyalarina kaydedilir ve \`index.html\` icine statik olarak islenir.
-
-## Yayina Alma
-
-1. Bu klasorun icerigini GitHub repository kok dizinine yukleyin.
-2. Repository ayarlarindan **Pages** bolumune girin.
-3. Source olarak ilgili branch'i ve root klasoru secin.
-4. GitHub Actions sekmesinden **Update static site data** workflow'unu manuel calistirarak ilk veri guncellemesini test edin.
-
-## Yerelde Calistirma
-
-\`\`\`bash
-node build-static.mjs
-python -m http.server 4173 --bind 127.0.0.1
-\`\`\`
-
-Sonra tarayicida:
-
-\`\`\`text
-http://127.0.0.1:4173/
-\`\`\`
-
-## Otomatik Veri Guncelleme
-
-\`.github/workflows/update-static-site.yml\` workflow'u:
-
-- Bionluk hizmetlerini ceker.
-- \`cache/*.json\` dosyalarini gunceller.
-- \`index.html\` dosyasini yeniden uretir.
-- Degisiklikleri otomatik commit eder.
-
-Workflow canli kullanim icin 6 saatte bir calisacak sekilde ayarlanmistir:
-
-\`\`\`yaml
-cron: "17 */6 * * *"
-\`\`\`
-
-## Dosya Yapisi
-
-- \`index.html\`: GitHub Pages'in yayinladigi statik sayfa.
-- \`index.template.html\`: Dinamik alanlar icin kullanilan HTML sablonu.
-- \`build-static.mjs\`: Canli Bionluk verilerini cekip statik HTML ureten build script'i.
-- \`assets/\`: CSS, JavaScript, gorseller, fontlar ve PDF dosyalari.
-- \`cache/\`: Son cekilen Bionluk verileri ve build zamani.
-- \`.nojekyll\`: GitHub Pages'in dosyalari Jekyll isleminden gecirmemesi icin.
-`;
-          fs.writeFileSync('README.md', readme, 'utf8');
-          NODE
-
       - name: Rebuild static site
         run: node build-static.mjs
 
@@ -118,4 +33,4 @@ cron: "17 */6 * * *"
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "Update static site data"
-          file_pattern: "index.html index.template.html build-static.mjs README.md cache/*.json"
+          file_pattern: "index.html cache/*.json"
