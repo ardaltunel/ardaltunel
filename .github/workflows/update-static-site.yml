@@ -27,7 +27,26 @@ jobs:
           node-version: 22
 
       - name: Keep GitHub cards only
-        run: node -e "const fs=require('fs');const work='    <section class=\"section-band work-band\" id=\"work\" aria-labelledby=\"work-title\">\n        <div class=\"container\">\n            <div class=\"section-heading split-heading\">\n                <div>\n                    <p class=\"eyebrow\">GitHub</p>\n                    <h2 id=\"work-title\">GitHub profilimde pinlediğim projeler.</h2>\n                </div>\n                <a class=\"text-link\" href=\"https://github.com/ardaltunel/\" target=\"_blank\" rel=\"nofollow\">\n                    GitHub\n                    <i class=\"bi bi-arrow-up-right\"></i>\n                </a>\n            </div>\n\n                <!-- GITHUB_PROJECTS -->\n        </div>\n    </section>\n\n';for(const file of ['index.template.html','index.html']){let html=fs.readFileSync(file,'utf8');html=html.replace('<li><a href=\"#services\">Hizmetler</a></li>','<li><a href=\"#work\">Projeler</a></li>\n            <li><a href=\"#services\">Hizmetler</a></li>');html=html.replace('href=\"#services\"','href=\"#work\"');html=html.replace(/Hizmetleri\s+İncele/g,'Projeleri İncele');const ws=html.indexOf('    <section class=\"section-band work-band\"');const ss=html.indexOf('    <section class=\"section-band services-band\"',ws>-1?ws:0);if(ws>-1&&ss>-1){html=html.slice(0,ws)+work+html.slice(ss)}else if(ss>-1){html=html.slice(0,ss)+work+html.slice(ss)}fs.writeFileSync(file,html,'utf8')}"
+        run: node -e "const fs=require('fs');const work='    <section class=\"section-band work-band\" id=\"work\" aria-labelledby=\"work-title\">\n        <div class=\"container\">\n            <div class=\"section-heading split-heading\">\n                <div>\n                    <p class=\"eyebrow\">GitHub</p>\n                    <h2 id=\"work-title\">GitHub profilimde pinlediğim projeler.</h2>\n                </div>\n                <a class=\"text-link\" href=\"https://github.com/ardaltunel/\" target=\"_blank\" rel=\"nofollow\">\n                    GitHub\n                    <i class=\"bi bi-arrow-up-right\"></i>\n                </a>\n            </div>\n\n                <!-- GITHUB_PROJECTS -->\n        </div>\n    </section>\n\n';for(const file of ['index.template.html','index.html']){let html=fs.readFileSync(file,'utf8');if(!html.includes('<li><a href=\"#work\">Projeler</a></li>'))html=html.replace('<li><a href=\"#services\">Hizmetler</a></li>','<li><a href=\"#work\">Projeler</a></li>\n            <li><a href=\"#services\">Hizmetler</a></li>');html=html.replace('<a class=\"btn-primary\" href=\"#services\">','<a class=\"btn-primary\" href=\"#work\">');html=html.replace(/Hizmetleri\s+İncele/g,'Projeleri İncele');const ws=html.indexOf('    <section class=\"section-band work-band\"');const ss=html.indexOf('    <section class=\"section-band services-band\"',ws>-1?ws:0);if(ws>-1&&ss>-1){html=html.slice(0,ws)+work+html.slice(ss)}else if(ss>-1){html=html.slice(0,ss)+work+html.slice(ss)}fs.writeFileSync(file,html,'utf8')}"
+
+      - name: Add stable nav CSS
+        run: |
+          cat <<'CSS' >> assets/css/style.css
+
+          /* stable-nav-active-fix */
+          .nav-links a:hover:not(.is-active) {
+              background: transparent !important;
+              color: var(--muted) !important;
+              transform: none !important;
+          }
+
+          .nav-links a.is-active,
+          .nav-links a.is-active:hover {
+              color: var(--text) !important;
+              background: var(--surface-hover) !important;
+              transform: translateY(-1px) !important;
+          }
+          CSS
 
       - name: Rebuild static site
         run: node build-static.mjs
@@ -35,5 +54,5 @@ jobs:
       - name: Commit updated data
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "Keep GitHub cards only"
-          file_pattern: "index.html index.template.html cache/*.json"
+          commit_message: "Fix navigation active style"
+          file_pattern: "index.html index.template.html assets/css/style.css cache/*.json"
