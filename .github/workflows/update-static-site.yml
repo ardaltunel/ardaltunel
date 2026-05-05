@@ -26,9 +26,8 @@ jobs:
         with:
           node-version: 22
 
-      - name: Remove projects section
-        run: |
-          node -e 'const fs=require("fs");for(const file of ["index.template.html","index.html"]){let html=fs.readFileSync(file,"utf8");html=html.replace(/\n\s*<li><a href="#work">Projeler<\/a><\/li>/g,"");html=html.replace(/href="#work"/g,"href=\"#services\"");html=html.replace(/Projeleri\s+İncele/g,"Hizmetleri İncele");const start=html.indexOf("    <section class=\"section-band work-band\"");const end=html.indexOf("    <section class=\"section-band services-band\"",start);if(start!==-1&&end!==-1){html=html.slice(0,start)+html.slice(end)}fs.writeFileSync(file,html,"utf8");}'
+      - name: Keep GitHub cards only
+        run: node -e "const fs=require('fs');const work='    <section class=\"section-band work-band\" id=\"work\" aria-labelledby=\"work-title\">\n        <div class=\"container\">\n            <div class=\"section-heading split-heading\">\n                <div>\n                    <p class=\"eyebrow\">GitHub</p>\n                    <h2 id=\"work-title\">GitHub profilimde pinlediğim projeler.</h2>\n                </div>\n                <a class=\"text-link\" href=\"https://github.com/ardaltunel/\" target=\"_blank\" rel=\"nofollow\">\n                    GitHub\n                    <i class=\"bi bi-arrow-up-right\"></i>\n                </a>\n            </div>\n\n                <!-- GITHUB_PROJECTS -->\n        </div>\n    </section>\n\n';for(const file of ['index.template.html','index.html']){let html=fs.readFileSync(file,'utf8');html=html.replace('<li><a href=\"#services\">Hizmetler</a></li>','<li><a href=\"#work\">Projeler</a></li>\n            <li><a href=\"#services\">Hizmetler</a></li>');html=html.replace('href=\"#services\"','href=\"#work\"');html=html.replace(/Hizmetleri\s+İncele/g,'Projeleri İncele');const ws=html.indexOf('    <section class=\"section-band work-band\"');const ss=html.indexOf('    <section class=\"section-band services-band\"',ws>-1?ws:0);if(ws>-1&&ss>-1){html=html.slice(0,ws)+work+html.slice(ss)}else if(ss>-1){html=html.slice(0,ss)+work+html.slice(ss)}fs.writeFileSync(file,html,'utf8')}"
 
       - name: Rebuild static site
         run: node build-static.mjs
@@ -36,5 +35,5 @@ jobs:
       - name: Commit updated data
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "Remove projects section from site"
+          commit_message: "Keep GitHub cards only"
           file_pattern: "index.html index.template.html cache/*.json"
