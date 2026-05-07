@@ -33,28 +33,6 @@
     "homepage": "https://ardaltunel.github.io/discord-bots-site/"
   },
   {
-    "name": "music-app",
-    "description": "A project where you can upload songs, listen to, delete added songs",
-    "language": "JavaScript",
-    "color": "#f1e05a",
-    "stars": 2,
-    "forks": 0,
-    "updated": "04.05.2026",
-    "url": "https://github.com/ardaltunel/music-app",
-    "homepage": "https://ardaltunel.github.io/music-app/"
-  },
-  {
-    "name": "translate-app",
-    "description": "A \"translation\" app that works just like google translate",
-    "language": "HTML",
-    "color": "#e34c26",
-    "stars": 2,
-    "forks": 0,
-    "updated": "04.05.2026",
-    "url": "https://github.com/ardaltunel/translate-app",
-    "homepage": "https://ardaltunel.github.io/translate-app/"
-  },
-  {
     "name": "weather-app",
     "description": "A javascript project developed to learn the weather conditions of your desired location.",
     "language": "JavaScript",
@@ -64,5 +42,27 @@
     "updated": "04.05.2026",
     "url": "https://github.com/ardaltunel/weather-app",
     "homepage": "https://ardaltunel.github.io/weather-app/"
+  },
+  {
+    "name": "translate",
+    "description": "A \"translation\" app that works just like google translate",
+    "language": "HTML",
+    "color": "#e34c26",
+    "stars": 2,
+    "forks": 0,
+    "updated": "07.05.2026",
+    "url": "https://github.com/ardaltunel/translate",
+    "homepage": "https://ardaltunel.github.io/translate/"
+  },
+  {
+    "name": "music",
+    "description": "A project where you can upload songs, listen to, delete added songs",
+    "language": "JavaScript",
+    "color": "#f1e05a",
+    "stars": 2,
+    "forks": 0,
+    "updated": "07.05.2026",
+    "url": "https://github.com/ardaltunel/music",
+    "homepage": "https://ardaltunel.github.io/music/"
   }
 ]
