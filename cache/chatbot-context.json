@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-16T10:58:04.306Z",
+  "generatedAt": "2026-05-16T13:58:26.421Z",
   "identity": {
     "name": "Arda Altunel",
     "title": "Full Stack Developer",
@@ -91,7 +91,7 @@
     },
     {
       "name": "omni-tools",
-      "description": "Modern dark-themed tasarıma sahip; araçlar, kripto takip sistemi, üretkenlik uygulamaları ve interaktif dashboard deneyimleri sunan çok amaçlı utility...",
+      "description": "Üretkenlik uygulamaları ve interaktif dashboard deneyimleri sunan çok amaçlı utility platformu.",
       "language": "JavaScript",
       "stars": 3,
       "forks": 0,
