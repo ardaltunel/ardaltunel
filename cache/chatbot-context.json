@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-16T10:34:55.237Z",
+  "generatedAt": "2026-05-16T10:58:04.306Z",
   "identity": {
     "name": "Arda Altunel",
     "title": "Full Stack Developer",
@@ -81,7 +81,7 @@
   "highlightedProjects": [
     {
       "name": "ardaltunel",
-      "description": "GitHub Pages üzerinde yayınlanmak üzere hazırlanmış modern, responsive ve dinamik içerik destekli kişisel portfolio websitesi.",
+      "description": "Vercel üzerinde yayınlanmak üzere hazırlanmış modern, responsive ve dinamik içerik destekli kişisel portfolio websitesi.",
       "language": "CSS",
       "stars": 1,
       "forks": 0,
