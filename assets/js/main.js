@@ -193,6 +193,7 @@
         const suggestions = chatbot.querySelectorAll(".chatbot-suggestions button");
         const conversation = [];
         let isSending = false;
+        let closeTimer = null;
 
         const getChatEndpoint = () => {
             const metaEndpoint = document.querySelector('meta[name="chat-api-url"]')?.getAttribute("content") || "";
@@ -204,15 +205,26 @@
                 return;
             }
 
-            panel.hidden = !isOpen;
+            window.clearTimeout(closeTimer);
             toggle.setAttribute("aria-expanded", String(isOpen));
-            toggle.setAttribute("aria-label", isOpen ? "Arda AI sohbetini kapat" : "Arda AI sohbetini aç");
-            toggle.innerHTML = isOpen
-                ? '<i class="bi bi-x-lg"></i>'
-                : '<i class="bi bi-chat-dots"></i><span class="chatbot-pulse" aria-hidden="true"></span>';
+
+            if (isOpen) {
+                panel.hidden = false;
+                toggle.setAttribute("aria-label", "Arda AI sohbeti açık");
+                chatbot.classList.remove("is-closing");
+                window.requestAnimationFrame(() => chatbot.classList.add("is-open"));
+            } else {
+                toggle.setAttribute("aria-label", "Arda AI sohbetini aç");
+                chatbot.classList.remove("is-open");
+                chatbot.classList.add("is-closing");
+                closeTimer = window.setTimeout(() => {
+                    panel.hidden = true;
+                    chatbot.classList.remove("is-closing");
+                }, 280);
+            }
 
             if (isOpen && input) {
-                window.setTimeout(() => input.focus(), 80);
+                window.setTimeout(() => input.focus(), 180);
             }
         };
 
@@ -222,7 +234,7 @@
             }
         };
 
-        const appendTextWithLinks = (container, text) => {
+        const appendLinkedText = (container, text) => {
             const pattern = /(https?:\/\/[^\s)]+|mailto:[^\s)]+|[\w.+-]+@[\w-]+\.[\w.-]+)/g;
             let lastIndex = 0;
 
@@ -247,6 +259,27 @@
             }
         };
 
+        const appendFormattedText = (container, text) => {
+            const boldPattern = /\*\*([^*]+)\*\*/g;
+            let lastIndex = 0;
+
+            String(text).replace(boldPattern, (match, content, offset) => {
+                if (offset > lastIndex) {
+                    appendLinkedText(container, text.slice(lastIndex, offset));
+                }
+
+                const strong = document.createElement("strong");
+                appendLinkedText(strong, content);
+                container.appendChild(strong);
+                lastIndex = offset + match.length;
+                return match;
+            });
+
+            if (lastIndex < text.length) {
+                appendLinkedText(container, text.slice(lastIndex));
+            }
+        };
+
         const addMessage = (role, text, options = {}) => {
             if (!messages) {
                 return null;
@@ -263,7 +296,7 @@
                 typing.innerHTML = "<span></span><span></span><span></span>";
                 paragraph.appendChild(typing);
             } else {
-                appendTextWithLinks(paragraph, text);
+                appendFormattedText(paragraph, text);
             }
 
             item.appendChild(paragraph);
