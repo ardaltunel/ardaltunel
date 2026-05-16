@@ -1,14 +1,14 @@
 [
   {
-    "name": "ardaltunel.github.io",
+    "name": "ardaltunel",
     "description": "GitHub Pages üzerinde yayınlanmak üzere hazırlanmış modern, responsive ve dinamik içerik destekli kişisel portfolio websitesi.",
     "language": "CSS",
     "color": "#563d7c",
     "stars": 1,
     "forks": 0,
     "updated": "16.05.2026",
-    "url": "https://github.com/ardaltunel/ardaltunel.github.io",
-    "homepage": "https://ardaltunel.github.io"
+    "url": "https://github.com/ardaltunel/ardaltunel",
+    "homepage": "https://ardaltunel.vercel.app"
   },
   {
     "name": "omni-tools",
