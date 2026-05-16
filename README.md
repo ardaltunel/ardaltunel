@@ -16,7 +16,7 @@
 - 🌍 I'm from **Turkey**
 - 💻 I'm a **Full Stack Developer**
 - 🌱 I'm currently learning **React**
-- 🌐 Personal website: [ardaltunel.com](https://ardaltunel.github.io/)
+- 🌐 Personal website: [ardaltunel.vercel.app](https://ardaltunel.vercel.app/)
 - 📄 LinkedIn: [Arda Altunel](https://www.linkedin.com/in/ardaltunel/)
 - 📫 Reach me at: **ardaltunelmain@gmail.com**
 
