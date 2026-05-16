@@ -13,7 +13,7 @@ Bu proje; projelerimi, freelance hizmetlerimi, sosyal bağlantılarımı ve tekn
 ## 📸 Preview
 
 <p align="center">
-  <img width="1824" height="905" alt="image" src="https://github.com/user-attachments/assets/d614df93-5ce1-46d1-bc30-be76bbb77a53" />
+  <img width="1884" height="907" alt="image" src="https://github.com/user-attachments/assets/59e9c0e9-b640-4649-ba4e-a20add5ed6de" />
 </p>
 
 ---
