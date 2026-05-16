@@ -1,7 +1,7 @@
 [
   {
     "name": "ardaltunel.github.io",
-    "description": "A static portfolio website prepared for publication on GitHub Pages.",
+    "description": "GitHub Pages üzerinde yayınlanmak üzere hazırlanmış modern, responsive ve dinamik içerik destekli kişisel portfolio websitesi.",
     "language": "CSS",
     "color": "#563d7c",
     "stars": 1,
@@ -12,7 +12,7 @@
   },
   {
     "name": "omni-tools",
-    "description": "Modern dark-themed dashboard with games, tools, crypto tracking, and productivity apps.",
+    "description": "Modern dark-themed tasarıma sahip; araçlar, kripto takip sistemi, üretkenlik uygulamaları ve interaktif dashboard deneyimleri sunan çok amaçlı utility...",
     "language": "JavaScript",
     "color": "#f1e05a",
     "stars": 3,
@@ -23,29 +23,29 @@
   },
   {
     "name": "blog",
-    "description": "A blog platform developed for article sharing and content management",
+    "description": "Makale paylaşımı, içerik yönetimi ve kullanıcı sistemi özelliklerine sahip modern blog platformu.",
     "language": "JavaScript",
     "color": "#f1e05a",
     "stars": 1,
     "forks": 0,
-    "updated": "07.05.2026",
+    "updated": "16.05.2026",
     "url": "https://github.com/ardaltunel/blog",
     "homepage": "https://ardaltunel.github.io/blog/"
   },
   {
     "name": "music",
-    "description": "A project where you can upload songs, listen to, delete added songs",
+    "description": "Şarkı yükleme, müzik dinleme, düzenleme ve silme özelliklerine sahip modern müzik paylaşım platformu.",
     "language": "JavaScript",
     "color": "#f1e05a",
     "stars": 2,
     "forks": 0,
-    "updated": "07.05.2026",
+    "updated": "16.05.2026",
     "url": "https://github.com/ardaltunel/music",
     "homepage": "https://ardaltunel.github.io/music/"
   },
   {
     "name": "no-hello",
-    "description": "Website about why you shouldn't say hello when you correspond",
+    "description": "Yazışmalarda yalnızca “selam” yazmak yerine doğrudan konuya girmenin neden daha verimli olduğunu anlatan minimalist bilgilendirme sitesi.",
     "language": "HTML",
     "color": "#e34c26",
     "stars": 1,
@@ -56,7 +56,7 @@
   },
   {
     "name": "phantaso-bot-site",
-    "description": "Phantaso is a multifunctional bot designed specifically for your discord server spicing up your server with fun and moderation features, phantaso now ...",
+    "description": "Discord sunucuları için eğlence, moderasyon ve yardımcı sistemler sunan Phantaso botu için geliştirilmiş modern tanıtım websitesi.",
     "language": "HTML",
     "color": "#e34c26",
     "stars": 2,
