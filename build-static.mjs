@@ -328,6 +328,109 @@ ${cards}
                 </div>`;
 };
 
+const buildChatbotContext = (services, projects) => ({
+  generatedAt: new Date().toISOString(),
+  identity: {
+    name: "Arda Altunel",
+    title: "Full Stack Developer",
+    location: "Istanbul, Turkiye",
+    availability: "Freelance bazli calismalar icin uygun",
+    summary:
+      "Arda Altunel; modern, hizli ve yonetilebilir web siteleri gelistiren Istanbul merkezli bir full stack gelistiricidir.",
+  },
+  about: [
+    "Web sitelerinde gorsel duzeni, performansi ve surdurulebilir kodu birlikte dusunmeye odaklanir.",
+    "Sayfalarin iyi gorunmesi kadar kolay kullanilmasina ve sonradan yonetilebilir olmasina da onem verir.",
+    "Projelerde net navigasyon, okunabilir icerik, guclu mobil deneyim ve bakimi kolay yapi kurmaya odaklanir.",
+  ],
+  focus: [
+    "Full stack web siteleri",
+    "Responsive UI ve UX",
+    "PHP tabanli web siteleri",
+    "Kurumsal web siteleri",
+    "Portfolyo ve landing page projeleri",
+    "Icerik odakli web projeleri",
+  ],
+  skills: {
+    languages: ["C#", "Python", "JavaScript", "HTML", "CSS", "PHP", "SQL", "JSON", "XML", "React", "jQuery"],
+    tools: ["Node.js", "Bootstrap", "Sass", "MySQL", "Git", "Linux", "cPanel", "VS Code", "Photoshop"],
+    workAreas: [
+      "Kurumsal web",
+      "Panel arayuzleri",
+      "PHP tabanli akislar",
+      "Responsive duzen",
+      "Form, kayit, listeleme ve icerik yonetimi akislari",
+    ],
+  },
+  experience: [
+    {
+      label: "Freelance - Guncel",
+      title: "Full Stack Developer",
+      description:
+        "Portfolyo, kurumsal site, landing page ve kucuk web uygulamalarinda gelistirme ve yayina alma destegi.",
+    },
+    {
+      label: "Egitim - Guncel",
+      title: "Okan Universitesi Mobil Teknolojileri",
+      description:
+        "Web gelistirme, arayuz tasarimi, veritabani ve temel sistem yonetimi alanlarinda uygulamali calismalar.",
+    },
+    {
+      label: "Sertifika",
+      title: "Microsoft Certified Solutions",
+      description: "Sistem yonetimi, temel altyapi mantigi ve problem cozme tarafini guclendiren egitim gecmisi.",
+    },
+  ],
+  contact: {
+    email: "ardaltunelmain@gmail.com",
+    linkedin: "https://linkedin.com/in/ardaltunel/",
+    github: "https://github.com/ardaltunel/",
+    instagram: "https://instagram.com/ardaltunel/",
+    bionluk: "https://bionluk.com/ardaltunel",
+    cv: "https://ardaltunel.github.io/assets/pdf/arda-altunel-cv.pdf",
+  },
+  highlightedProjects: projects.slice(0, 6).map((project) => ({
+    name: project.name,
+    description: project.description,
+    language: project.language,
+    stars: project.stars,
+    forks: project.forks,
+    updated: project.updated,
+    url: project.url,
+    homepage: project.homepage,
+  })),
+  services: services.slice(0, 6).map((service) => ({
+    title: service.title,
+    description: service.description,
+    price: service.price,
+    durationDays: service.duration,
+    revisions: service.revision,
+    url: service.url,
+  })),
+  notes: [
+    {
+      title: "DevOps Nedir?",
+      topic: "DevOps",
+      url: "https://ardaltunel.github.io/blog/post.html?id=15",
+    },
+    {
+      title: "PHP Nedir?",
+      topic: "Backend",
+      url: "https://ardaltunel.github.io/blog/post.html?id=19",
+    },
+    {
+      title: "CMS Nedir?",
+      topic: "CMS",
+      url: "https://ardaltunel.github.io/blog/post.html?id=17",
+    },
+  ],
+  sourceUrls: [
+    "https://ardaltunel.github.io/",
+    "https://github.com/ardaltunel/",
+    "https://bionluk.com/ardaltunel",
+  ],
+});
+
 const template = fs.readFileSync(path.join(root, "index.template.html"), "utf8");
 let output = template;
 const bionlukServices = await refreshData(
@@ -345,6 +448,7 @@ writeJson("cache/last-updated.json", {
   bionlukServices: bionlukServices.length,
   githubPinnedProjects: githubPinnedProjects.length,
 });
+writeJson("cache/chatbot-context.json", buildChatbotContext(bionlukServices, githubPinnedProjects));
 
 output = output
   .replace("{{CURRENT_YEAR}}", String(year))

@@ -180,6 +180,229 @@
         cleanHash();
     });
 
+    const chatbot = document.querySelector("[data-chatbot]");
+
+    if (chatbot) {
+        const toggle = chatbot.querySelector(".chatbot-toggle");
+        const panel = chatbot.querySelector(".chatbot-panel");
+        const closeButton = chatbot.querySelector(".chatbot-close");
+        const messages = chatbot.querySelector(".chatbot-messages");
+        const form = chatbot.querySelector(".chatbot-form");
+        const input = chatbot.querySelector("#chatbot-input");
+        const submitButton = form ? form.querySelector("button[type='submit']") : null;
+        const suggestions = chatbot.querySelectorAll(".chatbot-suggestions button");
+        const conversation = [];
+        let isSending = false;
+
+        const getChatEndpoint = () => {
+            const metaEndpoint = document.querySelector('meta[name="chat-api-url"]')?.getAttribute("content") || "";
+            return window.ARDA_CHAT_API_URL || metaEndpoint || "/api/chat";
+        };
+
+        const setPanelOpen = (isOpen) => {
+            if (!panel || !toggle) {
+                return;
+            }
+
+            panel.hidden = !isOpen;
+            toggle.setAttribute("aria-expanded", String(isOpen));
+            toggle.setAttribute("aria-label", isOpen ? "Arda AI sohbetini kapat" : "Arda AI sohbetini aç");
+            toggle.innerHTML = isOpen
+                ? '<i class="bi bi-x-lg"></i>'
+                : '<i class="bi bi-chat-dots"></i><span class="chatbot-pulse" aria-hidden="true"></span>';
+
+            if (isOpen && input) {
+                window.setTimeout(() => input.focus(), 80);
+            }
+        };
+
+        const scrollMessages = () => {
+            if (messages) {
+                messages.scrollTop = messages.scrollHeight;
+            }
+        };
+
+        const appendTextWithLinks = (container, text) => {
+            const pattern = /(https?:\/\/[^\s)]+|mailto:[^\s)]+|[\w.+-]+@[\w-]+\.[\w.-]+)/g;
+            let lastIndex = 0;
+
+            String(text).replace(pattern, (match, _value, offset) => {
+                if (offset > lastIndex) {
+                    container.appendChild(document.createTextNode(text.slice(lastIndex, offset)));
+                }
+
+                const link = document.createElement("a");
+                const href = match.includes("@") && !match.startsWith("mailto:") ? `mailto:${match}` : match;
+                link.href = href;
+                link.textContent = match.replace(/^mailto:/, "");
+                link.target = href.startsWith("http") ? "_blank" : "";
+                link.rel = href.startsWith("http") ? "noopener nofollow" : "";
+                container.appendChild(link);
+                lastIndex = offset + match.length;
+                return match;
+            });
+
+            if (lastIndex < text.length) {
+                container.appendChild(document.createTextNode(text.slice(lastIndex)));
+            }
+        };
+
+        const addMessage = (role, text, options = {}) => {
+            if (!messages) {
+                return null;
+            }
+
+            const item = document.createElement("div");
+            const paragraph = document.createElement("p");
+            item.className = `chatbot-message ${role}${options.error ? " error" : ""}`;
+
+            if (options.typing) {
+                const typing = document.createElement("span");
+                typing.className = "chatbot-typing";
+                typing.setAttribute("aria-label", "Yanıt hazırlanıyor");
+                typing.innerHTML = "<span></span><span></span><span></span>";
+                paragraph.appendChild(typing);
+            } else {
+                appendTextWithLinks(paragraph, text);
+            }
+
+            item.appendChild(paragraph);
+            messages.appendChild(item);
+            scrollMessages();
+            return item;
+        };
+
+        const setSending = (state) => {
+            isSending = state;
+
+            if (input) {
+                input.disabled = state;
+            }
+
+            if (submitButton) {
+                submitButton.disabled = state;
+            }
+        };
+
+        const autoResizeInput = () => {
+            if (!input) {
+                return;
+            }
+
+            input.style.height = "auto";
+            input.style.height = `${Math.min(input.scrollHeight, 118)}px`;
+        };
+
+        const userFriendlyError = (status) => {
+            if ([404, 405, 501].includes(status)) {
+                return "Chatbot backend'i henüz yapılandırılmamış görünüyor. Site Vercel üzerinde /api/chat ile yayınlandığında veya chat API adresi tanımlandığında çalışır.";
+            }
+
+            if (status === 429) {
+                return "Çok kısa sürede fazla mesaj gönderdin. Bir dakika sonra tekrar deneyebilirsin.";
+            }
+
+            return "Şu anda yanıt alınamıyor. Biraz sonra tekrar deneyebilir veya iletişim bölümünden Arda'ya ulaşabilirsin.";
+        };
+
+        const sendMessage = async (value) => {
+            const message = String(value || "").trim();
+
+            if (!message || isSending) {
+                return;
+            }
+
+            const history = conversation.slice(-6);
+            addMessage("user", message);
+            conversation.push({ role: "user", content: message });
+            setSending(true);
+
+            if (input) {
+                input.value = "";
+                autoResizeInput();
+            }
+
+            const typingMessage = addMessage("bot", "", { typing: true });
+
+            try {
+                const response = await fetch(getChatEndpoint(), {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ message, history }),
+                });
+                const data = await response.json().catch(() => ({}));
+
+                if (!response.ok) {
+                    throw new Error(userFriendlyError(response.status));
+                }
+
+                if (typingMessage) {
+                    typingMessage.remove();
+                }
+
+                const answer =
+                    data.answer ||
+                    "Bu konuda site içeriğinde net bir bilgi bulamadım. İletişim bölümünden Arda ile doğrudan görüşebilirsin.";
+                addMessage("bot", answer);
+                conversation.push({ role: "assistant", content: answer });
+            } catch (error) {
+                if (typingMessage) {
+                    typingMessage.remove();
+                }
+
+                addMessage("bot", error.message || userFriendlyError(), { error: true });
+            } finally {
+                setSending(false);
+
+                if (input && !panel.hidden) {
+                    input.focus();
+                }
+            }
+        };
+
+        if (toggle) {
+            toggle.addEventListener("click", () => {
+                setPanelOpen(panel ? panel.hidden : false);
+            });
+        }
+
+        if (closeButton) {
+            closeButton.addEventListener("click", () => setPanelOpen(false));
+        }
+
+        suggestions.forEach((button) => {
+            button.addEventListener("click", () => {
+                setPanelOpen(true);
+                sendMessage(button.textContent);
+            });
+        });
+
+        if (input) {
+            input.addEventListener("input", autoResizeInput);
+            input.addEventListener("keydown", (event) => {
+                if (event.key === "Enter" && !event.shiftKey) {
+                    event.preventDefault();
+                    form.requestSubmit();
+                }
+            });
+        }
+
+        if (form) {
+            form.addEventListener("submit", (event) => {
+                event.preventDefault();
+                sendMessage(input ? input.value : "");
+            });
+        }
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape" && panel && !panel.hidden) {
+                setPanelOpen(false);
+            }
+        });
+    }
+
     if (!reduceMotion) {
         const revealItems = [
             ".section-heading",

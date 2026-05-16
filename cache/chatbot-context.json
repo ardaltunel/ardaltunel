@@ -1,0 +1,215 @@
+{
+  "generatedAt": "2026-05-16T10:01:38.431Z",
+  "identity": {
+    "name": "Arda Altunel",
+    "title": "Full Stack Developer",
+    "location": "Istanbul, Turkiye",
+    "availability": "Freelance bazli calismalar icin uygun",
+    "summary": "Arda Altunel; modern, hizli ve yonetilebilir web siteleri gelistiren Istanbul merkezli bir full stack gelistiricidir."
+  },
+  "about": [
+    "Web sitelerinde gorsel duzeni, performansi ve surdurulebilir kodu birlikte dusunmeye odaklanir.",
+    "Sayfalarin iyi gorunmesi kadar kolay kullanilmasina ve sonradan yonetilebilir olmasina da onem verir.",
+    "Projelerde net navigasyon, okunabilir icerik, guclu mobil deneyim ve bakimi kolay yapi kurmaya odaklanir."
+  ],
+  "focus": [
+    "Full stack web siteleri",
+    "Responsive UI ve UX",
+    "PHP tabanli web siteleri",
+    "Kurumsal web siteleri",
+    "Portfolyo ve landing page projeleri",
+    "Icerik odakli web projeleri"
+  ],
+  "skills": {
+    "languages": [
+      "C#",
+      "Python",
+      "JavaScript",
+      "HTML",
+      "CSS",
+      "PHP",
+      "SQL",
+      "JSON",
+      "XML",
+      "React",
+      "jQuery"
+    ],
+    "tools": [
+      "Node.js",
+      "Bootstrap",
+      "Sass",
+      "MySQL",
+      "Git",
+      "Linux",
+      "cPanel",
+      "VS Code",
+      "Photoshop"
+    ],
+    "workAreas": [
+      "Kurumsal web",
+      "Panel arayuzleri",
+      "PHP tabanli akislar",
+      "Responsive duzen",
+      "Form, kayit, listeleme ve icerik yonetimi akislari"
+    ]
+  },
+  "experience": [
+    {
+      "label": "Freelance - Guncel",
+      "title": "Full Stack Developer",
+      "description": "Portfolyo, kurumsal site, landing page ve kucuk web uygulamalarinda gelistirme ve yayina alma destegi."
+    },
+    {
+      "label": "Egitim - Guncel",
+      "title": "Okan Universitesi Mobil Teknolojileri",
+      "description": "Web gelistirme, arayuz tasarimi, veritabani ve temel sistem yonetimi alanlarinda uygulamali calismalar."
+    },
+    {
+      "label": "Sertifika",
+      "title": "Microsoft Certified Solutions",
+      "description": "Sistem yonetimi, temel altyapi mantigi ve problem cozme tarafini guclendiren egitim gecmisi."
+    }
+  ],
+  "contact": {
+    "email": "ardaltunelmain@gmail.com",
+    "linkedin": "https://linkedin.com/in/ardaltunel/",
+    "github": "https://github.com/ardaltunel/",
+    "instagram": "https://instagram.com/ardaltunel/",
+    "bionluk": "https://bionluk.com/ardaltunel",
+    "cv": "https://ardaltunel.github.io/assets/pdf/arda-altunel-cv.pdf"
+  },
+  "highlightedProjects": [
+    {
+      "name": "ardaltunel.github.io",
+      "description": "GitHub Pages üzerinde yayınlanmak üzere hazırlanmış modern, responsive ve dinamik içerik destekli kişisel portfolio websitesi.",
+      "language": "CSS",
+      "stars": 1,
+      "forks": 0,
+      "updated": "16.05.2026",
+      "url": "https://github.com/ardaltunel/ardaltunel.github.io",
+      "homepage": "https://ardaltunel.github.io"
+    },
+    {
+      "name": "omni-tools",
+      "description": "Modern dark-themed tasarıma sahip; araçlar, kripto takip sistemi, üretkenlik uygulamaları ve interaktif dashboard deneyimleri sunan çok amaçlı utility...",
+      "language": "JavaScript",
+      "stars": 3,
+      "forks": 0,
+      "updated": "16.05.2026",
+      "url": "https://github.com/ardaltunel/omni-tools",
+      "homepage": "https://ardaltunel.github.io/omni-tools/"
+    },
+    {
+      "name": "blog",
+      "description": "Makale paylaşımı, içerik yönetimi ve kullanıcı sistemi özelliklerine sahip modern blog platformu.",
+      "language": "JavaScript",
+      "stars": 1,
+      "forks": 0,
+      "updated": "16.05.2026",
+      "url": "https://github.com/ardaltunel/blog",
+      "homepage": "https://ardaltunel.github.io/blog/"
+    },
+    {
+      "name": "music",
+      "description": "Şarkı yükleme, müzik dinleme, düzenleme ve silme özelliklerine sahip modern müzik paylaşım platformu.",
+      "language": "JavaScript",
+      "stars": 2,
+      "forks": 0,
+      "updated": "16.05.2026",
+      "url": "https://github.com/ardaltunel/music",
+      "homepage": "https://ardaltunel.github.io/music/"
+    },
+    {
+      "name": "no-hello",
+      "description": "Yazışmalarda yalnızca “selam” yazmak yerine doğrudan konuya girmenin neden daha verimli olduğunu anlatan minimalist bilgilendirme sitesi.",
+      "language": "HTML",
+      "stars": 1,
+      "forks": 0,
+      "updated": "16.05.2026",
+      "url": "https://github.com/ardaltunel/no-hello",
+      "homepage": "https://ardaltunel.github.io/no-hello/"
+    },
+    {
+      "name": "phantaso-bot-site",
+      "description": "Discord sunucuları için eğlence, moderasyon ve yardımcı sistemler sunan Phantaso botu için geliştirilmiş modern tanıtım websitesi.",
+      "language": "HTML",
+      "stars": 2,
+      "forks": 0,
+      "updated": "16.05.2026",
+      "url": "https://github.com/ardaltunel/phantaso-bot-site",
+      "homepage": "https://ardaltunel.github.io/phantaso-bot-site/"
+    }
+  ],
+  "services": [
+    {
+      "title": "mobil uyumlu blog sitesi yaparım",
+      "description": "Merhaba, Size özel bir blog web sitesi hazırlıyorum. İstediğiniz kategoriye uygun (kişisel, teknoloji, seyahat, yemek vb.) bir blog sitesi...",
+      "price": "3.500TL",
+      "durationDays": 1,
+      "revisions": 1,
+      "url": "https://bionluk.com/ardaltunel/mobil-uyumlu-blog-sitesi-yaparim-613069"
+    },
+    {
+      "title": "mobil uyumlu portfolio web sitesi yaparım",
+      "description": "Merhaba, Size özel bir portföy (portfolio) web sitesi hazırlıyorum. Kişisel markanızı, çalışmalarınızı ve projelerinizi en iyi şekilde yan...",
+      "price": "3.000TL",
+      "durationDays": 1,
+      "revisions": 1,
+      "url": "https://bionluk.com/ardaltunel/mobil-uyumlu-portfolio-web-sitesi-yaparim-855157"
+    },
+    {
+      "title": "kişiye özel modern link in bio sitesi yaparım",
+      "description": "Merhaba, Size özel tüm sosyal medyalarınızı tek bir adreste toplayabileceğiniz web sitesi oluşturuyorum. Hazırlanacak site, mobil uyumlu v...",
+      "price": "2.500TL",
+      "durationDays": 1,
+      "revisions": 1,
+      "url": "https://bionluk.com/ardaltunel/kisiye-ozel-modern-link-in-bio-sitesi-yaparim-855072"
+    },
+    {
+      "title": "web sitenizdeki hataları tespit eder ve gideririm",
+      "description": "Merhaba, Web sitenizde bulunan hataları tespit ederek gerekli düzenlemeleri yapıyorum. Mevcut sorunları analiz eder, sizin fark ettiğiniz ...",
+      "price": "750TL",
+      "durationDays": 1,
+      "revisions": 1,
+      "url": "https://bionluk.com/ardaltunel/web-sitenizdeki-hatalari-tespit-eder-ve-gideririm-536375"
+    },
+    {
+      "title": "seo uyumlu blog yazısı yaparım",
+      "description": "Merhaba, Web siteniz için SEO uyumlu, özgün ve etkileyici blog içerikleri hazırlıyorum. Hedef kitlenizi analiz ederek içerik stratejisi ol...",
+      "price": "250TL",
+      "durationDays": 1,
+      "revisions": 1,
+      "url": "https://bionluk.com/ardaltunel/seo-uyumlu-blog-yazisi-yaparim-832900"
+    },
+    {
+      "title": "ingilizce–türkçe hızlı ve doğru çeviri yaparım",
+      "description": "Merhaba, Türkçe ve İngilizce arasında hızlı, doğru ve özenli çeviri hizmeti sunuyorum. Blog yazıları, kısa metinler, sosyal medya içerikle...",
+      "price": "150TL",
+      "durationDays": 1,
+      "revisions": 1,
+      "url": "https://bionluk.com/ardaltunel/ingilizce-turkce-hizli-ve-dogru-ceviri-yaparim-832906"
+    }
+  ],
+  "notes": [
+    {
+      "title": "DevOps Nedir?",
+      "topic": "DevOps",
+      "url": "https://ardaltunel.github.io/blog/post.html?id=15"
+    },
+    {
+      "title": "PHP Nedir?",
+      "topic": "Backend",
+      "url": "https://ardaltunel.github.io/blog/post.html?id=19"
+    },
+    {
+      "title": "CMS Nedir?",
+      "topic": "CMS",
+      "url": "https://ardaltunel.github.io/blog/post.html?id=17"
+    }
+  ],
+  "sourceUrls": [
+    "https://ardaltunel.github.io/",
+    "https://github.com/ardaltunel/",
+    "https://bionluk.com/ardaltunel"
+  ]
+}

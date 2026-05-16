@@ -662,6 +662,47 @@
     </div>
 </footer>
 
+<div class="chatbot-widget" data-chatbot>
+    <button class="chatbot-toggle" type="button" aria-label="Arda AI sohbetini aç" aria-expanded="false"
+            aria-controls="arda-chatbot-panel">
+        <i class="bi bi-chat-dots"></i>
+        <span class="chatbot-pulse" aria-hidden="true"></span>
+    </button>
+
+    <section class="chatbot-panel" id="arda-chatbot-panel" aria-label="Arda AI sohbet penceresi" hidden>
+        <div class="chatbot-header">
+            <div>
+                <span>Arda AI</span>
+                <p>Portfolyo asistanı</p>
+            </div>
+            <button class="chatbot-close" type="button" aria-label="Sohbeti kapat">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+
+        <div class="chatbot-messages" role="log" aria-live="polite" aria-relevant="additions">
+            <div class="chatbot-message bot">
+                <p>Merhaba, Arda Altunel'in portfolyosu, projeleri, yetenekleri ve iletişim bilgileri hakkında soru sorabilirsin.</p>
+            </div>
+        </div>
+
+        <div class="chatbot-suggestions" aria-label="Örnek sorular">
+            <button type="button">Arda kimdir?</button>
+            <button type="button">Hangi projeleri var?</button>
+            <button type="button">Nasıl iletişim kurabilirim?</button>
+        </div>
+
+        <form class="chatbot-form">
+            <label class="sr-only" for="chatbot-input">Mesajınız</label>
+            <textarea id="chatbot-input" name="message" rows="1" maxlength="500"
+                      placeholder="Arda hakkında soru sor..."></textarea>
+            <button type="submit" aria-label="Mesaj gönder">
+                <i class="bi bi-send"></i>
+            </button>
+        </form>
+    </section>
+</div>
+
 <script src="assets/js/main.js"></script>
 
 </body>

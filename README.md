@@ -76,6 +76,28 @@ adresine gidin.
 
 ---
 
+# AI Chatbot Kurulumu
+
+Chatbot arayuzu statik siteye eklidir; OpenAI API anahtari frontend icine yazilmaz. Yanitlar `api/chat.js` Vercel serverless function uzerinden uretilir.
+
+Vercel ortam degiskenleri:
+
+```text
+OPENAI_API_KEY=sk-...
+OPENAI_MODEL=gpt-5.4-mini
+ALLOWED_ORIGINS=https://ardaltunel.github.io,https://your-vercel-domain.vercel.app
+```
+
+GitHub Pages statik oldugu icin `/api/chat` dogrudan calismaz. Chatbotu canli GitHub Pages alan adinda kullanmak icin repo Vercel'e baglanabilir veya GitHub Pages tarafinda public backend adresi tanimlanabilir:
+
+```html
+<script>
+  window.ARDA_CHAT_API_URL = "https://your-vercel-domain.vercel.app/api/chat";
+</script>
+```
+
+---
+
 # 🚀 GitHub Pages Yayına Alma
 
 1. Repository dosyalarını GitHub repository kök dizinine yükleyin.
