@@ -13,7 +13,7 @@ Bu proje; projelerimi, freelance hizmetlerimi, sosyal bağlantılarımı ve tekn
 ## 📸 Preview
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/ardaltunel/ardaltunel.github.io/main/assets/images/preview.png" width="100%">
+  <img width="1824" height="905" alt="image" src="https://github.com/user-attachments/assets/d614df93-5ce1-46d1-bc30-be76bbb77a53" />
 </p>
 
 ---
