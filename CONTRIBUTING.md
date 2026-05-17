@@ -6,7 +6,7 @@ Bu proje; projelerimi, freelance hizmetlerimi, sosyal bağlantılarımı ve tekn
 
 ## 🌍 Live Website
 
-🔗 https://ardaltunel.github.io/
+🔗 https://ardaltunel.vercel.app
 
 ---
 
