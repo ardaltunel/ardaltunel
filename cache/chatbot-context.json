@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-20T09:53:45.714Z",
+  "generatedAt": "2026-05-20T15:54:35.698Z",
   "identity": {
     "name": "Arda Altunel",
     "title": "Full Stack Developer",
@@ -120,6 +120,16 @@
       "homepage": "https://ardaltunel.github.io/music/"
     },
     {
+      "name": "photo-album",
+      "description": "Supabase Auth ve Storage ile çalışan, sadece izinli kullanıcıların erişebildiği özel fotoğraf albümü sitesi.",
+      "language": "CSS",
+      "stars": 1,
+      "forks": 0,
+      "updated": "20.05.2026",
+      "url": "https://github.com/ardaltunel/photo-album",
+      "homepage": "https://ardaltunel.github.io/photo-album/"
+    },
+    {
       "name": "no-hello",
       "description": "Yazışmalarda yalnızca “selam” yazmak yerine doğrudan konuya girmenin neden daha verimli olduğunu anlatan minimalist bilgilendirme sitesi.",
       "language": "HTML",
@@ -128,16 +138,6 @@
       "updated": "16.05.2026",
       "url": "https://github.com/ardaltunel/no-hello",
       "homepage": "https://ardaltunel.github.io/no-hello/"
-    },
-    {
-      "name": "phantaso-bot-site",
-      "description": "Discord sunucuları için eğlence, moderasyon ve yardımcı sistemler sunan Phantaso botu için geliştirilmiş modern tanıtım websitesi.",
-      "language": "HTML",
-      "stars": 2,
-      "forks": 0,
-      "updated": "16.05.2026",
-      "url": "https://github.com/ardaltunel/phantaso-bot-site",
-      "homepage": "https://ardaltunel.github.io/phantaso-bot-site/"
     }
   ],
   "services": [
