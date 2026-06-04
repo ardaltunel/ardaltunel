@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-03T21:29:16.098Z",
+  "generatedAt": "2026-06-04T05:03:37.223Z",
   "identity": {
     "name": "Arda Altunel",
     "title": "Full Stack Developer",
@@ -118,16 +118,6 @@
       "updated": "20.05.2026",
       "url": "https://github.com/ardaltunel/music",
       "homepage": "https://ardaltunel.github.io/music/"
-    },
-    {
-      "name": "photo-album",
-      "description": "Supabase Auth ve Storage ile çalışan, sadece izinli kullanıcıların erişebildiği özel fotoğraf albümü sitesi.",
-      "language": "CSS",
-      "stars": 1,
-      "forks": 0,
-      "updated": "20.05.2026",
-      "url": "https://github.com/ardaltunel/photo-album",
-      "homepage": "https://ardaltunel.github.io/photo-album/"
     },
     {
       "name": "no-hello",

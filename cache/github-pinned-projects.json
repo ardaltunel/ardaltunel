@@ -44,17 +44,6 @@
     "homepage": "https://ardaltunel.github.io/music/"
   },
   {
-    "name": "photo-album",
-    "description": "Supabase Auth ve Storage ile çalışan, sadece izinli kullanıcıların erişebildiği özel fotoğraf albümü sitesi.",
-    "language": "CSS",
-    "color": "#563d7c",
-    "stars": 1,
-    "forks": 0,
-    "updated": "20.05.2026",
-    "url": "https://github.com/ardaltunel/photo-album",
-    "homepage": "https://ardaltunel.github.io/photo-album/"
-  },
-  {
     "name": "no-hello",
     "description": "Yazışmalarda yalnızca “selam” yazmak yerine doğrudan konuya girmenin neden daha verimli olduğunu anlatan minimalist bilgilendirme sitesi.",
     "language": "HTML",
