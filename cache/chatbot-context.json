@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-07T19:45:36.152Z",
+  "generatedAt": "2026-06-08T05:00:24.498Z",
   "identity": {
     "name": "Arda Altunel",
     "title": "Full Stack Developer",
@@ -128,6 +128,16 @@
       "updated": "16.05.2026",
       "url": "https://github.com/ardaltunel/no-hello",
       "homepage": "https://ardaltunel.github.io/no-hello/"
+    },
+    {
+      "name": "phantaso-bot-site",
+      "description": "Discord sunucuları için eğlence, moderasyon ve yardımcı sistemler sunan Phantaso botu için geliştirilmiş modern tanıtım websitesi.",
+      "language": "HTML",
+      "stars": 2,
+      "forks": 0,
+      "updated": "16.05.2026",
+      "url": "https://github.com/ardaltunel/phantaso-bot-site",
+      "homepage": "https://ardaltunel.github.io/phantaso-bot-site/"
     }
   ],
   "services": [
