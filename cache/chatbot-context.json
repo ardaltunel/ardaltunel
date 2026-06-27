@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-27T04:15:19.460Z",
+  "generatedAt": "2026-06-27T08:49:04.121Z",
   "identity": {
     "name": "Arda Altunel",
     "title": "Full Stack Developer",
@@ -85,7 +85,7 @@
       "language": "CSS",
       "stars": 1,
       "forks": 0,
-      "updated": "26.06.2026",
+      "updated": "27.06.2026",
       "url": "https://github.com/ardaltunel/ardaltunel",
       "homepage": "https://ardaltunel.vercel.app"
     },
@@ -178,7 +178,7 @@
       "description": "Merhaba, Web siteniz için SEO uyumlu, özgün ve etkileyici blog içerikleri hazırlıyorum. Hedef kitlenizi analiz ederek içerik stratejisi ol...",
       "price": "250TL",
       "durationDays": 1,
-      "revisions": 0,
+      "revisions": 1,
       "url": "https://bionluk.com/ardaltunel/seo-uyumlu-blog-yazisi-yaparim-832900"
     },
     {
