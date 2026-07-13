@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-13T09:46:23.251Z",
+  "generatedAt": "2026-07-13T15:09:28.455Z",
   "identity": {
     "name": "Arda Altunel",
     "title": "Full Stack Developer",
@@ -105,7 +105,7 @@
       "language": "JavaScript",
       "stars": 1,
       "forks": 0,
-      "updated": "17.05.2026",
+      "updated": "13.07.2026",
       "url": "https://github.com/ardaltunel/blog",
       "homepage": "https://ardaltunel.github.io/blog/"
     },
@@ -115,7 +115,7 @@
       "language": "JavaScript",
       "stars": 2,
       "forks": 0,
-      "updated": "20.05.2026",
+      "updated": "13.07.2026",
       "url": "https://github.com/ardaltunel/music",
       "homepage": "https://ardaltunel.github.io/music/"
     },
