@@ -6160,3 +6160,17 @@ h3 {
     background: var(--surface-hover) !important;
     transform: translateY(-1px) !important;
 }
+
+/* stable-nav-active-fix */
+.nav-links a:hover:not(.is-active) {
+    background: transparent !important;
+    color: var(--muted) !important;
+    transform: none !important;
+}
+
+.nav-links a.is-active,
+.nav-links a.is-active:hover {
+    color: var(--text) !important;
+    background: var(--surface-hover) !important;
+    transform: translateY(-1px) !important;
+}
