@@ -7,7 +7,7 @@ on:
       - main
       - master
   schedule:
-    - cron: "17 */6 * * *"
+    - cron: "0 21 * * *"
 
 permissions:
   contents: write
