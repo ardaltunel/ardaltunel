@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-26T21:58:24.549Z",
+  "generatedAt": "2026-07-27T22:05:47.939Z",
   "identity": {
     "name": "Arda Altunel",
     "title": "Full Stack Developer",
@@ -83,9 +83,9 @@
       "name": "ardaltunel",
       "description": "Vercel üzerinde yayınlanmak üzere hazırlanmış modern, responsive ve dinamik içerik destekli kişisel portfolio websitesi.",
       "language": "CSS",
-      "stars": 1,
+      "stars": 0,
       "forks": 0,
-      "updated": "25.07.2026",
+      "updated": "27.07.2026",
       "url": "https://github.com/ardaltunel/ardaltunel",
       "homepage": "https://ardaltunel.vercel.app"
     },
@@ -93,9 +93,9 @@
       "name": "omni-tools",
       "description": "Üretkenlik uygulamaları ve interaktif dashboard deneyimleri sunan çok amaçlı utility platformu.",
       "language": "JavaScript",
-      "stars": 3,
+      "stars": 2,
       "forks": 0,
-      "updated": "23.07.2026",
+      "updated": "27.07.2026",
       "url": "https://github.com/ardaltunel/omni-tools",
       "homepage": "https://ardaltunel.github.io/omni-tools/"
     },
@@ -103,9 +103,9 @@
       "name": "blog",
       "description": "Makale paylaşımı, içerik yönetimi ve kullanıcı sistemi özelliklerine sahip modern blog platformu.",
       "language": "JavaScript",
-      "stars": 1,
+      "stars": 0,
       "forks": 0,
-      "updated": "17.07.2026",
+      "updated": "27.07.2026",
       "url": "https://github.com/ardaltunel/blog",
       "homepage": "https://ardaltunel.github.io/blog/"
     },
@@ -113,9 +113,9 @@
       "name": "music",
       "description": "Şarkı yükleme, müzik dinleme, düzenleme ve silme özelliklerine sahip modern müzik paylaşım platformu.",
       "language": "JavaScript",
-      "stars": 2,
+      "stars": 1,
       "forks": 0,
-      "updated": "15.07.2026",
+      "updated": "27.07.2026",
       "url": "https://github.com/ardaltunel/music",
       "homepage": "https://ardaltunel.github.io/music/"
     },
@@ -123,9 +123,9 @@
       "name": "no-hello",
       "description": "Yazışmalarda yalnızca “selam” yazmak yerine doğrudan konuya girmenin neden daha verimli olduğunu anlatan minimalist bilgilendirme sitesi.",
       "language": "HTML",
-      "stars": 1,
+      "stars": 0,
       "forks": 0,
-      "updated": "16.05.2026",
+      "updated": "27.07.2026",
       "url": "https://github.com/ardaltunel/no-hello",
       "homepage": "https://ardaltunel.github.io/no-hello/"
     },
@@ -133,9 +133,9 @@
       "name": "phantaso-bot-site",
       "description": "Discord sunucuları için eğlence, moderasyon ve yardımcı sistemler sunan Phantaso botu için geliştirilmiş modern tanıtım websitesi.",
       "language": "HTML",
-      "stars": 2,
+      "stars": 1,
       "forks": 0,
-      "updated": "16.05.2026",
+      "updated": "27.07.2026",
       "url": "https://github.com/ardaltunel/phantaso-bot-site",
       "homepage": "https://ardaltunel.github.io/phantaso-bot-site/"
     }
