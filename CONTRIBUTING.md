@@ -1,8 +1,8 @@
 # Arda Altunel Portfolio
 
-Modern, responsive ve GitHub Pages destekli kişisel portfolio websitesi.
+A modern, responsive personal portfolio website designed for deployment on GitHub Pages and Vercel.
 
-Bu proje; projelerimi, freelance hizmetlerimi, sosyal bağlantılarımı ve teknik yeteneklerimi modern bir arayüz ile sergilemek amacıyla geliştirilmiştir.
+This project was developed to showcase my projects, freelance services, social profiles, and technical skills through a modern and user-friendly interface.
 
 ## 🌍 Live Website
 
@@ -13,26 +13,28 @@ Bu proje; projelerimi, freelance hizmetlerimi, sosyal bağlantılarımı ve tekn
 ## 📸 Preview
 
 <p align="center">
-  <img width="1884" height="907" alt="image" src="https://github.com/user-attachments/assets/59e9c0e9-b640-4649-ba4e-a20add5ed6de" />
+  <img width="1884" height="907" alt="Arda Altunel portfolio website preview" src="https://github.com/user-attachments/assets/59e9c0e9-b640-4649-ba4e-a20add5ed6de" />
 </p>
 
 ---
 
-# ✨ Özellikler
+# ✨ Features
 
-- Modern ve responsive tasarım
-- GitHub Pages desteği
-- Otomatik veri güncelleme sistemi
-- GitHub pinned repository entegrasyonu
-- Bionluk servis entegrasyonu
-- Tamamen statik yapı
-- SEO dostu yapı
-- Hızlı yükleme performansı
-- Mobil uyumlu kullanıcı deneyimi
+* Modern and responsive design
+* GitHub Pages support
+* Automated data update system
+* GitHub pinned repository integration
+* Bionluk service integration
+* Fully static website architecture
+* SEO-friendly structure
+* Fast loading performance
+* Mobile-friendly user experience
+* AI-powered chatbot integration
+* Vercel serverless function support
 
 ---
 
-# 🚀 Kullanılan Teknolojiler
+# 🚀 Technologies Used
 
 <p align="left">
   <img src="https://img.shields.io/badge/HTML-E34F26?style=for-the-badge&logo=html5&logoColor=white">
@@ -40,47 +42,65 @@ Bu proje; projelerimi, freelance hizmetlerimi, sosyal bağlantılarımı ve tekn
   <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
   <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white">
   <img src="https://img.shields.io/badge/GitHub_Pages-121013?style=for-the-badge&logo=github&logoColor=white">
+  <img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white">
+  <img src="https://img.shields.io/badge/OpenAI-412991?style=for-the-badge&logo=openai&logoColor=white">
 </p>
 
 ---
 
-# 📂 Proje Yapısı
+# 📂 Project Structure
 
 ```text
 .
-├── assets/                  # CSS, JS, görseller, fontlar
-├── cache/                   # Cache verileri
-├── .github/workflows/       # GitHub Actions workflow dosyaları
-├── build-static.mjs         # Static build script
-├── index.template.html      # HTML template
-├── index.html               # Build sonrası oluşan statik sayfa
-└── .nojekyll
+├── api/
+│   └── chat.js                # Vercel serverless chatbot endpoint
+├── assets/                    # CSS, JavaScript, images, and fonts
+├── cache/                     # Cached project and service data
+├── .github/
+│   └── workflows/             # GitHub Actions workflow files
+├── build-static.mjs           # Static site build script
+├── index.template.html        # Main HTML template
+├── index.html                 # Generated static website
+└── .nojekyll                  # Disables Jekyll processing
 ```
 
 ---
 
-# ⚙️ Yerelde Çalıştırma
+# ⚙️ Running Locally
+
+Generate the static website:
 
 ```bash
 node build-static.mjs
+```
+
+Start a local development server:
+
+```bash
 python -m http.server 4173 --bind 127.0.0.1
 ```
 
-Daha sonra tarayıcı üzerinden:
+Then open the following address in your browser:
 
 ```text
 http://127.0.0.1:4173/
 ```
 
-adresine gidin.
-
 ---
 
-# AI Chatbot Kurulumu
+# 🤖 AI Chatbot Setup
 
-Chatbot arayuzu statik siteye eklidir; OpenAI API anahtari frontend icine yazilmaz. Yanitlar `api/chat.js` Vercel serverless function uzerinden uretilir.
+The chatbot interface is included in the static website. However, the OpenAI API key must never be placed directly in frontend code.
 
-Vercel ortam degiskenleri:
+Chatbot responses are generated through the Vercel serverless function located at:
+
+```text
+api/chat.js
+```
+
+## Vercel Environment Variables
+
+Add the following environment variables to your Vercel project:
 
 ```text
 OPENAI_API_KEY=sk-...
@@ -88,7 +108,11 @@ OPENAI_MODEL=gpt-5.4-mini
 ALLOWED_ORIGINS=https://ardaltunel.github.io,https://your-vercel-domain.vercel.app
 ```
 
-GitHub Pages statik oldugu icin `/api/chat` dogrudan calismaz. Chatbotu canli GitHub Pages alan adinda kullanmak icin repo Vercel'e baglanabilir veya GitHub Pages tarafinda public backend adresi tanimlanabilir:
+> ⚠️ **Security Notice:** Never commit your OpenAI API key to GitHub or expose it in client-side JavaScript.
+
+Because GitHub Pages only supports static websites, the `/api/chat` endpoint cannot run directly on GitHub Pages.
+
+To use the chatbot on the live GitHub Pages domain, you can connect the repository to Vercel or define the public URL of an external backend:
 
 ```html
 <script>
@@ -96,56 +120,93 @@ GitHub Pages statik oldugu icin `/api/chat` dogrudan calismaz. Chatbotu canli Gi
 </script>
 ```
 
+The frontend will then send chatbot requests to the configured Vercel serverless endpoint.
+
 ---
 
-# 🚀 GitHub Pages Yayına Alma
+# 🚀 Deploying to GitHub Pages
 
-1. Repository dosyalarını GitHub repository kök dizinine yükleyin.
-2. Repository ayarlarından `Pages` bölümüne girin.
-3. Source olarak ilgili branch ve root klasörü seçin.
-4. GitHub Actions üzerinden:
+1. Upload the project files to the root directory of your GitHub repository.
+2. Open the repository settings.
+3. Navigate to the `Pages` section.
+4. Select the appropriate deployment branch and root directory.
+5. Open the GitHub Actions tab.
+6. Run the following workflow:
 
 ```text
 Update static site data
 ```
 
-workflow'unu çalıştırın.
+After the workflow is completed, the generated static files can be deployed through GitHub Pages.
 
 ---
 
-# 🔄 Otomatik Veri Güncelleme Sistemi
+# ▲ Deploying to Vercel
 
-`.github/workflows/update-static-site.yml` workflow'u:
+1. Import the GitHub repository into Vercel.
+2. Configure the required environment variables.
+3. Deploy the project.
+4. Verify that the `/api/chat` serverless endpoint is working.
+5. Add the Vercel domain to the `ALLOWED_ORIGINS` environment variable.
 
-- Bionluk hizmetlerini çeker
-- GitHub pinned projelerini çeker
-- `cache/*.json` dosyalarını günceller
-- Statik HTML çıktısı oluşturur
-- Değişiklikleri otomatik commit eder
+Vercel is required for server-side functionality such as the AI chatbot endpoint.
 
 ---
 
-# 🎯 Proje Amacı
+# 🔄 Automated Data Update System
 
-Bu proje;
+The following GitHub Actions workflow manages automated content updates:
 
-- Modern portfolio geliştirmek
-- GitHub Pages pratiği yapmak
-- Static site generation mantığını öğrenmek
-- Otomatik veri güncelleme sistemleri geliştirmek
-- Responsive frontend deneyimi oluşturmak
+```text
+.github/workflows/update-static-site.yml
+```
 
-amacıyla geliştirilmiştir.
+The workflow performs the following operations:
+
+* Fetches Bionluk services
+* Fetches pinned GitHub repositories
+* Updates the `cache/*.json` files
+* Generates the static HTML output
+* Commits updated files automatically
+* Keeps portfolio content synchronized with external data sources
+
+---
+
+# 🏗️ Static Build Process
+
+The portfolio uses a simple static site generation workflow.
+
+The `build-static.mjs` script:
+
+1. Reads data from the cache files.
+2. Processes the HTML template.
+3. Inserts updated project and service information.
+4. Generates the final `index.html` file.
+5. Prepares the website for static hosting.
+
+This structure allows the website to remain fast and compatible with GitHub Pages while still supporting automatically updated content.
+
+---
+
+# 🎯 Project Purpose
+
+This project was developed to:
+
+* Build a modern personal portfolio
+* Gain practical experience with GitHub Pages
+* Learn static site generation concepts
+* Develop automated data update workflows
+* Improve responsive frontend development skills
+* Integrate external services into a static website
+* Learn GitHub Actions automation
+* Add secure AI functionality through serverless architecture
 
 ---
 
 # 📄 License
 
-This project is licensed under the MIT License.
-
-For more details:
-<a href="LICENSE">LICENSE</a>
+This project is licensed under the [MIT License](LICENSE).
 
 ---
 
-Made with ❤️ by Arda Altunel
+Made with ❤️ by **Arda Altunel**
