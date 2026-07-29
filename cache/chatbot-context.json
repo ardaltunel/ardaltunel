@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-28T10:52:41.041Z",
+  "generatedAt": "2026-07-29T09:17:05.741Z",
   "identity": {
     "name": "Arda Altunel",
     "title": "Full Stack Developer",
@@ -81,61 +81,61 @@
   "highlightedProjects": [
     {
       "name": "ardaltunel",
-      "description": "Vercel üzerinde yayınlanmak üzere hazırlanmış modern, responsive ve dinamik içerik destekli kişisel portfolio websitesi.",
+      "description": "A modern, responsive personal portfolio website with dynamic content support, prepared for deployment on Vercel.",
       "language": "CSS",
-      "stars": 0,
+      "stars": 1,
       "forks": 0,
-      "updated": "27.07.2026",
+      "updated": "29.07.2026",
       "url": "https://github.com/ardaltunel/ardaltunel",
       "homepage": "https://ardaltunel.vercel.app"
     },
     {
       "name": "omni-tools",
-      "description": "Üretkenlik uygulamaları ve interaktif dashboard deneyimleri sunan çok amaçlı utility platformu.",
+      "description": "A multi-purpose utility platform offering productivity applications and interactive dashboard experiences.",
       "language": "JavaScript",
-      "stars": 2,
+      "stars": 3,
       "forks": 0,
-      "updated": "27.07.2026",
+      "updated": "29.07.2026",
       "url": "https://github.com/ardaltunel/omni-tools",
       "homepage": "https://ardaltunel.github.io/omni-tools/"
     },
     {
       "name": "blog",
-      "description": "Makale paylaşımı, içerik yönetimi ve kullanıcı sistemi özelliklerine sahip modern blog platformu.",
+      "description": "A modern blog platform with article publishing, content management, and user system features.",
       "language": "JavaScript",
-      "stars": 0,
-      "forks": 0,
-      "updated": "27.07.2026",
+      "stars": 2,
+      "forks": 1,
+      "updated": "29.07.2026",
       "url": "https://github.com/ardaltunel/blog",
       "homepage": "https://ardaltunel.github.io/blog/"
     },
     {
       "name": "music",
-      "description": "Şarkı yükleme, müzik dinleme, düzenleme ve silme özelliklerine sahip modern müzik paylaşım platformu.",
+      "description": "A modern music sharing platform with features for uploading songs, listening to music, editing, and deleting.",
       "language": "JavaScript",
-      "stars": 1,
+      "stars": 2,
       "forks": 0,
-      "updated": "27.07.2026",
+      "updated": "29.07.2026",
       "url": "https://github.com/ardaltunel/music",
       "homepage": "https://ardaltunel.github.io/music/"
     },
     {
       "name": "no-hello",
-      "description": "Yazışmalarda yalnızca “selam” yazmak yerine doğrudan konuya girmenin neden daha verimli olduğunu anlatan minimalist bilgilendirme sitesi.",
+      "description": "A minimalist informational website explaining why it's more efficient to get straight to the point in conversations instead of writing only “hello.”",
       "language": "HTML",
-      "stars": 0,
+      "stars": 1,
       "forks": 0,
-      "updated": "27.07.2026",
+      "updated": "29.07.2026",
       "url": "https://github.com/ardaltunel/no-hello",
       "homepage": "https://ardaltunel.github.io/no-hello/"
     },
     {
       "name": "phantaso-bot-site",
-      "description": "Discord sunucuları için eğlence, moderasyon ve yardımcı sistemler sunan Phantaso botu için geliştirilmiş modern tanıtım websitesi.",
+      "description": "A modern promotional website developed for the Phantaso bot, offering entertainment, moderation, and utility systems for Discord servers.",
       "language": "HTML",
-      "stars": 1,
+      "stars": 2,
       "forks": 0,
-      "updated": "27.07.2026",
+      "updated": "29.07.2026",
       "url": "https://github.com/ardaltunel/phantaso-bot-site",
       "homepage": "https://ardaltunel.github.io/phantaso-bot-site/"
     }
