@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-07T00:59:53.081Z",
+  "generatedAt": "2026-08-11T21:35:12.518Z",
   "identity": {
     "name": "Arda Altunel",
     "title": "Full Stack Developer",
@@ -83,9 +83,9 @@
       "name": "ardaltunel",
       "description": "A modern, responsive personal portfolio website with dynamic content support, prepared for deployment on Vercel.",
       "language": "CSS",
-      "stars": 16,
-      "forks": 1,
-      "updated": "06.08.2026",
+      "stars": 30,
+      "forks": 2,
+      "updated": "10.08.2026",
       "url": "https://github.com/ardaltunel/ardaltunel",
       "homepage": "https://ardaltunel.vercel.app"
     },
@@ -93,9 +93,9 @@
       "name": "omni-tools",
       "description": "A multi-purpose utility platform offering productivity applications and interactive dashboard experiences.",
       "language": "JavaScript",
-      "stars": 17,
-      "forks": 0,
-      "updated": "06.08.2026",
+      "stars": 36,
+      "forks": 1,
+      "updated": "11.08.2026",
       "url": "https://github.com/ardaltunel/omni-tools",
       "homepage": "https://ardaltunel.github.io/omni-tools/"
     },
@@ -103,9 +103,9 @@
       "name": "blog",
       "description": "A modern blog platform with article publishing, content management, and user system features.",
       "language": "JavaScript",
-      "stars": 8,
+      "stars": 21,
       "forks": 1,
-      "updated": "06.08.2026",
+      "updated": "10.08.2026",
       "url": "https://github.com/ardaltunel/blog",
       "homepage": "https://ardaltunel.github.io/blog/"
     },
@@ -113,9 +113,9 @@
       "name": "music",
       "description": "A modern music sharing platform with features for uploading songs, listening to music, editing, and deleting.",
       "language": "JavaScript",
-      "stars": 11,
+      "stars": 23,
       "forks": 0,
-      "updated": "06.08.2026",
+      "updated": "10.08.2026",
       "url": "https://github.com/ardaltunel/music",
       "homepage": "https://ardaltunel.github.io/music/"
     },
@@ -123,9 +123,9 @@
       "name": "no-hello",
       "description": "A minimalist informational website explaining why it's more efficient to get straight to the point in conversations instead of writing only “hello.”",
       "language": "HTML",
-      "stars": 5,
+      "stars": 17,
       "forks": 0,
-      "updated": "06.08.2026",
+      "updated": "10.08.2026",
       "url": "https://github.com/ardaltunel/no-hello",
       "homepage": "https://ardaltunel.github.io/no-hello/"
     },
@@ -133,9 +133,9 @@
       "name": "phantaso-bot-site",
       "description": "A modern promotional website developed for the Phantaso bot, offering entertainment, moderation, and utility systems for Discord servers.",
       "language": "HTML",
-      "stars": 6,
+      "stars": 18,
       "forks": 0,
-      "updated": "06.08.2026",
+      "updated": "10.08.2026",
       "url": "https://github.com/ardaltunel/phantaso-bot-site",
       "homepage": "https://ardaltunel.github.io/phantaso-bot-site/"
     }
