@@ -4,9 +4,9 @@
     "description": "A modern, responsive personal portfolio website with dynamic content support, prepared for deployment on Vercel.",
     "language": "CSS",
     "color": "#563d7c",
-    "stars": 30,
+    "stars": 37,
     "forks": 2,
-    "updated": "10.08.2026",
+    "updated": "16.08.2026",
     "url": "https://github.com/ardaltunel/ardaltunel",
     "homepage": "https://ardaltunel.vercel.app"
   },
@@ -15,9 +15,9 @@
     "description": "A multi-purpose utility platform offering productivity applications and interactive dashboard experiences.",
     "language": "JavaScript",
     "color": "#f1e05a",
-    "stars": 36,
+    "stars": 40,
     "forks": 1,
-    "updated": "11.08.2026",
+    "updated": "16.08.2026",
     "url": "https://github.com/ardaltunel/omni-tools",
     "homepage": "https://ardaltunel.github.io/omni-tools/"
   },
@@ -26,9 +26,9 @@
     "description": "A modern blog platform with article publishing, content management, and user system features.",
     "language": "JavaScript",
     "color": "#f1e05a",
-    "stars": 21,
+    "stars": 22,
     "forks": 1,
-    "updated": "10.08.2026",
+    "updated": "16.08.2026",
     "url": "https://github.com/ardaltunel/blog",
     "homepage": "https://ardaltunel.github.io/blog/"
   },
@@ -39,7 +39,7 @@
     "color": "#f1e05a",
     "stars": 23,
     "forks": 0,
-    "updated": "10.08.2026",
+    "updated": "16.08.2026",
     "url": "https://github.com/ardaltunel/music",
     "homepage": "https://ardaltunel.github.io/music/"
   },
@@ -50,7 +50,7 @@
     "color": "#e34c26",
     "stars": 17,
     "forks": 0,
-    "updated": "10.08.2026",
+    "updated": "16.08.2026",
     "url": "https://github.com/ardaltunel/no-hello",
     "homepage": "https://ardaltunel.github.io/no-hello/"
   },
@@ -61,7 +61,7 @@
     "color": "#e34c26",
     "stars": 18,
     "forks": 0,
-    "updated": "10.08.2026",
+    "updated": "16.08.2026",
     "url": "https://github.com/ardaltunel/phantaso-bot-site",
     "homepage": "https://ardaltunel.github.io/phantaso-bot-site/"
   }
