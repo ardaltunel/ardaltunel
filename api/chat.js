@@ -3,6 +3,9 @@ const path = require("node:path");
 
 const DEFAULT_ALLOWED_ORIGINS = [
   "https://ardaltunel.github.io",
+  "https://ardaltunel.vercel.app",
+  "https://ardaltunel.com",
+  "https://www.ardaltunel.com",
   "http://localhost:4173",
   "http://127.0.0.1:4173",
 ];
@@ -12,11 +15,12 @@ const fallbackContext = {
   identity: {
     name: "Arda Altunel",
     title: "Full Stack Developer",
-    location: "Istanbul, Turkiye",
-    summary: "Arda Altunel modern, hizli ve yonetilebilir web siteleri gelistiren bir full stack developer.",
+    location: "Tuzla, Istanbul, Turkiye",
+    summary: "Arda Altunel React, JavaScript, PHP, MySQL ve Supabase ile responsive web uygulamalari gelistiren, WEATRA deneyimine sahip bir Full Stack Developer.",
   },
   contact: {
-    email: "ardaltunelmain@gmail.com",
+    email: "arifardaaltunel@gmail.com",
+    phone: "+90 545 648 25 30",
     linkedin: "https://linkedin.com/in/ardaltunel/",
     github: "https://github.com/ardaltunel/",
     bionluk: "https://bionluk.com/ardaltunel",

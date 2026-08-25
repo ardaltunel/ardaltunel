@@ -112,6 +112,11 @@ body.nav-open {
     overflow: hidden;
 }
 
+body.nav-open .chatbot-widget {
+    opacity: 0;
+    pointer-events: none;
+}
+
 a {
     color: inherit;
     text-decoration: none;
@@ -349,9 +354,7 @@ h3 {
 }
 
 .btn-primary:hover,
-.btn-secondary:hover,
-.project-card:hover,
-.note-grid a:hover {
+.btn-secondary:hover {
     transform: translateY(-2px);
 }
 
@@ -557,10 +560,7 @@ h3 {
 }
 
 .value-grid article,
-.timeline article,
 .note-grid a,
-.project-card,
-.github-card,
 .contact-shell {
     border: 1px solid var(--line);
     border-radius: var(--radius);
@@ -603,18 +603,6 @@ h3 {
     display: none;
 }
 
-.reveal {
-    opacity: 0;
-    transform: translateY(26px);
-    transition: opacity 620ms ease, transform 620ms ease;
-    transition-delay: var(--reveal-delay, 0ms);
-}
-
-.reveal.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
 .value-grid article {
     padding: 22px;
 }
@@ -632,7 +620,6 @@ h3 {
 }
 
 .value-grid p,
-.project-content p,
 .timeline p,
 .contact-shell p {
     color: var(--muted);
@@ -644,87 +631,6 @@ h3 {
     background: rgba(var(--bg-rgb), 0.34);
     border-top: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
-}
-
-.project-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 18px;
-}
-
-.project-card {
-    overflow: hidden;
-    transition: transform 180ms ease, border-color 180ms ease;
-}
-
-.case-card {
-    display: grid;
-    grid-template-columns: 1.25fr 0.75fr;
-    min-height: 420px;
-}
-
-.case-card-reverse {
-    grid-template-columns: 0.75fr 1.25fr;
-}
-
-.case-card-reverse > a {
-    order: 2;
-}
-
-.case-card-reverse .project-content {
-    order: 1;
-}
-
-.project-card:hover {
-    border-color: rgba(61, 220, 151, 0.36);
-}
-
-.project-card img {
-    width: 100%;
-    height: 100%;
-    min-height: 420px;
-    aspect-ratio: 16 / 10;
-    object-fit: cover;
-    object-position: top;
-    background: var(--panel);
-    transition: transform 700ms ease, filter 700ms ease;
-}
-
-.project-card:hover img {
-    transform: scale(1.035);
-    filter: saturate(1.08) contrast(1.04);
-}
-
-.media-marvio img {
-    object-position: left top;
-}
-
-.project-content {
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.project-content span {
-    display: inline-block;
-    margin-bottom: 12px;
-    color: var(--amber);
-    font-size: 12px;
-    font-weight: 900;
-    text-transform: uppercase;
-}
-
-.project-content h3 {
-    margin-bottom: 10px;
-}
-
-.project-content a {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--green);
-    font-weight: 800;
 }
 
 .github-projects {
@@ -744,21 +650,54 @@ h3 {
 
 .github-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 16px;
+    counter-reset: repository;
 }
 
 .github-card {
-    min-height: 258px;
-    padding: 22px;
-    display: grid;
-    grid-template-rows: auto auto 1fr auto auto;
+    position: relative;
+    min-width: 0;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
     gap: 12px;
+    overflow: hidden;
+    counter-increment: repository;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background:
+        radial-gradient(circle at 92% 8%, rgba(76, 201, 240, 0.12), transparent 34%),
+        var(--surface);
     transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
 }
 
+.github-card::after {
+    content: "0" counter(repository);
+    position: absolute;
+    right: 18px;
+    bottom: -14px;
+    color: rgba(255, 255, 255, 0.035);
+    font-size: 92px;
+    font-weight: 950;
+    line-height: 1;
+    pointer-events: none;
+}
+
+.github-card:nth-child(3n + 1) {
+    background:
+        radial-gradient(circle at 92% 8%, rgba(61, 220, 151, 0.14), transparent 36%),
+        var(--surface);
+}
+
+.github-card:nth-child(3n) {
+    background:
+        radial-gradient(circle at 90% 10%, rgba(246, 196, 83, 0.13), transparent 34%),
+        var(--surface);
+}
+
 .github-card:hover {
-    transform: translateY(-2px);
+    transform: translateY(-4px);
     border-color: rgba(61, 220, 151, 0.34);
     background: var(--surface-hover);
 }
@@ -776,15 +715,14 @@ h3 {
 }
 
 .github-card-top i {
-    width: 38px;
-    height: 38px;
+    width: 42px;
+    height: 42px;
     display: grid;
     place-items: center;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    background: var(--surface-inner);
+    border-radius: 50%;
+    background: rgba(61, 220, 151, 0.12);
     color: var(--green);
-    font-size: 18px;
+    font-size: 19px;
 }
 
 .github-card-top span,
@@ -797,7 +735,7 @@ h3 {
 
 .github-card h3 {
     margin: 0;
-    font-size: 21px;
+    font-size: 23px;
     line-height: 1.2;
 }
 
@@ -829,8 +767,11 @@ h3 {
 }
 
 .github-card-footer {
+    position: relative;
+    z-index: 1;
     justify-content: space-between;
     gap: 12px;
+    margin-top: auto;
 }
 
 .github-card-footer a {
@@ -843,7 +784,7 @@ h3 {
 
 .service-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 18px;
 }
 
@@ -888,7 +829,7 @@ h3 {
 .service-body {
     padding: 20px;
     display: grid;
-    grid-template-rows: auto 58px 104px auto;
+    grid-template-rows: auto 58px 78px auto;
     row-gap: 10px;
 }
 
@@ -928,7 +869,12 @@ h3 {
     color: var(--muted);
     display: -webkit-box;
     overflow: hidden;
-    -webkit-line-clamp: 4;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    hyphenate-limit-chars: 7 3 3;
+    overflow-wrap: normal;
+    text-wrap: pretty;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
 }
 
@@ -960,22 +906,74 @@ h3 {
 
 .skill-board {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 18px;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    background:
+        radial-gradient(circle at 8% 0%, rgba(61, 220, 151, 0.1), transparent 28%),
+        radial-gradient(circle at 94% 100%, rgba(76, 201, 240, 0.08), transparent 30%),
+        var(--surface);
 }
 
 .skill-panel {
-    padding: 22px;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    background: var(--surface);
+    position: relative;
+    grid-column: span 6;
+    padding: 22px 24px;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    background: transparent;
+}
+
+.skill-panel::before {
+    content: "";
+    position: absolute;
+    top: 24px;
+    left: 0;
+    width: 3px;
+    height: 28px;
+    border-radius: 0 999px 999px 0;
+    background: var(--green);
+}
+
+.skill-panel-ai {
+    grid-column: span 12;
+    border-right: 0;
+    background:
+        linear-gradient(105deg, rgba(145, 112, 255, 0.08), transparent 42%),
+        rgba(255, 255, 255, 0.01);
+}
+
+.skill-panel-ai::before {
+    background: linear-gradient(180deg, #9b7cff, var(--cyan));
+}
+
+.skill-panel-ai .skill-panel-header span {
+    color: #b9a7ff;
+}
+
+.skill-panel-backend {
+    border-right: 0;
+}
+
+.skill-panel-backend::before {
+    background: var(--cyan);
+}
+
+.skill-panel-tools {
+    grid-column: span 12;
+    border-right: 0;
+}
+
+.skill-panel-tools::before {
+    background: var(--amber);
 }
 
 .skill-panel-header {
     display: block;
-    margin-bottom: 18px;
-    padding-bottom: 14px;
-    border-bottom: 1px solid var(--line);
+    margin-bottom: 13px;
 }
 
 .skill-panel-header span {
@@ -987,136 +985,85 @@ h3 {
 
 .skill-panel-header p {
     max-width: 620px;
-    margin: 8px 0 0;
+    margin: 6px 0 0;
     color: var(--muted);
     font-size: 15px;
 }
 
+@media (min-width: 993px) {
+    .skill-panel-frontend .skill-panel-header,
+    .skill-panel-backend .skill-panel-header {
+        min-height: 80px;
+    }
+}
+
+@media (min-width: 761px) {
+    .skill-tags {
+        grid-auto-rows: 42px;
+        align-content: start;
+    }
+
+    .skill-tag {
+        height: 42px;
+        min-height: 42px;
+    }
+}
+
 .skill-panel-wide {
-    grid-column: 1 / -1;
+    grid-column: span 12;
+    border-right: 0;
+    border-bottom: 0;
+    background: rgba(255, 255, 255, 0.018);
+}
+
+.skill-panel-wide::before {
+    background: var(--amber);
 }
 
 .skill-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
+    display: grid;
+    gap: 8px;
+    align-content: stretch;
+}
+
+.skill-panel-ai .skill-tags {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.skill-panel-frontend .skill-tags {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.skill-panel-backend .skill-tags {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.skill-panel-tools .skill-tags {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
 }
 
 .skill-tag {
+    width: 100%;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-height: 42px;
-    padding: 0 14px;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    background: var(--surface-inner);
+    min-height: 34px;
+    padding: 6px 8px;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.055);
     color: var(--text);
-    font-size: 15px;
-    font-weight: 900;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 1.25;
+    text-align: center;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.055);
     transition: transform 180ms ease, border-color 180ms ease;
 }
 
 .skill-tag:hover {
     transform: translateY(-3px);
     border-color: rgba(61, 220, 151, 0.34);
-}
-
-.tag-csharp {
-    background: rgba(146, 73, 196, 0.18);
-    color: #d9b6ff;
-}
-
-.tag-python {
-    background: rgba(53, 114, 165, 0.2);
-    color: #9fd0ff;
-}
-
-.tag-node {
-    background: rgba(104, 160, 99, 0.2);
-    color: #b5f4ae;
-}
-
-.tag-js {
-    background: rgba(247, 223, 30, 0.18);
-    color: #f7df1e;
-}
-
-.tag-css {
-    background: rgba(21, 114, 182, 0.2);
-    color: #8ed1ff;
-}
-
-.tag-html {
-    background: rgba(227, 79, 38, 0.2);
-    color: #ffac8e;
-}
-
-.tag-bootstrap {
-    background: rgba(121, 82, 179, 0.22);
-    color: #d4b8ff;
-}
-
-.tag-php {
-    background: rgba(119, 123, 179, 0.22);
-    color: #d8dcff;
-}
-
-.tag-sass {
-    background: rgba(204, 102, 153, 0.2);
-    color: #ffbddc;
-}
-
-.tag-mysql,
-.tag-sql {
-    background: rgba(0, 117, 143, 0.2);
-    color: #9deaff;
-}
-
-.tag-json {
-    background: rgba(247, 223, 30, 0.16);
-    color: #f7df1e;
-}
-
-.tag-xml {
-    background: rgba(255, 128, 64, 0.18);
-    color: #ffb28c;
-}
-
-.tag-react {
-    background: rgba(97, 218, 251, 0.18);
-    color: #9eeaff;
-}
-
-.tag-jquery {
-    background: rgba(7, 105, 173, 0.2);
-    color: #8ecaff;
-}
-
-.tag-git {
-    background: rgba(240, 80, 51, 0.2);
-    color: #ffad9e;
-}
-
-.tag-linux {
-    background: rgba(246, 196, 83, 0.18);
-    color: var(--amber);
-}
-
-.tag-cpanel {
-    background: rgba(255, 111, 64, 0.18);
-    color: #ffb59c;
-}
-
-.tag-vscode {
-    background: rgba(0, 122, 204, 0.2);
-    color: #8bd2ff;
-}
-
-.tag-photoshop {
-    background: rgba(49, 168, 255, 0.2);
-    color: #94d7ff;
 }
 
 .delivery-grid p {
@@ -1126,15 +1073,20 @@ h3 {
 .delivery-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
+    gap: 0;
+    margin-top: 6px;
+    border-top: 1px solid var(--line);
 }
 
 .delivery-grid article {
-    min-height: 176px;
-    padding: 18px;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    background: var(--surface-inner);
+    min-height: 164px;
+    padding: 24px 24px 0;
+    border-right: 1px solid var(--line);
+    background: transparent;
+}
+
+.delivery-grid article:last-child {
+    border-right: 0;
 }
 
 .delivery-grid i {
@@ -1143,7 +1095,7 @@ h3 {
     display: grid;
     place-items: center;
     margin-bottom: 16px;
-    border-radius: var(--radius);
+    border-radius: 50%;
     background: rgba(246, 196, 83, 0.12);
     color: var(--amber);
 }
@@ -1157,25 +1109,46 @@ h3 {
     padding-top: 80px;
 }
 
+.experience-layout {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 72px;
+}
+
+.experience-group-title {
+    margin: 0 0 26px;
+    color: var(--text);
+    font-size: 24px;
+}
+
 .timeline {
     display: grid;
-    gap: 14px;
+    gap: 0;
+    padding-left: 30px;
+    border-left: 1px solid var(--line);
 }
 
 .timeline article {
     position: relative;
-    padding: 24px 24px 24px 58px;
+    padding: 0 0 38px;
+    background: transparent;
+}
+
+.timeline article:last-child {
+    padding-bottom: 0;
 }
 
 .timeline article::before {
     content: "";
     position: absolute;
-    top: 30px;
-    left: 24px;
-    width: 14px;
-    height: 14px;
-    border: 3px solid var(--green);
+    top: 3px;
+    left: -38px;
+    width: 15px;
+    height: 15px;
+    border: 4px solid var(--bg);
     border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 0 1px rgba(61, 220, 151, 0.55);
 }
 
 .timeline-meta {
@@ -1186,9 +1159,115 @@ h3 {
     text-transform: uppercase;
 }
 
+.certifications-block {
+    margin-top: 72px;
+    padding: 0;
+}
+
+.certifications-block .subsection-heading {
+    max-width: 760px;
+    margin-bottom: 0;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--line);
+}
+
+.certifications-block .subsection-heading h3 {
+    max-width: 680px;
+    letter-spacing: -0.025em;
+}
+
+.certificate-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 56px;
+    counter-reset: certificate;
+}
+
+.certificate-grid::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 1px;
+    background: var(--line);
+    transform: translateX(-0.5px);
+}
+
+.certificate-grid article {
+    position: relative;
+    min-width: 0;
+    min-height: 152px;
+    padding: 24px 46px 24px 0;
+    counter-increment: certificate;
+    border-bottom: 1px solid var(--line);
+    transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), border-color 180ms ease;
+}
+
+.certificate-grid article:nth-child(even) {
+    padding-left: 28px;
+}
+
+.certificate-grid article::after {
+    content: counter(certificate, decimal-leading-zero);
+    position: absolute;
+    top: 25px;
+    right: 0;
+    color: var(--quiet);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    opacity: 0.62;
+}
+
+.certificate-grid article:hover {
+    transform: translateX(3px);
+    border-color: rgba(61, 220, 151, 0.36);
+}
+
+.certificate-grid span {
+    display: block;
+    padding-right: 42px;
+    color: var(--cyan);
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 0.035em;
+    text-transform: uppercase;
+}
+
+.certificate-grid h4 {
+    margin: 8px 0 0;
+    font-size: 18px;
+    line-height: 1.3;
+}
+
+.certificate-grid p {
+    margin: 5px 0 0;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.certificate-grid .inline-link {
+    width: max-content;
+    min-height: 0;
+    margin-top: 14px;
+    padding: 0 0 3px;
+    border-bottom: 1px solid rgba(61, 220, 151, 0.32);
+    font-size: 14px;
+}
+
+.certificate-grid .inline-link:hover {
+    border-color: var(--green);
+}
+
+.certificate-grid article:nth-last-child(-n + 2) {
+    border-bottom: 0;
+}
+
 .note-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 16px;
 }
 
@@ -1200,6 +1279,8 @@ h3 {
     grid-template-rows: auto auto auto 1fr auto;
     gap: 12px;
     overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
     background:
         linear-gradient(135deg, rgba(61, 220, 151, 0.1), transparent 44%),
         var(--surface);
@@ -1622,6 +1703,34 @@ h3 {
     opacity: 0.62;
 }
 
+.reveal {
+    --reveal-offset-y: 18px;
+    --reveal-scale: 0.992;
+    opacity: 0;
+    translate: 0 var(--reveal-offset-y);
+    scale: var(--reveal-scale);
+    transition-property: opacity, translate, scale, transform, border-color, background, box-shadow;
+    transition-duration: 360ms, 520ms, 520ms, 180ms, 180ms, 180ms, 180ms;
+    transition-timing-function: ease-out, cubic-bezier(0.22, 1, 0.36, 1), cubic-bezier(0.22, 1, 0.36, 1), ease, ease, ease, ease;
+    transition-delay: var(--reveal-delay, 0ms), var(--reveal-delay, 0ms), var(--reveal-delay, 0ms), 0ms, 0ms, 0ms, 0ms;
+}
+
+.section-heading.reveal {
+    --reveal-offset-y: 12px;
+    --reveal-scale: 1;
+}
+
+.certifications-block.reveal {
+    --reveal-offset-y: 10px;
+    --reveal-scale: 1;
+}
+
+.reveal.is-visible {
+    opacity: 1;
+    translate: 0 0;
+    scale: 1;
+}
+
 @keyframes typingBlink {
     0%,
     100% {
@@ -1718,34 +1827,28 @@ h3 {
 @media (max-width: 992px) {
     .hero-grid,
     .about-layout,
-    .skill-board,
+    .experience-layout,
     .contact-shell {
         grid-template-columns: 1fr;
+    }
+
+    .skill-panel {
+        grid-column: span 12;
+        border-right: 0;
     }
 
     .hero-panel {
         max-width: 520px;
     }
 
-    .case-card {
-        display: block;
-        min-height: 0;
-    }
-
-    .case-card-reverse > a,
-    .case-card-reverse .project-content {
-        order: initial;
-    }
-
-    .project-card img {
-        min-height: 260px;
-    }
-
     .value-grid,
-    .github-grid,
     .service-grid,
     .note-grid {
         grid-template-columns: 1fr;
+    }
+
+    .github-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .delivery-grid {
@@ -1753,7 +1856,183 @@ h3 {
     }
 }
 
+@media (min-width: 993px) and (max-width: 1199px) {
+    .hero-grid {
+        grid-template-columns: minmax(0, 1fr) 340px;
+        gap: 32px;
+    }
+
+    h1 {
+        font-size: clamp(52px, 5.6vw, 62px);
+    }
+
+    .skill-panel-frontend .skill-tags,
+    .skill-panel-backend .skill-tags {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 761px) and (max-width: 992px) {
+    .value-grid,
+    .note-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .service-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 900px) {
+    .nav-shell {
+        grid-template-columns: minmax(0, 1fr) auto auto;
+    }
+
+    .brand {
+        min-width: 0;
+    }
+
+    .nav-toggle {
+        display: grid;
+        place-items: center;
+    }
+
+    .nav-links {
+        position: fixed;
+        inset: 0;
+        z-index: 40;
+        width: 100%;
+        height: 100dvh;
+        min-height: 100vh;
+        display: grid;
+        place-content: center;
+        justify-items: center;
+        gap: 14px;
+        padding: 88px 28px 32px;
+        overflow-y: auto;
+        border: 0;
+        border-radius: 0;
+        background:
+            radial-gradient(circle at top left, rgba(61, 220, 151, 0.16), transparent 24rem),
+            rgba(var(--bg-rgb), 0.985);
+        backdrop-filter: blur(18px);
+        box-shadow: var(--shadow);
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-14px) scale(0.98);
+        transition: opacity 220ms ease, transform 220ms ease;
+    }
+
+    .nav-links.is-open {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0) scale(1);
+    }
+
+    .nav-links a {
+        position: relative;
+        justify-content: center;
+        width: auto;
+        min-height: 0;
+        padding: 6px 0;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        color: var(--text);
+        font-size: 28px;
+        line-height: 1.2;
+        font-weight: 900;
+        transform: translateY(8px);
+        opacity: 0;
+        transition: opacity 220ms ease, transform 220ms ease, color 180ms ease;
+    }
+
+    .nav-links a::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        width: 0;
+        height: 2px;
+        border-radius: 999px;
+        background: var(--green);
+        transform: translateX(-50%);
+        transition: width 180ms ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.is-active {
+        background: transparent;
+        color: var(--green);
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.is-active::after {
+        width: 100%;
+    }
+
+    .nav-links.is-open a {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    .brand,
+    .theme-toggle,
+    .nav-toggle {
+        position: relative;
+        z-index: 60;
+    }
+}
+
 @media (max-width: 760px) {
+    .skill-panel-ai .skill-tags,
+    .skill-panel-frontend .skill-tags,
+    .skill-panel-backend .skill-tags,
+    .skill-panel-tools .skill-tags {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .github-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .certificate-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .certificate-grid::before {
+        display: none;
+    }
+
+    .certifications-block {
+        padding: 0;
+    }
+
+    .certificate-grid article,
+    .certificate-grid article:nth-child(even) {
+        min-height: 0;
+        padding: 21px 38px 21px 0;
+    }
+
+    .certificate-grid article:nth-last-child(2) {
+        border-bottom: 1px solid var(--line);
+    }
+
+    .service-card {
+        grid-template-columns: 1fr;
+    }
+
+    .service-media,
+    .service-card:nth-child(4n + 3) .service-media,
+    .service-card:nth-child(4n + 4) .service-media {
+        order: 0;
+        min-height: 0;
+        aspect-ratio: 16 / 9;
+        border-right: 0;
+        border-left: 0;
+        border-bottom: 1px solid var(--line);
+    }
+
     .container,
     .nav-shell {
         width: min(100% - 28px, 1120px);
@@ -1932,6 +2211,16 @@ h3 {
         grid-template-columns: 1fr;
     }
 
+    .delivery-grid article {
+        padding: 22px 0;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+    }
+
+    .delivery-grid article:last-child {
+        border-bottom: 0;
+    }
+
     .contact-shell {
         padding: 24px;
     }
@@ -1948,6 +2237,78 @@ h3 {
     }
 }
 
+@media (min-width: 761px) and (max-width: 900px) {
+    .footer-inner {
+        padding-right: 82px;
+    }
+}
+
+@media (min-width: 560px) and (max-width: 760px) {
+    .skill-panel-ai .skill-tags,
+    .skill-panel-frontend .skill-tags,
+    .skill-panel-backend .skill-tags,
+    .skill-panel-tools .skill-tags {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 360px) {
+    .hero-actions .btn-primary {
+        flex-grow: 1.35;
+    }
+
+    .hero-actions .btn-secondary {
+        flex-grow: 0.65;
+    }
+
+    .chatbot-panel {
+        width: min(370px, calc(100vw - 44px));
+    }
+}
+
+@media (max-width: 300px) {
+    .brand > span:last-child {
+        display: none;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+    }
+
+    .hero-actions a {
+        width: 100%;
+    }
+}
+
+@media (max-width: 900px) and (max-height: 520px) {
+    .nav-links {
+        place-content: start center;
+        gap: 5px;
+        padding-top: 78px;
+        padding-bottom: 18px;
+    }
+
+    .nav-links a {
+        font-size: 21px;
+    }
+
+    .chatbot-panel {
+        height: calc(100dvh - 86px);
+    }
+
+    .chatbot-header {
+        padding: 10px 12px;
+    }
+
+    .chatbot-messages {
+        padding: 12px;
+    }
+
+    .chatbot-suggestions {
+        display: none;
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -1960,6 +2321,8 @@ h3 {
     .reveal {
         opacity: 1;
         transform: none;
+        translate: none;
+        scale: none;
     }
 
     .cursor-glow {
@@ -1973,4654 +2336,6 @@ h3 {
 
 .work-band .github-projects .subsection-heading {
     display: none;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* stable-nav-active-fix */
-.nav-links a:hover:not(.is-active) {
-    background: transparent !important;
-    color: var(--muted) !important;
-    transform: none !important;
-}
-
-.nav-links a.is-active,
-.nav-links a.is-active:hover {
-    color: var(--text) !important;
-    background: var(--surface-hover) !important;
-    transform: translateY(-1px) !important;
 }
 
 /* stable-nav-active-fix */

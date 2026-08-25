@@ -441,35 +441,101 @@
             ".section-heading",
             ".lead-block",
             ".value-grid article",
-            ".project-card",
             ".github-card",
             ".service-card",
             ".skill-panel",
             ".timeline article",
+            ".certifications-block",
             ".note-grid a",
             ".contact-shell"
         ];
 
-        document.querySelectorAll(revealItems.join(",")).forEach((item, index) => {
+        const revealElements = [...document.querySelectorAll(revealItems.join(","))];
+
+        revealElements.forEach((item) => {
             item.classList.add("reveal");
-            item.style.setProperty("--reveal-delay", `${Math.min(index % 6, 5) * 55}ms`);
+            item.style.setProperty("--reveal-delay", "0ms");
         });
 
-        const revealObserver = new IntersectionObserver((entries) => {
+        const revealGroups = [
+            ".value-grid",
+            ".github-grid",
+            ".service-grid",
+            ".skill-board",
+            ".timeline",
+            ".note-grid"
+        ];
+
+        document.querySelectorAll(revealGroups.join(",")).forEach((group) => {
+            const items = [...group.children].filter((item) => item.classList.contains("reveal"));
+            let rowTop = null;
+            let rowIndex = 0;
+
+            items.forEach((item) => {
+                const itemTop = Math.round(item.offsetTop);
+
+                if (rowTop === null || Math.abs(itemTop - rowTop) > 8) {
+                    rowTop = itemTop;
+                    rowIndex = 0;
+                }
+
+                item.style.setProperty("--reveal-delay", `${Math.min(rowIndex, 2) * 65}ms`);
+                rowIndex += 1;
+            });
+        });
+
+        const pendingRevealElements = new Set(revealElements);
+        let revealFrame = null;
+        let revealObserver = null;
+
+        const revealItem = (item) => {
+            if (!pendingRevealElements.has(item)) {
+                return;
+            }
+
+            item.classList.add("is-visible");
+            pendingRevealElements.delete(item);
+            revealObserver?.unobserve(item);
+
+            if (pendingRevealElements.size === 0) {
+                window.removeEventListener("scroll", revealPassedItems);
+            }
+        };
+
+        const revealPassedItems = () => {
+            if (revealFrame || pendingRevealElements.size === 0) {
+                return;
+            }
+
+            revealFrame = requestAnimationFrame(() => {
+                const revealLine = headerOffset();
+
+                pendingRevealElements.forEach((item) => {
+                    if (item.getBoundingClientRect().bottom <= revealLine) {
+                        revealItem(item);
+                    }
+                });
+
+                revealFrame = null;
+            });
+        };
+
+        revealObserver = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add("is-visible");
-                    revealObserver.unobserve(entry.target);
+                if (entry.isIntersecting || entry.boundingClientRect.bottom <= headerOffset()) {
+                    revealItem(entry.target);
                 }
             });
         }, {
-            rootMargin: "0px 0px -12% 0px",
-            threshold: 0.12
+            rootMargin: "0px 0px -8% 0px",
+            threshold: 0.08
         });
 
-        document.querySelectorAll(".reveal").forEach((item) => revealObserver.observe(item));
+        revealElements.forEach((item) => revealObserver.observe(item));
+        window.addEventListener("scroll", revealPassedItems, { passive: true });
+        revealPassedItems();
 
-        const interactiveCards = document.querySelectorAll(".project-card, .github-card, .service-card, .note-grid a, .hero-panel");
+        const interactiveCards = document.querySelectorAll(".github-card, .service-card, .note-grid a, .hero-panel");
         const enablePointerEffects = !reduceMotion && !isDesktopSafari;
 
         if (enablePointerEffects) {

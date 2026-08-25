@@ -3,6 +3,7 @@ import path from "node:path";
 
 const root = process.cwd();
 const year = new Date().getFullYear();
+const serviceDescriptionLimit = 110;
 const bionlukHeaders = {
   "Content-Type": "application/x-www-form-urlencoded; Charset=utf-8",
   Accept: "application/json",
@@ -20,6 +21,45 @@ const htmlEscape = (value) =>
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;");
+
+const turkishVowels = new Set(Array.from("aeıioöuüâîû"));
+
+const hyphenateTurkishWord = (word) => {
+  const letters = Array.from(word);
+  if (letters.length < 8) {
+    return word;
+  }
+
+  const vowelIndexes = [];
+  letters.forEach((letter, index) => {
+    if (turkishVowels.has(letter.toLocaleLowerCase("tr-TR"))) {
+      vowelIndexes.push(index);
+    }
+  });
+
+  if (vowelIndexes.length < 2) {
+    return word;
+  }
+
+  const breakpoints = new Set();
+  for (let index = 0; index < vowelIndexes.length - 1; index += 1) {
+    const currentVowel = vowelIndexes[index];
+    const nextVowel = vowelIndexes[index + 1];
+    const consonantsBetween = nextVowel - currentVowel - 1;
+    const breakpoint = consonantsBetween === 0 ? currentVowel + 1 : nextVowel - 1;
+
+    if (breakpoint >= 3 && letters.length - breakpoint >= 3) {
+      breakpoints.add(breakpoint);
+    }
+  }
+
+  return letters
+    .map((letter, index) => `${breakpoints.has(index) ? "\u00AD" : ""}${letter}`)
+    .join("");
+};
+
+const addServiceSoftHyphens = (value) =>
+  String(value ?? "").replace(/\p{L}{8,}/gu, hyphenateTurkishWord);
 
 const readJson = (file) => {
   const fullPath = path.join(root, file);
@@ -44,6 +84,23 @@ const cleanText = (value, limit = 150) => {
     .trim();
 
   return text.length > limit ? `${text.slice(0, limit)}...` : text;
+};
+
+const cleanServiceDescription = (value) => {
+  const text = cleanText(value, Number.MAX_SAFE_INTEGER);
+  const wasTruncated = text.endsWith("...");
+  const source = wasTruncated ? text.slice(0, -3).trimEnd() : text;
+
+  if (!wasTruncated && source.length <= serviceDescriptionLimit) {
+    return source;
+  }
+
+  const clipped = source.slice(0, serviceDescriptionLimit - 1).trimEnd();
+  const lastWordBoundary = clipped.lastIndexOf(" ");
+  const wordSafeText = (lastWordBoundary > 0 ? clipped.slice(0, lastWordBoundary) : clipped)
+    .replace(/[.,;:!?-]+$/g, "");
+
+  return `${wordSafeText}…`;
 };
 
 const repairMojibake = (value) =>
@@ -116,7 +173,7 @@ const fetchBionlukServices = async () => {
     const price = cleanText(gig.priceText, 24);
     services.push({
       title: cleanText(gig.title, 92),
-      description: cleanText(gig.description_m, 138),
+      description: cleanServiceDescription(gig.description_m),
       price,
       priceValue: parseBionlukPrice(price),
       duration: Number(gig.duration) || 0,
@@ -233,6 +290,64 @@ const refreshData = async (label, file, fetcher) => {
   }
 };
 
+const localizeServiceImages = async (services) => {
+  const imageDirectory = path.join(root, "assets", "img", "services");
+  fs.mkdirSync(imageDirectory, { recursive: true });
+  const expectedFiles = new Set();
+
+  const localizedServices = await Promise.all(
+    services.map(async (service) => {
+      const imageUrl = String(service.image ?? "");
+      if (!/^https?:\/\//i.test(imageUrl)) {
+        const localName = path.basename(imageUrl);
+        if (localName) {
+          expectedFiles.add(localName);
+          return { ...service, image: `assets/img/services/${localName}` };
+        }
+        return service;
+      }
+
+      const remoteName = path.basename(new URL(imageUrl).pathname);
+      const fileName = remoteName.replace(/[^a-zA-Z0-9._-]/g, "");
+      if (!fileName) {
+        return service;
+      }
+
+      const outputPath = path.join(imageDirectory, fileName);
+      try {
+        const response = await fetch(imageUrl, {
+          headers: {
+            Accept: "image/*",
+            "User-Agent": "ArdaAltunelPortfolio/1.0",
+          },
+        });
+        if (!response.ok) {
+          throw new Error(`image request failed: ${response.status}`);
+        }
+
+        fs.writeFileSync(outputPath, Buffer.from(await response.arrayBuffer()));
+        expectedFiles.add(fileName);
+        return { ...service, image: `assets/img/services/${fileName}` };
+      } catch (error) {
+        if (fs.existsSync(outputPath)) {
+          expectedFiles.add(fileName);
+          return { ...service, image: `assets/img/services/${fileName}` };
+        }
+        console.warn(`Bionluk image: using remote URL (${error.message})`);
+        return service;
+      }
+    })
+  );
+
+  for (const fileName of fs.readdirSync(imageDirectory)) {
+    if (!expectedFiles.has(fileName)) {
+      fs.unlinkSync(path.join(imageDirectory, fileName));
+    }
+  }
+
+  return localizedServices;
+};
+
 const renderGithubProjects = (projects) => {
   if (projects.length === 0) {
     return "";
@@ -302,7 +417,7 @@ const renderServices = (services) => {
                                 ? `<a class="service-media" href="${htmlEscape(service.url)}" target="_blank"
                                    rel="nofollow" aria-label="${htmlEscape(service.title)}">
                                     <img src="${htmlEscape(service.image)}"
-                                         alt="${htmlEscape(service.title)}" loading="lazy">
+                                         alt="${htmlEscape(service.title)}" loading="lazy" referrerpolicy="no-referrer">
                                 </a>`
                                 : ""
                             }
@@ -313,7 +428,7 @@ const renderServices = (services) => {
                                     <span>${revision > 0 ? `${revision} revizyon` : "Revizyon yok"}</span>
                                 </div>
                                 <h3>${htmlEscape(service.title)}</h3>
-                                <p>${htmlEscape(service.description)}</p>
+                                <p>${htmlEscape(addServiceSoftHyphens(service.description))}</p>
                                 <a href="${htmlEscape(service.url)}" target="_blank" rel="nofollow">
                                     Bionluk'ta İncele
                                     <i class="bi bi-arrow-up-right"></i>
@@ -333,27 +448,31 @@ const buildChatbotContext = (services, projects) => ({
   identity: {
     name: "Arda Altunel",
     title: "Full Stack Developer",
-    location: "Istanbul, Turkiye",
+    location: "Tuzla, Istanbul, Turkiye",
     availability: "Freelance bazli calismalar icin uygun",
     summary:
-      "Arda Altunel; modern, hizli ve yonetilebilir web siteleri gelistiren Istanbul merkezli bir full stack gelistiricidir.",
+      "Arda Altunel; React, JavaScript, PHP, MySQL ve Supabase ile responsive web uygulamalari gelistiren, WEATRA ajans deneyimine sahip Istanbul merkezli bir Full Stack Developer ve Frontend Developer'dir.",
   },
   about: [
-    "Web sitelerinde gorsel duzeni, performansi ve surdurulebilir kodu birlikte dusunmeye odaklanir.",
-    "Sayfalarin iyi gorunmesi kadar kolay kullanilmasina ve sonradan yonetilebilir olmasina da onem verir.",
-    "Projelerde net navigasyon, okunabilir icerik, guclu mobil deneyim ve bakimi kolay yapi kurmaya odaklanir.",
+    "WEATRA'da frontend stajyerliginden full-time gelistirici rolune gecerek responsive ve kullanici odakli web arayuzleri gelistirdi.",
+    "REST API entegrasyonu, Git ve GitHub, Vite ve Vercel yayin surecleri ile temel UI/UX prensiplerinde uygulamali deneyime sahiptir.",
+    "Istanbul Okan Universitesi Mobil Teknolojileri on lisans programinda egitimine devam etmektedir.",
   ],
   focus: [
     "Full stack web siteleri",
     "Responsive UI ve UX",
-    "PHP tabanli web siteleri",
+    "React tabanli web uygulamalari",
+    "REST API ve Supabase entegrasyonlari",
+    "PHP ve MySQL tabanli web siteleri",
     "Kurumsal web siteleri",
     "Portfolyo ve landing page projeleri",
     "Icerik odakli web projeleri",
   ],
   skills: {
-    languages: ["C#", "Python", "JavaScript", "HTML", "CSS", "PHP", "SQL", "JSON", "XML", "React", "jQuery"],
-    tools: ["Node.js", "Bootstrap", "Sass", "MySQL", "Git", "Linux", "cPanel", "VS Code", "Photoshop"],
+    artificialIntelligence: ["Yapay Zeka", "Vibe Kodlama", "Codex", "Makine Ogrenimi", "Dogal Dil Isleme"],
+    frontend: ["Web Gelistirme", "On Yuz Web Gelistirmesi", "Uyumlu Web Tasarimi", "Web Uygulamalari", "HTML", "CSS", "JavaScript", "React.js", "Tailwind CSS", "Bootstrap 5", "Sass", "jQuery"],
+    backendAndData: ["Arka Plan Web Gelistirmesi", "PHP", "MySQL", "SQL", "Supabase", "Web Services API", "REST API", "Veritabanlari", "JSON", "XML"],
+    tools: ["C#", "Python", "Kotlin", "Git", "GitHub", "Node.js", "npm", "Vite", "Vercel", "GitHub Pages", "Linux", "Android Studio", "Cisco Packet Tracer", "cPanel", "VS Code", "Siber Guvenlik", "SEO", "Web Performansi Temelleri"],
     workAreas: [
       "Kurumsal web",
       "Panel arayuzleri",
@@ -364,31 +483,74 @@ const buildChatbotContext = (services, projects) => ({
   },
   experience: [
     {
+      label: "09/2022 - 06/2023 - Istanbul",
+      title: "Full Stack Developer - WEATRA",
+      description:
+        "Frontend staji sonrasinda tam zamanli role gecerek responsive web arayuzleri, proje gelistirme surecleri ve temel UI/UX uygulamalarinda aktif sorumluluk aldi.",
+    },
+    {
+      label: "01/2022 - 09/2022 - Istanbul",
+      title: "Frontend Developer Stajyer - WEATRA",
+      description:
+        "HTML, CSS ve JavaScript ile tasarimlari farkli ekran boyutlarina uyumlu, calisan web arayuzlerine donusturdu.",
+    },
+    {
       label: "Freelance - Guncel",
       title: "Full Stack Developer",
-      description:
-        "Portfolyo, kurumsal site, landing page ve kucuk web uygulamalarinda gelistirme ve yayina alma destegi.",
-    },
-    {
-      label: "Egitim - Guncel",
-      title: "Okan Universitesi Mobil Teknolojileri",
-      description:
-        "Web gelistirme, arayuz tasarimi, veritabani ve temel sistem yonetimi alanlarinda uygulamali calismalar.",
-    },
-    {
-      label: "Sertifika",
-      title: "Microsoft Certified Solutions",
-      description: "Sistem yonetimi, temel altyapi mantigi ve problem cozme tarafini guclendiren egitim gecmisi.",
+      description: "Portfolyo, kurumsal site, landing page ve web uygulamalarinda gelistirme, entegrasyon ve yayina alma destegi sunuyor.",
     },
   ],
+  education: [
+    {
+      period: "2025 - 2027",
+      school: "Istanbul Okan Universitesi",
+      program: "Mobil Teknolojileri - On Lisans",
+    },
+    {
+      period: "2018 - 2023",
+      school: "Tuzla Mesleki ve Teknik Anadolu Lisesi",
+      program: "Bilgisayar Programciligi",
+    },
+  ],
+  certifications: [
+    "Artificial Intelligence Fundamentals - IBM - Agustos 2026",
+    "What Is Generative AI - LinkedIn Learning - Agustos 2026",
+    "Introduction to Responsible AI - Google Cloud Skills Boost - Agustos 2026",
+    "Microsoft Certified Solutions Developer - SmartPro Teknoloji - Subat-Eylul 2024",
+    "Complete Applied Web Development Training - Udemy - Mayis 2023",
+    "Version Controls: Git and GitHub - BTK Akademi - Nisan 2023",
+    "Bootstrap 5 - BTK Akademi - Nisan 2023",
+    "Web Development with HTML5 - BTK Akademi - Nisan 2023",
+    "Ethical Hacker (Linux) - Udemy - Nisan 2023",
+    "Search Engine Optimization - Udemy - Nisan 2023",
+  ],
+  languages: ["Turkce - Ana dil", "Ingilizce - Sinirli calisma yetkinligi"],
   contact: {
-    email: "ardaltunelmain@gmail.com",
+    email: "arifardaaltunel@gmail.com",
+    phone: "+90 545 648 25 30",
     linkedin: "https://linkedin.com/in/ardaltunel/",
     github: "https://github.com/ardaltunel/",
     instagram: "https://instagram.com/ardaltunel/",
     bionluk: "https://bionluk.com/ardaltunel",
-    cv: "https://ardaltunel.github.io/assets/pdf/arda-altunel-cv.pdf",
+    cv: "https://ardaltunel.vercel.app/assets/pdf/arda-altunel-cv.pdf",
   },
+  selectedProjects: [
+    {
+      name: "Omni Tools",
+      description: "React, React Router, Tailwind CSS ve REST API'lerle gelistirilen, 50'den fazla arac ve modulu bir araya getiren uygulama.",
+      url: "https://ardaltunel.github.io/omni-tools",
+    },
+    {
+      name: "Blog Platformu",
+      description: "JavaScript ve Supabase ile kayit, kimlik dogrulama, admin paneli, icerik ve gorsel yonetimi sunan platform.",
+      url: "https://blog.ardaltunel.com",
+    },
+    {
+      name: "Emlak Kraliceleri",
+      description: "Responsive ilan arayuzu ve frontend-backend entegrasyonu bulunan full stack emlak web projesi.",
+      url: "https://emlakkraliceleri.com",
+    },
+  ],
   highlightedProjects: projects.slice(0, 6).map((project) => ({
     name: project.name,
     description: project.description,
@@ -425,7 +587,9 @@ const buildChatbotContext = (services, projects) => ({
     },
   ],
   sourceUrls: [
-    "https://ardaltunel.github.io/",
+    "https://ardaltunel.vercel.app/",
+    "https://www.ardaltunel.com/",
+    "https://www.linkedin.com/in/ardaltunel/",
     "https://github.com/ardaltunel/",
     "https://bionluk.com/ardaltunel",
   ],
@@ -433,11 +597,17 @@ const buildChatbotContext = (services, projects) => ({
 
 const template = fs.readFileSync(path.join(root, "index.template.html"), "utf8");
 let output = template;
-const bionlukServices = await refreshData(
+let bionlukServices = await refreshData(
   "Bionluk services",
   "cache/bionluk-services.json",
   fetchBionlukServices
 );
+bionlukServices = bionlukServices.map((service) => ({
+  ...service,
+  description: cleanServiceDescription(service.description),
+}));
+bionlukServices = await localizeServiceImages(bionlukServices);
+writeJson("cache/bionluk-services.json", bionlukServices);
 const githubPinnedProjects = await refreshData(
   "GitHub pinned projects",
   "cache/github-pinned-projects.json",

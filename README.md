@@ -1,6 +1,6 @@
 <h1 align="center">Hi 👋, I'm Arda</h1>
 
-<h3 align="center">A passionate Front-End Developer from Turkey</h3>
+<h3 align="center">A Full Stack Developer focused on responsive web applications</h3>
 
 <p align="center">
   <img src="https://komarev.com/ghpvc/?username=ardaltunel&label=Profile%20Views&color=lightgrey&style=for-the-badge" alt="Profile views" />
@@ -15,10 +15,10 @@
 
 - 🌍 I'm from **Turkey**
 - 💻 I'm a **Full Stack Developer**
-- 🌱 I'm currently learning **React**
+- 🧩 I build with **React, JavaScript, PHP, MySQL and Supabase**
 - 🌐 Personal website: [ardaltunel.vercel.app](https://ardaltunel.vercel.app/)
 - 📄 LinkedIn: [Arda Altunel](https://www.linkedin.com/in/ardaltunel/)
-- 📫 Reach me at: **ardaltunelmain@gmail.com**
+- 📫 Reach me at: **arifardaaltunel@gmail.com**
 
 <br clear="right" />
 

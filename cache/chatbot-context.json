@@ -1,49 +1,80 @@
 {
-  "generatedAt": "2026-08-24T23:50:52.985Z",
+  "generatedAt": "2026-08-25T23:00:29.599Z",
   "identity": {
     "name": "Arda Altunel",
     "title": "Full Stack Developer",
-    "location": "Istanbul, Turkiye",
+    "location": "Tuzla, Istanbul, Turkiye",
     "availability": "Freelance bazli calismalar icin uygun",
-    "summary": "Arda Altunel; modern, hizli ve yonetilebilir web siteleri gelistiren Istanbul merkezli bir full stack gelistiricidir."
+    "summary": "Arda Altunel; React, JavaScript, PHP, MySQL ve Supabase ile responsive web uygulamalari gelistiren, WEATRA ajans deneyimine sahip Istanbul merkezli bir Full Stack Developer ve Frontend Developer'dir."
   },
   "about": [
-    "Web sitelerinde gorsel duzeni, performansi ve surdurulebilir kodu birlikte dusunmeye odaklanir.",
-    "Sayfalarin iyi gorunmesi kadar kolay kullanilmasina ve sonradan yonetilebilir olmasina da onem verir.",
-    "Projelerde net navigasyon, okunabilir icerik, guclu mobil deneyim ve bakimi kolay yapi kurmaya odaklanir."
+    "WEATRA'da frontend stajyerliginden full-time gelistirici rolune gecerek responsive ve kullanici odakli web arayuzleri gelistirdi.",
+    "REST API entegrasyonu, Git ve GitHub, Vite ve Vercel yayin surecleri ile temel UI/UX prensiplerinde uygulamali deneyime sahiptir.",
+    "Istanbul Okan Universitesi Mobil Teknolojileri on lisans programinda egitimine devam etmektedir."
   ],
   "focus": [
     "Full stack web siteleri",
     "Responsive UI ve UX",
-    "PHP tabanli web siteleri",
+    "React tabanli web uygulamalari",
+    "REST API ve Supabase entegrasyonlari",
+    "PHP ve MySQL tabanli web siteleri",
     "Kurumsal web siteleri",
     "Portfolyo ve landing page projeleri",
     "Icerik odakli web projeleri"
   ],
   "skills": {
-    "languages": [
-      "C#",
-      "Python",
-      "JavaScript",
+    "artificialIntelligence": [
+      "Yapay Zeka",
+      "Vibe Kodlama",
+      "Codex",
+      "Makine Ogrenimi",
+      "Dogal Dil Isleme"
+    ],
+    "frontend": [
+      "Web Gelistirme",
+      "On Yuz Web Gelistirmesi",
+      "Uyumlu Web Tasarimi",
+      "Web Uygulamalari",
       "HTML",
       "CSS",
-      "PHP",
-      "SQL",
-      "JSON",
-      "XML",
-      "React",
+      "JavaScript",
+      "React.js",
+      "Tailwind CSS",
+      "Bootstrap 5",
+      "Sass",
       "jQuery"
     ],
-    "tools": [
-      "Node.js",
-      "Bootstrap",
-      "Sass",
+    "backendAndData": [
+      "Arka Plan Web Gelistirmesi",
+      "PHP",
       "MySQL",
+      "SQL",
+      "Supabase",
+      "Web Services API",
+      "REST API",
+      "Veritabanlari",
+      "JSON",
+      "XML"
+    ],
+    "tools": [
+      "C#",
+      "Python",
+      "Kotlin",
       "Git",
+      "GitHub",
+      "Node.js",
+      "npm",
+      "Vite",
+      "Vercel",
+      "GitHub Pages",
       "Linux",
+      "Android Studio",
+      "Cisco Packet Tracer",
       "cPanel",
       "VS Code",
-      "Photoshop"
+      "Siber Guvenlik",
+      "SEO",
+      "Web Performansi Temelleri"
     ],
     "workAreas": [
       "Kurumsal web",
@@ -55,37 +86,83 @@
   },
   "experience": [
     {
+      "label": "09/2022 - 06/2023 - Istanbul",
+      "title": "Full Stack Developer - WEATRA",
+      "description": "Frontend staji sonrasinda tam zamanli role gecerek responsive web arayuzleri, proje gelistirme surecleri ve temel UI/UX uygulamalarinda aktif sorumluluk aldi."
+    },
+    {
+      "label": "01/2022 - 09/2022 - Istanbul",
+      "title": "Frontend Developer Stajyer - WEATRA",
+      "description": "HTML, CSS ve JavaScript ile tasarimlari farkli ekran boyutlarina uyumlu, calisan web arayuzlerine donusturdu."
+    },
+    {
       "label": "Freelance - Guncel",
       "title": "Full Stack Developer",
-      "description": "Portfolyo, kurumsal site, landing page ve kucuk web uygulamalarinda gelistirme ve yayina alma destegi."
-    },
-    {
-      "label": "Egitim - Guncel",
-      "title": "Okan Universitesi Mobil Teknolojileri",
-      "description": "Web gelistirme, arayuz tasarimi, veritabani ve temel sistem yonetimi alanlarinda uygulamali calismalar."
-    },
-    {
-      "label": "Sertifika",
-      "title": "Microsoft Certified Solutions",
-      "description": "Sistem yonetimi, temel altyapi mantigi ve problem cozme tarafini guclendiren egitim gecmisi."
+      "description": "Portfolyo, kurumsal site, landing page ve web uygulamalarinda gelistirme, entegrasyon ve yayina alma destegi sunuyor."
     }
   ],
+  "education": [
+    {
+      "period": "2025 - 2027",
+      "school": "Istanbul Okan Universitesi",
+      "program": "Mobil Teknolojileri - On Lisans"
+    },
+    {
+      "period": "2018 - 2023",
+      "school": "Tuzla Mesleki ve Teknik Anadolu Lisesi",
+      "program": "Bilgisayar Programciligi"
+    }
+  ],
+  "certifications": [
+    "Artificial Intelligence Fundamentals - IBM - Agustos 2026",
+    "What Is Generative AI - LinkedIn Learning - Agustos 2026",
+    "Introduction to Responsible AI - Google Cloud Skills Boost - Agustos 2026",
+    "Microsoft Certified Solutions Developer - SmartPro Teknoloji - Subat-Eylul 2024",
+    "Complete Applied Web Development Training - Udemy - Mayis 2023",
+    "Version Controls: Git and GitHub - BTK Akademi - Nisan 2023",
+    "Bootstrap 5 - BTK Akademi - Nisan 2023",
+    "Web Development with HTML5 - BTK Akademi - Nisan 2023",
+    "Ethical Hacker (Linux) - Udemy - Nisan 2023",
+    "Search Engine Optimization - Udemy - Nisan 2023"
+  ],
+  "languages": [
+    "Turkce - Ana dil",
+    "Ingilizce - Sinirli calisma yetkinligi"
+  ],
   "contact": {
-    "email": "ardaltunelmain@gmail.com",
+    "email": "arifardaaltunel@gmail.com",
+    "phone": "+90 545 648 25 30",
     "linkedin": "https://linkedin.com/in/ardaltunel/",
     "github": "https://github.com/ardaltunel/",
     "instagram": "https://instagram.com/ardaltunel/",
     "bionluk": "https://bionluk.com/ardaltunel",
-    "cv": "https://ardaltunel.github.io/assets/pdf/arda-altunel-cv.pdf"
+    "cv": "https://ardaltunel.vercel.app/assets/pdf/arda-altunel-cv.pdf"
   },
+  "selectedProjects": [
+    {
+      "name": "Omni Tools",
+      "description": "React, React Router, Tailwind CSS ve REST API'lerle gelistirilen, 50'den fazla arac ve modulu bir araya getiren uygulama.",
+      "url": "https://ardaltunel.github.io/omni-tools"
+    },
+    {
+      "name": "Blog Platformu",
+      "description": "JavaScript ve Supabase ile kayit, kimlik dogrulama, admin paneli, icerik ve gorsel yonetimi sunan platform.",
+      "url": "https://blog.ardaltunel.com"
+    },
+    {
+      "name": "Emlak Kraliceleri",
+      "description": "Responsive ilan arayuzu ve frontend-backend entegrasyonu bulunan full stack emlak web projesi.",
+      "url": "https://emlakkraliceleri.com"
+    }
+  ],
   "highlightedProjects": [
     {
       "name": "ardaltunel",
       "description": "A modern, responsive personal portfolio website with dynamic content support, prepared for deployment on Vercel.",
       "language": "CSS",
-      "stars": 36,
+      "stars": 34,
       "forks": 2,
-      "updated": "24.08.2026",
+      "updated": "25.08.2026",
       "url": "https://github.com/ardaltunel/ardaltunel",
       "homepage": "https://ardaltunel.vercel.app"
     },
@@ -93,9 +170,9 @@
       "name": "omni-tools",
       "description": "A multi-purpose utility platform offering productivity applications and interactive dashboard experiences.",
       "language": "JavaScript",
-      "stars": 39,
+      "stars": 37,
       "forks": 1,
-      "updated": "24.08.2026",
+      "updated": "25.08.2026",
       "url": "https://github.com/ardaltunel/omni-tools",
       "homepage": "https://ardaltunel.github.io/omni-tools/"
     },
@@ -103,9 +180,9 @@
       "name": "blog",
       "description": "A modern blog platform with article publishing, content management, and user system features.",
       "language": "JavaScript",
-      "stars": 21,
+      "stars": 19,
       "forks": 1,
-      "updated": "21.08.2026",
+      "updated": "25.08.2026",
       "url": "https://github.com/ardaltunel/blog",
       "homepage": "https://ardaltunel.github.io/blog/"
     },
@@ -113,9 +190,9 @@
       "name": "music",
       "description": "A modern music sharing platform with features for uploading songs, listening to music, editing, and deleting.",
       "language": "JavaScript",
-      "stars": 22,
+      "stars": 20,
       "forks": 0,
-      "updated": "17.08.2026",
+      "updated": "25.08.2026",
       "url": "https://github.com/ardaltunel/music",
       "homepage": "https://ardaltunel.github.io/music/"
     },
@@ -123,9 +200,9 @@
       "name": "no-hello",
       "description": "A minimalist informational website explaining why it's more efficient to get straight to the point in conversations instead of writing only “hello.”",
       "language": "HTML",
-      "stars": 16,
+      "stars": 14,
       "forks": 0,
-      "updated": "17.08.2026",
+      "updated": "25.08.2026",
       "url": "https://github.com/ardaltunel/no-hello",
       "homepage": "https://ardaltunel.github.io/no-hello/"
     },
@@ -133,9 +210,9 @@
       "name": "phantaso-bot-site",
       "description": "A modern promotional website developed for the Phantaso bot, offering entertainment, moderation, and utility systems for Discord servers.",
       "language": "HTML",
-      "stars": 17,
+      "stars": 15,
       "forks": 0,
-      "updated": "17.08.2026",
+      "updated": "25.08.2026",
       "url": "https://github.com/ardaltunel/phantaso-bot-site",
       "homepage": "https://ardaltunel.github.io/phantaso-bot-site/"
     }
@@ -143,7 +220,7 @@
   "services": [
     {
       "title": "mobil uyumlu blog sitesi yaparım",
-      "description": "Merhaba, Size özel bir blog web sitesi hazırlıyorum. İstediğiniz kategoriye uygun (kişisel, teknoloji, seyahat, yemek vb.) bir blog sitesi...",
+      "description": "Merhaba, Size özel bir blog web sitesi hazırlıyorum. İstediğiniz kategoriye uygun (kişisel, teknoloji…",
       "price": "3.500TL",
       "durationDays": 1,
       "revisions": 1,
@@ -151,7 +228,7 @@
     },
     {
       "title": "mobil uyumlu portfolio web sitesi yaparım",
-      "description": "Merhaba, Size özel bir portföy (portfolio) web sitesi hazırlıyorum. Kişisel markanızı, çalışmalarınızı ve projelerinizi en iyi şekilde yan...",
+      "description": "Merhaba, Size özel bir portföy (portfolio) web sitesi hazırlıyorum. Kişisel markanızı, çalışmalarınızı ve…",
       "price": "3.000TL",
       "durationDays": 1,
       "revisions": 1,
@@ -159,7 +236,7 @@
     },
     {
       "title": "kişiye özel modern link in bio sitesi yaparım",
-      "description": "Merhaba, Size özel tüm sosyal medyalarınızı tek bir adreste toplayabileceğiniz web sitesi oluşturuyorum. Hazırlanacak site, mobil uyumlu v...",
+      "description": "Merhaba, Size özel tüm sosyal medyalarınızı tek bir adreste toplayabileceğiniz web sitesi oluşturuyorum…",
       "price": "2.500TL",
       "durationDays": 1,
       "revisions": 1,
@@ -167,7 +244,7 @@
     },
     {
       "title": "web sitenizdeki hataları tespit eder ve gideririm",
-      "description": "Merhaba, Web sitenizde bulunan hataları tespit ederek gerekli düzenlemeleri yapıyorum. Mevcut sorunları analiz eder, sizin fark ettiğiniz ...",
+      "description": "Merhaba, Web sitenizde bulunan hataları tespit ederek gerekli düzenlemeleri yapıyorum. Mevcut sorunları…",
       "price": "750TL",
       "durationDays": 1,
       "revisions": 1,
@@ -175,7 +252,7 @@
     },
     {
       "title": "seo uyumlu blog yazısı yaparım",
-      "description": "Merhaba, Web siteniz için SEO uyumlu, özgün ve etkileyici blog içerikleri hazırlıyorum. Hedef kitlenizi analiz ederek içerik stratejisi ol...",
+      "description": "Merhaba, Web siteniz için SEO uyumlu, özgün ve etkileyici blog içerikleri hazırlıyorum. Hedef kitlenizi…",
       "price": "250TL",
       "durationDays": 1,
       "revisions": 1,
@@ -183,7 +260,7 @@
     },
     {
       "title": "ingilizce–türkçe hızlı ve doğru çeviri yaparım",
-      "description": "Merhaba, Türkçe ve İngilizce arasında hızlı, doğru ve özenli çeviri hizmeti sunuyorum. Blog yazıları, kısa metinler, sosyal medya içerikle...",
+      "description": "Merhaba, Türkçe ve İngilizce arasında hızlı, doğru ve özenli çeviri hizmeti sunuyorum. Blog yazıları…",
       "price": "150TL",
       "durationDays": 1,
       "revisions": 1,
@@ -208,7 +285,9 @@
     }
   ],
   "sourceUrls": [
-    "https://ardaltunel.github.io/",
+    "https://ardaltunel.vercel.app/",
+    "https://www.ardaltunel.com/",
+    "https://www.linkedin.com/in/ardaltunel/",
     "https://github.com/ardaltunel/",
     "https://bionluk.com/ardaltunel"
   ]
