@@ -1165,7 +1165,8 @@ h3 {
 }
 
 .certifications-block .subsection-heading {
-    max-width: 760px;
+    max-width: none;
+    width: 100%;
     margin-bottom: 0;
     padding-bottom: 28px;
     border-bottom: 1px solid var(--line);

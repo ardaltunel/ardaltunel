@@ -507,8 +507,8 @@ const buildChatbotContext = (services, projects) => ({
       program: "Mobil Teknolojileri - On Lisans",
     },
     {
-      period: "2018 - 2023",
-      school: "Tuzla Mesleki ve Teknik Anadolu Lisesi",
+      period: "2018 - 2023 - Istanbul",
+      school: "Tuzla MTAL",
       program: "Bilgisayar Programciligi",
     },
   ],
