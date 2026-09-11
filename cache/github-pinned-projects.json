@@ -4,9 +4,9 @@
     "description": "A modern, responsive personal portfolio website with dynamic content support, prepared for deployment on Vercel.",
     "language": "CSS",
     "color": "#563d7c",
-    "stars": 34,
+    "stars": 33,
     "forks": 2,
-    "updated": "05.09.2026",
+    "updated": "11.09.2026",
     "url": "https://github.com/ardaltunel/ardaltunel",
     "homepage": "https://ardaltunel.vercel.app"
   },
@@ -26,9 +26,9 @@
     "description": "A modern blog platform with article publishing, content management, and user system features.",
     "language": "JavaScript",
     "color": "#f1e05a",
-    "stars": 19,
+    "stars": 18,
     "forks": 1,
-    "updated": "29.08.2026",
+    "updated": "11.09.2026",
     "url": "https://github.com/ardaltunel/blog",
     "homepage": "https://ardaltunel.github.io/blog/"
   },
@@ -39,7 +39,7 @@
     "color": "#f1e05a",
     "stars": 20,
     "forks": 1,
-    "updated": "05.09.2026",
+    "updated": "07.09.2026",
     "url": "https://github.com/ardaltunel/music",
     "homepage": "https://ardaltunel.github.io/music/"
   },

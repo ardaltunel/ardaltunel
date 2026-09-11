@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-06T22:32:59.601Z",
+  "generatedAt": "2026-09-11T22:52:37.819Z",
   "identity": {
     "name": "Arda Altunel",
     "title": "Full Stack Developer",
@@ -160,9 +160,9 @@
       "name": "ardaltunel",
       "description": "A modern, responsive personal portfolio website with dynamic content support, prepared for deployment on Vercel.",
       "language": "CSS",
-      "stars": 34,
+      "stars": 33,
       "forks": 2,
-      "updated": "05.09.2026",
+      "updated": "11.09.2026",
       "url": "https://github.com/ardaltunel/ardaltunel",
       "homepage": "https://ardaltunel.vercel.app"
     },
@@ -180,9 +180,9 @@
       "name": "blog",
       "description": "A modern blog platform with article publishing, content management, and user system features.",
       "language": "JavaScript",
-      "stars": 19,
+      "stars": 18,
       "forks": 1,
-      "updated": "29.08.2026",
+      "updated": "11.09.2026",
       "url": "https://github.com/ardaltunel/blog",
       "homepage": "https://ardaltunel.github.io/blog/"
     },
@@ -192,7 +192,7 @@
       "language": "JavaScript",
       "stars": 20,
       "forks": 1,
-      "updated": "05.09.2026",
+      "updated": "07.09.2026",
       "url": "https://github.com/ardaltunel/music",
       "homepage": "https://ardaltunel.github.io/music/"
     },
