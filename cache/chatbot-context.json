@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-11T22:52:37.819Z",
+  "generatedAt": "2026-09-16T12:30:01.639Z",
   "identity": {
     "name": "Arda Altunel",
     "title": "Full Stack Developer",
@@ -162,7 +162,7 @@
       "language": "CSS",
       "stars": 33,
       "forks": 2,
-      "updated": "11.09.2026",
+      "updated": "12.09.2026",
       "url": "https://github.com/ardaltunel/ardaltunel",
       "homepage": "https://ardaltunel.vercel.app"
     },
@@ -172,7 +172,7 @@
       "language": "JavaScript",
       "stars": 38,
       "forks": 1,
-      "updated": "05.09.2026",
+      "updated": "12.09.2026",
       "url": "https://github.com/ardaltunel/omni-tools",
       "homepage": "https://ardaltunel.github.io/omni-tools/"
     },
@@ -182,7 +182,7 @@
       "language": "JavaScript",
       "stars": 18,
       "forks": 1,
-      "updated": "11.09.2026",
+      "updated": "14.09.2026",
       "url": "https://github.com/ardaltunel/blog",
       "homepage": "https://ardaltunel.github.io/blog/"
     },
@@ -192,7 +192,7 @@
       "language": "JavaScript",
       "stars": 20,
       "forks": 1,
-      "updated": "07.09.2026",
+      "updated": "08.09.2026",
       "url": "https://github.com/ardaltunel/music",
       "homepage": "https://ardaltunel.github.io/music/"
     },
@@ -219,52 +219,52 @@
   ],
   "services": [
     {
-      "title": "mobil uyumlu blog sitesi yaparım",
-      "description": "Merhaba, Size özel bir blog web sitesi hazırlıyorum. İstediğiniz kategoriye uygun (kişisel, teknoloji…",
-      "price": "3.500TL",
-      "durationDays": 1,
-      "revisions": 1,
-      "url": "https://bionluk.com/ardaltunel/mobil-uyumlu-blog-sitesi-yaparim-613069"
-    },
-    {
       "title": "mobil uyumlu portfolio web sitesi yaparım",
-      "description": "Merhaba, Size özel bir portföy (portfolio) web sitesi hazırlıyorum. Kişisel markanızı, çalışmalarınızı ve…",
-      "price": "3.000TL",
+      "description": "Merhaba 👋 Kişisel markanızı, çalışmalarınızı, projelerinizi ve yeteneklerinizi profesyonel şekilde…",
+      "price": "5.500TL",
       "durationDays": 1,
       "revisions": 1,
       "url": "https://bionluk.com/ardaltunel/mobil-uyumlu-portfolio-web-sitesi-yaparim-855157"
     },
     {
+      "title": "mobil uyumlu blog sitesi yaparım",
+      "description": "Merhaba 👋 Kişisel markanız, hobiniz, uzmanlık alanınız ya da paylaşmak istediğiniz içerikler için size…",
+      "price": "5.000TL",
+      "durationDays": 1,
+      "revisions": 1,
+      "url": "https://bionluk.com/ardaltunel/mobil-uyumlu-blog-sitesi-yaparim-613069"
+    },
+    {
       "title": "kişiye özel modern link in bio sitesi yaparım",
-      "description": "Merhaba, Size özel tüm sosyal medyalarınızı tek bir adreste toplayabileceğiniz web sitesi oluşturuyorum…",
-      "price": "2.500TL",
+      "description": "Merhaba 👋 Instagram, TikTok, YouTube, WhatsApp, web siteniz, portföyünüz ve diğer tüm bağlantılarınızı tek…",
+      "price": "3.500TL",
       "durationDays": 1,
       "revisions": 1,
       "url": "https://bionluk.com/ardaltunel/kisiye-ozel-modern-link-in-bio-sitesi-yaparim-855072"
     },
     {
       "title": "web sitenizdeki hataları tespit eder ve gideririm",
-      "description": "Merhaba, Web sitenizde bulunan hataları tespit ederek gerekli düzenlemeleri yapıyorum. Mevcut sorunları…",
-      "price": "750TL",
+      "description": "Merhaba 👋 Web sitenizde yaşanan teknik, görsel veya kullanım kaynaklı sorunları detaylı şekilde…",
+      "price": "3.000TL",
       "durationDays": 1,
       "revisions": 1,
       "url": "https://bionluk.com/ardaltunel/web-sitenizdeki-hatalari-tespit-eder-ve-gideririm-536375"
     },
     {
-      "title": "seo uyumlu blog yazısı yaparım",
-      "description": "Merhaba, Web siteniz için SEO uyumlu, özgün ve etkileyici blog içerikleri hazırlıyorum. Hedef kitlenizi…",
-      "price": "250TL",
-      "durationDays": 1,
-      "revisions": 1,
-      "url": "https://bionluk.com/ardaltunel/seo-uyumlu-blog-yazisi-yaparim-832900"
-    },
-    {
       "title": "ingilizce–türkçe hızlı ve doğru çeviri yaparım",
-      "description": "Merhaba, Türkçe ve İngilizce arasında hızlı, doğru ve özenli çeviri hizmeti sunuyorum. Blog yazıları, kısa…",
-      "price": "150TL",
+      "description": "Merhaba 👋 Türkçe ve İngilizce arasında özenli, doğal ve anlaşılır çeviri hizmeti sunuyorum. Çeviri…",
+      "price": "1.000TL",
       "durationDays": 1,
       "revisions": 1,
       "url": "https://bionluk.com/ardaltunel/ingilizce-turkce-hizli-ve-dogru-ceviri-yaparim-832906"
+    },
+    {
+      "title": "seo uyumlu blog yazısı yaparım",
+      "description": "Merhaba 👋 Web siteniz için SEO uyumlu, özgün ve okuyucu odaklı blog içerikleri hazırlıyorum. İçerik…",
+      "price": "1.000TL",
+      "durationDays": 1,
+      "revisions": 1,
+      "url": "https://bionluk.com/ardaltunel/seo-uyumlu-blog-yazisi-yaparim-832900"
     }
   ],
   "notes": [
