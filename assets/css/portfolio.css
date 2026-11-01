@@ -2493,7 +2493,8 @@ body[data-theme="light"] .portfolio-page {
 }
 
 @media (min-width: 901px) {
-    .portfolio-page.is-about .portfolio-detail-card.is-toolkit {
+    .portfolio-page.is-about .portfolio-detail-card.is-toolkit,
+    .portfolio-page.is-about .portfolio-detail-card.is-connections {
         align-self: start;
         margin-top: -72px;
     }
