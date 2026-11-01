@@ -10,6 +10,8 @@ const pages = [
   { path: "/hakkimda/", file: "hakkimda/index.html" },
   { path: "/projeler/", file: "projeler/index.html", heading: "Web geliştirme projelerim" },
   { path: "/hizmetler/", file: "hizmetler/index.html", heading: "Web geliştirme hizmetlerim" },
+  { path: "/projeler/omni-tools/", file: "projeler/omni-tools/index.html", heading: "Omni Tools: tek panelde farklı web araçları" },
+  { path: "/projeler/blog-platformu/", file: "projeler/blog-platformu/index.html", heading: "Blog Platformu: yazı hazırlamadan yönetici incelemesine" },
 ];
 const read = (file) => fs.readFileSync(path.join(root, file), "utf8");
 const attributes = (tag) => Object.fromEntries([...tag.matchAll(/([\w:-]+)\s*=\s*(["'])([\s\S]*?)\2/g)].map((match) => [match[1].toLowerCase(), match[3]]));
@@ -88,7 +90,7 @@ test("social cards use the absolute PNG asset and its actual dimensions", () => 
 
 test("the homepage links to all child pages and all local assets resolve", () => {
   const homeLinks = tags(read("index.html"), "a").map((tag) => new URL(tag.href, site + "/").href);
-  for (const page of pages.slice(1)) assert.ok(homeLinks.includes(site + page.path), page.path);
+  for (const page of pages.slice(1).filter((page) => page.path.split("/").filter(Boolean).length === 1)) assert.ok(homeLinks.includes(site + page.path), page.path);
   for (const page of pages) {
     for (const match of read(page.file).matchAll(/\b(?:href|src)\s*=\s*["']([^"']+)["']/gi)) {
       const value = match[1].split(/[?#]/)[0];

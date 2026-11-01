@@ -2,7 +2,9 @@ import fs from "node:fs";
 import path from "node:path";
 import { createHash } from "node:crypto";
 import { seoPages } from "./content/seo-pages.mjs";
-import { HOME_PAGE, renderSeoHead, renderDetailPage, renderSitemap, renderRobots } from "./lib/seo.mjs";
+import { projectStudies } from "./content/project-studies.mjs";
+import { indexNowConfig } from "./content/search-discovery.mjs";
+import { HOME_PAGE, structuredData, renderSeoHead, renderDetailPage, renderSitemap, renderRobots } from "./lib/seo.mjs";
 
 const root = process.cwd();
 const year = new Date().getFullYear();
@@ -552,7 +554,7 @@ const buildChatbotContext = (services, projects) => ({
   selectedProjects: [
     {
       name: "Omni Tools",
-      description: "React, React Router, Tailwind CSS ve REST API'lerle gelistirilen, 50'den fazla arac ve modulu bir araya getiren uygulama.",
+      description: "HTML, CSS ve JavaScript ile arac aramasi, kategori filtreleme, JSON bicimlendirme ve gorsel sikistirma gibi farkli araclari bir araya getiren tarayici tabanli uygulama.",
       url: "https://ardaltunel.github.io/omni-tools",
     },
     {
@@ -633,6 +635,7 @@ writeJson("cache/last-updated.json", {
   githubPinnedProjects: githubPinnedProjects.length,
 });
 const knowledgeBase = buildChatbotContext(bionlukServices, githubPinnedProjects);
+knowledgeBase.projectDetails = projectStudies.map((page) => ({ name: page.heading, url: `https://ardaltunel.vercel.app${page.path}` }));
 writeJson("cache/chatbot-context.json", knowledgeBase);
 
 output = output
@@ -642,13 +645,17 @@ output = output
   .replace("<!-- BIONLUK_SERVICES -->", renderServices(bionlukServices));
 
 fs.writeFileSync(path.join(root, "index.html"), versionAssetLinks(output), "utf8");
-for (const page of seoPages) {
+const detailPages = [...seoPages, ...projectStudies];
+for (const page of detailPages) {
   const directory = path.join(root, page.path.slice(1));
   fs.mkdirSync(directory, { recursive: true });
   fs.writeFileSync(path.join(directory, "index.html"), versionAssetLinks(renderDetailPage(template, page, knowledgeBase, year)), "utf8");
 }
-fs.writeFileSync(path.join(root, "sitemap.xml"), renderSitemap([HOME_PAGE, ...seoPages]), "utf8");
+fs.writeFileSync(path.join(root, "sitemap.xml"), renderSitemap([HOME_PAGE, ...detailPages]), "utf8");
 fs.writeFileSync(path.join(root, "robots.txt"), renderRobots(), "utf8");
+const profilePage = seoPages.find((page) => page.path === "/hakkimda/");
+fs.writeFileSync(path.join(root, "profil.jsonld"), JSON.stringify(structuredData(profilePage, knowledgeBase), null, 2) + "\n", "utf8");
+fs.writeFileSync(path.join(root, `${indexNowConfig.key}.txt`), indexNowConfig.key, "utf8");
 const notFound = output
   .replace(/<title>[\s\S]*?<\/title>/, "<title>Sayfa bulunamadı | Arda Altunel</title>")
   .replace(/<meta name="robots"[^>]+>/, '<meta name="robots" content="noindex, follow">')

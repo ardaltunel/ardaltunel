@@ -1,4 +1,4 @@
-<h1 align="center">Hi 👋, I'm Arda</h1>
+<h1 align="center">Hi 👋, I'm Arda Altunel</h1>
 
 <h3 align="center">A Full Stack Developer focused on responsive web applications</h3>
 
@@ -17,6 +17,8 @@
 - 💻 I'm a **Full Stack Developer**
 - 🧩 I build with **React, JavaScript, PHP, MySQL and Supabase**
 - 🌐 Personal website: [ardaltunel.vercel.app](https://ardaltunel.vercel.app/)
+- 👤 Profile and background: [About Arda Altunel](https://ardaltunel.vercel.app/hakkimda/)
+- 💻 Source-backed project notes: [Omni Tools](https://ardaltunel.vercel.app/projeler/omni-tools/) · [Blog Platform](https://ardaltunel.vercel.app/projeler/blog-platformu/)
 - 📄 LinkedIn: [Arda Altunel](https://www.linkedin.com/in/ardaltunel/)
 - 📫 Reach me at: **arifardaaltunel@gmail.com**
 

@@ -42,4 +42,4 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "Update portfolio data"
-          file_pattern: "index.html index.template.html 404.html robots.txt sitemap.xml hakkimda/index.html projeler/index.html hizmetler/index.html assets/img/services/* cache/*.json"
+          file_pattern: "index.html index.template.html 404.html robots.txt sitemap.xml profil.jsonld hakkimda/index.html projeler/index.html projeler/*/index.html hizmetler/index.html assets/img/services/* cache/*.json"

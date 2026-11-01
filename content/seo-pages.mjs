@@ -56,18 +56,19 @@ export const seoPages = [
   },
   {
     path: "/projeler/",
-    title: "Arda Altunel'in Projeleri | React ve Full Stack Web",
+    title: "Arda Altunel'in Projeleri | JavaScript ve Full Stack Web",
     description: "Arda Altunel'in Omni Tools, Blog Platformu ve Emlak Kraliçeleri projelerini; kullanılan teknolojileri, özellikleri ve proje bağlantılarıyla inceleyin.",
     heading: "Web geliştirme projelerim",
-    intro: "Ben Arda Altunel. Bu sayfada React tabanlı araç uygulaması, içerik yönetimi sunan blog platformu ve full stack emlak projesi gibi çalışmalarımı tanıtıyorum. Her örnek, portfolyomda yer alan teknoloji ve özellik bilgileriyle birlikte sunuluyor. Proje bağlantıları ile GitHub depolarını ayrı ayrı inceleyerek arayüzlere, kullanım akışlarına ve paylaşılan koda ulaşabilirsiniz.",
+    intro: "Ben Arda Altunel. Bu sayfada tarayıcı tabanlı araç uygulaması, içerik yönetimi sunan blog platformu ve full stack emlak projesi gibi çalışmalarımı tanıtıyorum. Her örnek, portfolyomda yer alan teknoloji ve özellik bilgileriyle birlikte sunuluyor. Proje bağlantıları ile GitHub depolarını ayrı ayrı inceleyerek arayüzlere, kullanım akışlarına ve paylaşılan koda ulaşabilirsiniz.",
     sections: [
       {
-        heading: "Omni Tools: React tabanlı araç uygulaması",
+        heading: "Omni Tools: tarayıcı tabanlı araç uygulaması",
         paragraphs: [
-          "Omni Tools, farklı araçları ve modülleri bir araya getiren bir web uygulaması. Projede React, React Router, Tailwind CSS ve REST API'ler kullanılıyor. Portfolyomdaki bu örnek, bileşen tabanlı arayüz geliştirme ile farklı araçları ortak bir uygulama içinde sunma yaklaşımını bir araya getiriyor.",
-          "Uygulama, üretkenlik araçları ve dashboard deneyimleri üzerine kurulu. React uygulamalarına ilgi duyuyorsanız bu proje üzerinden araçların sunumunu ve sayfa düzenlerini inceleyebilirsiniz. Kaynak koduna bakmak isteyenler için ayrı GitHub deposu da bulunuyor; böylece yalnızca ekran görüntülerine bağlı kalmadan projeyi değerlendirebilirsiniz.",
+          "Omni Tools, farklı araçları ve modülleri bir araya getiren bir web uygulaması. Güncel herkese açık kaynak kodunda HTML, CSS ve JavaScript ile araç araması, kategori filtreleme ve tarayıcı geçmişiyle gezinme akışları bulunuyor. JSON biçimlendirme ve görsel sıkıştırma gibi araçlar ayrı uygulama dosyalarıyla sunuluyor.",
+          "Uygulama, üretkenlik araçları ve dashboard deneyimleri üzerine kurulu. Araçların sunumunu, kategori seçimini ve sayfa düzenlerini uygulamada inceleyebilirsiniz. Kaynak koduna bakmak isteyenler için ayrı GitHub deposu da bulunuyor; böylece yalnızca ekran görüntülerine bağlı kalmadan projeyi değerlendirebilirsiniz.",
         ],
         links: [
+          { label: "Omni Tools proje incelemesi", url: "/projeler/omni-tools/" },
           { label: "Omni Tools uygulamasını açın", url: "https://ardaltunel.github.io/omni-tools/" },
           { label: "Omni Tools GitHub deposu", url: "https://github.com/ardaltunel/omni-tools" },
         ],
@@ -79,6 +80,7 @@ export const seoPages = [
           "Proje, web arayüzüyle kullanıcı ve içerik verilerinin birlikte ele alındığı çalışmalarım arasında yer alıyor. Blogun bağlantısını ve GitHub deposunu aşağıda bulabilirsiniz. Kendi içerik projenizi görüşürken yazıların kim tarafından yönetileceğini, kullanıcı kaydı gerekip gerekmediğini ve hangi yönetim ekranlarına ihtiyaç duyduğunuzu bu örnek üzerinden anlatabilirsiniz.",
         ],
         links: [
+          { label: "Blog Platformu proje incelemesi", url: "/projeler/blog-platformu/" },
           { label: "Blog Platformu'nu açın", url: "https://ardaltunel.github.io/blog/" },
           { label: "Blog GitHub deposu", url: "https://github.com/ardaltunel/blog" },
         ],

@@ -1,0 +1,90 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://ardaltunel.vercel.app/#person",
+      "name": "Arda Altunel",
+      "alternateName": "ardaltunel",
+      "url": "https://ardaltunel.vercel.app/",
+      "jobTitle": "Full Stack Developer",
+      "description": "Arda Altunel, İstanbul merkezli bir Full Stack Developer ve Frontend Developer'dır. React, JavaScript, PHP, MySQL ve Supabase ile responsive web siteleri ve web uygulamaları geliştirir. WEATRA'da geçmiş ajans deneyimi bulunur; freelance web geliştirme çalışmaları yapar.",
+      "identifier": {
+        "@type": "PropertyValue",
+        "propertyID": "GitHub username",
+        "value": "ardaltunel"
+      },
+      "homeLocation": {
+        "@type": "Place",
+        "name": "İstanbul, Türkiye"
+      },
+      "knowsAbout": [
+        "React",
+        "JavaScript",
+        "PHP",
+        "MySQL",
+        "Supabase",
+        "Responsive Web Design",
+        "REST API"
+      ],
+      "sameAs": [
+        "https://linkedin.com/in/ardaltunel/",
+        "https://github.com/ardaltunel/",
+        "https://instagram.com/ardaltunel/",
+        "https://bionluk.com/ardaltunel"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://ardaltunel.vercel.app/#website",
+      "url": "https://ardaltunel.vercel.app/",
+      "name": "Arda Altunel",
+      "alternateName": "Arda Altunel Portfolyo",
+      "inLanguage": "tr-TR",
+      "publisher": {
+        "@id": "https://ardaltunel.vercel.app/#person"
+      }
+    },
+    {
+      "@type": "ProfilePage",
+      "@id": "https://ardaltunel.vercel.app/hakkimda/#webpage",
+      "url": "https://ardaltunel.vercel.app/hakkimda/",
+      "name": "Arda Altunel Kimdir? | Full Stack Developer · İstanbul",
+      "description": "İstanbul merkezli Full Stack Developer Arda Altunel'in web geliştirme deneyimini, React ve PHP yeteneklerini, eğitimini ve çalışmalarını tanıyın.",
+      "inLanguage": "tr-TR",
+      "isPartOf": {
+        "@id": "https://ardaltunel.vercel.app/#website"
+      },
+      "about": {
+        "@id": "https://ardaltunel.vercel.app/#person"
+      },
+      "author": {
+        "@id": "https://ardaltunel.vercel.app/#person"
+      },
+      "mainEntity": {
+        "@id": "https://ardaltunel.vercel.app/#person"
+      },
+      "breadcrumb": {
+        "@id": "https://ardaltunel.vercel.app/hakkimda/#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://ardaltunel.vercel.app/hakkimda/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Ana sayfa",
+          "item": "https://ardaltunel.vercel.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Arda Altunel kimdir?",
+          "item": "https://ardaltunel.vercel.app/hakkimda/"
+        }
+      ]
+    }
+  ]
+}

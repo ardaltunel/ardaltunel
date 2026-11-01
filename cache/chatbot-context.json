@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-01T13:40:14.856Z",
+  "generatedAt": "2026-11-01T13:53:56.781Z",
   "identity": {
     "name": "Arda Altunel",
     "title": "Full Stack Developer",
@@ -141,7 +141,7 @@
   "selectedProjects": [
     {
       "name": "Omni Tools",
-      "description": "React, React Router, Tailwind CSS ve REST API'lerle gelistirilen, 50'den fazla arac ve modulu bir araya getiren uygulama.",
+      "description": "HTML, CSS ve JavaScript ile arac aramasi, kategori filtreleme, JSON bicimlendirme ve gorsel sikistirma gibi farkli araclari bir araya getiren tarayici tabanli uygulama.",
       "url": "https://ardaltunel.github.io/omni-tools"
     },
     {
@@ -289,5 +289,15 @@
     "https://www.linkedin.com/in/ardaltunel/",
     "https://github.com/ardaltunel/",
     "https://bionluk.com/ardaltunel"
+  ],
+  "projectDetails": [
+    {
+      "name": "Omni Tools: tek panelde farklı web araçları",
+      "url": "https://ardaltunel.vercel.app/projeler/omni-tools/"
+    },
+    {
+      "name": "Blog Platformu: yazı hazırlamadan yönetici incelemesine",
+      "url": "https://ardaltunel.vercel.app/projeler/blog-platformu/"
+    }
   ]
 }
