@@ -2492,6 +2492,13 @@ body[data-theme="light"] .portfolio-page {
         var(--surface);
 }
 
+@media (min-width: 901px) {
+    .portfolio-page.is-about .portfolio-detail-card.is-toolkit {
+        align-self: start;
+        margin-top: -72px;
+    }
+}
+
 .portfolio-page.is-about .portfolio-detail-card::before {
     content: "";
     position: absolute;
