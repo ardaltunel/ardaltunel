@@ -26,6 +26,9 @@ jobs:
         with:
           node-version: 22
 
+      - name: Test chatbot failover
+        run: node --test
+
       - name: Rebuild static site
         run: node build-static.mjs
 

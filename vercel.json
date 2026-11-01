@@ -1,7 +1,8 @@
 {
   "functions": {
     "api/chat.js": {
-      "includeFiles": "cache/chatbot-context.json"
+      "includeFiles": "cache/chatbot-context.json",
+      "maxDuration": 30
     }
   }
 }

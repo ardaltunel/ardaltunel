@@ -1,0 +1,25 @@
+{
+  "$schema": "https://raw.githubusercontent.com/cloudflare/workers-sdk/main/packages/wrangler/config-schema.json",
+  "name": "arda-ai-backup",
+  "main": "arda-ai.mjs",
+  "account_id": "b1a0c404a59941b8cc0fcf380b863f55",
+  "compatibility_date": "2026-11-01",
+  "workers_dev": true,
+  "preview_urls": false,
+  "ai": {
+    "binding": "AI"
+  },
+  "ratelimits": [
+    {
+      "name": "CHAT_RATE_LIMITER",
+      "namespace_id": "2026110101",
+      "simple": {
+        "limit": 12,
+        "period": 60
+      }
+    }
+  ],
+  "vars": {
+    "CLOUDFLARE_AI_MODEL": "@cf/meta/llama-3.1-8b-instruct-fp8"
+  }
+}

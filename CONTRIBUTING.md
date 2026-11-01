@@ -90,7 +90,7 @@ http://127.0.0.1:4173/
 
 # 🤖 AI Chatbot Setup
 
-The chatbot interface is included in the static website. However, the OpenAI API key must never be placed directly in frontend code.
+The chatbot uses OpenAI first and automatically switches to Cloudflare Workers AI if the primary provider fails. If both AI providers are unavailable, basic portfolio questions are answered from `cache/chatbot-context.json` without inventing facts.
 
 Chatbot responses are generated through the Vercel serverless function located at:
 
@@ -100,19 +100,39 @@ api/chat.js
 
 ## Vercel Environment Variables
 
-Add the following environment variables to your Vercel project:
+OpenAI is optional. To use it as the primary provider, add these server-side environment variables to Vercel:
 
 ```text
 OPENAI_API_KEY=sk-...
 OPENAI_MODEL=gpt-5.4-mini
-ALLOWED_ORIGINS=https://ardaltunel.github.io,https://your-vercel-domain.vercel.app
+ALLOWED_ORIGINS=https://ardaltunel.github.io,https://ardaltunel.vercel.app,https://ardaltunel.com,https://www.ardaltunel.com
 ```
 
-> ⚠️ **Security Notice:** Never commit your OpenAI API key to GitHub or expose it in client-side JavaScript.
+`ALLOWED_ORIGINS` is optional and replaces the default origin list when set. Vercel preview URLs are added without removing the default production origins. Never commit provider keys or expose them in client-side JavaScript.
+
+## Cloudflare Backup
+
+The independent Worker is configured in `cloudflare/wrangler.jsonc` and serves:
+
+```text
+https://arda-ai-backup.arifardaaltunel.workers.dev/api/chat
+```
+
+It uses an `AI` binding, so no Cloudflare API token is needed by the website or Vercel. It also has a native rate-limit binding (12 messages per IP per minute), origin checks, input limits and a six-second AI deadline. Deploy changes to the Worker separately after changing the shared chat code or cached portfolio context:
+
+```bash
+npx wrangler deploy --config cloudflare/wrangler.jsonc
+```
+
+The Vercel function forwards failed OpenAI requests to this Worker. The browser also retries the Worker directly when the primary endpoint is unreachable, times out, returns a server error, or sends an invalid answer. Validation, origin and rate-limit errors are not retried. If Vercel and the Worker are both unreachable, the browser displays a friendly error and restores the input.
+
+For a different Worker, set server-side `CLOUDFLARE_CHAT_URL` and frontend `window.ARDA_CHAT_FALLBACK_API_URL` (or a `chat-fallback-api-url` meta tag). Alternatively, the Vercel function can call the Cloudflare REST API directly with server-side `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_API_TOKEN` and optional `CLOUDFLARE_AI_MODEL`. The default model is `@cf/meta/llama-3.1-8b-instruct-fp8`.
+
+Cloudflare setup references: [Workers AI REST API](https://developers.cloudflare.com/workers-ai/get-started/rest-api/), [AI bindings](https://developers.cloudflare.com/workers-ai/configuration/bindings/), [rate-limit bindings](https://developers.cloudflare.com/workers/runtime-apis/bindings/rate-limit/). OpenAI request format follows the [Responses API reference](https://developers.openai.com/api/reference/typescript/resources/responses/methods/create).
 
 Because GitHub Pages only supports static websites, the `/api/chat` endpoint cannot run directly on GitHub Pages.
 
-To use the chatbot on the live GitHub Pages domain, you can connect the repository to Vercel or define the public URL of an external backend:
+On GitHub Pages, the frontend automatically uses the Vercel API with the Cloudflare Worker as backup. To override the primary backend, define its public URL before loading `assets/js/main.js`:
 
 ```html
 <script>
@@ -120,7 +140,7 @@ To use the chatbot on the live GitHub Pages domain, you can connect the reposito
 </script>
 ```
 
-The frontend will then send chatbot requests to the configured Vercel serverless endpoint.
+Run all chatbot checks with `node --test`. Tests mock provider requests and do not require API keys or consume inference quota.
 
 ---
 
@@ -149,7 +169,7 @@ After the workflow is completed, the generated static files can be deployed thro
 4. Verify that the `/api/chat` serverless endpoint is working.
 5. Add the Vercel domain to the `ALLOWED_ORIGINS` environment variable.
 
-Vercel is required for server-side functionality such as the AI chatbot endpoint.
+Vercel hosts the primary chatbot endpoint; the independent Cloudflare Worker provides the backup endpoint.
 
 ---
 

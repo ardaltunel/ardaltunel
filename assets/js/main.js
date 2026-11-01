@@ -195,9 +195,18 @@
         let isSending = false;
         let closeTimer = null;
 
-        const getChatEndpoint = () => {
+        const DEFAULT_CHAT_FALLBACK_URL = "https://arda-ai-backup.arifardaaltunel.workers.dev/api/chat";
+
+        const getChatEndpoints = () => {
             const metaEndpoint = document.querySelector('meta[name="chat-api-url"]')?.getAttribute("content") || "";
-            return window.ARDA_CHAT_API_URL || metaEndpoint || "/api/chat";
+            const metaFallbackEndpoint = document.querySelector('meta[name="chat-fallback-api-url"]')?.getAttribute("content") || "";
+            const defaultEndpoint = window.location.hostname.endsWith(".github.io")
+                ? "https://ardaltunel.vercel.app/api/chat"
+                : "/api/chat";
+            return [...new Set([
+                window.ARDA_CHAT_API_URL || metaEndpoint || defaultEndpoint,
+                window.ARDA_CHAT_FALLBACK_API_URL || metaFallbackEndpoint || DEFAULT_CHAT_FALLBACK_URL,
+            ].filter((endpoint) => typeof endpoint === "string" && endpoint.trim()).map((endpoint) => endpoint.trim()))];
         };
 
         const setPanelOpen = (isOpen) => {
@@ -328,7 +337,7 @@
 
         const userFriendlyError = (status) => {
             if ([404, 405, 501].includes(status)) {
-                return "Chatbot backend'i henüz yapılandırılmamış görünüyor. Site Vercel üzerinde /api/chat ile yayınlandığında veya chat API adresi tanımlandığında çalışır.";
+                return "Sohbet hizmetine şu anda ulaşılamıyor. Biraz sonra tekrar deneyebilir veya iletişim bölümünden Arda'ya ulaşabilirsin.";
             }
 
             if (status === 429) {
@@ -336,6 +345,43 @@
             }
 
             return "Şu anda yanıt alınamıyor. Biraz sonra tekrar deneyebilir veya iletişim bölümünden Arda'ya ulaşabilirsin.";
+        };
+
+        const requestAnswer = async (endpoint, payload, timeoutMs) => {
+            const controller = new AbortController();
+            const requestTimeout = window.setTimeout(() => controller.abort(), timeoutMs);
+            let errorMessage = userFriendlyError();
+            let retryable = true;
+
+            try {
+                const response = await fetch(endpoint, {
+                    method: "POST",
+                    signal: controller.signal,
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload),
+                });
+                if (!response.ok) {
+                    errorMessage = userFriendlyError(response.status);
+                    retryable = response.status >= 500 || [404, 405].includes(response.status);
+                    throw new Error("Chat request failed");
+                }
+
+                const data = await response.json();
+                const answer = typeof data?.answer === "string" ? data.answer.replace(/\s+/g, " ").trim() : "";
+                if (!answer) {
+                    throw new Error("Chat response is empty or invalid");
+                }
+                return answer;
+            } catch {
+                const error = new Error("Chat request failed");
+                error.retryable = retryable;
+                error.userMessage = controller.signal.aborted
+                    ? "Yanıt beklenenden uzun sürdü. Lütfen tekrar dene veya iletişim bölümünden Arda'ya ulaş."
+                    : errorMessage;
+                throw error;
+            } finally {
+                window.clearTimeout(requestTimeout);
+            }
         };
 
         const sendMessage = async (value) => {
@@ -347,7 +393,6 @@
 
             const history = conversation.slice(-6);
             addMessage("user", message);
-            conversation.push({ role: "user", content: message });
             setSending(true);
 
             if (input) {
@@ -358,38 +403,38 @@
             const typingMessage = addMessage("bot", "", { typing: true });
 
             try {
-                const response = await fetch(getChatEndpoint(), {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({ message, history }),
-                });
-                const data = await response.json().catch(() => ({}));
-
-                if (!response.ok) {
-                    throw new Error(userFriendlyError(response.status));
+                const endpoints = getChatEndpoints();
+                let answer;
+                for (let index = 0; index < endpoints.length; index += 1) {
+                    try {
+                        answer = await requestAnswer(endpoints[index], { message, history }, index === 0 ? 18000 : 10000);
+                        break;
+                    } catch (error) {
+                        if (!error.retryable || index === endpoints.length - 1) {
+                            throw error;
+                        }
+                    }
+                }
+                if (!answer) {
+                    throw new Error("No chat endpoint is available");
                 }
 
                 if (typingMessage) {
                     typingMessage.remove();
                 }
 
-                const answer =
-                    data.answer ||
-                    "Bu konuda site içeriğinde net bir bilgi bulamadım. İletişim bölümünden Arda ile doğrudan görüşebilirsin.";
                 addMessage("bot", answer);
-                conversation.push({ role: "assistant", content: answer });
+                conversation.push({ role: "user", content: message }, { role: "assistant", content: answer });
             } catch (error) {
                 if (typingMessage) {
                     typingMessage.remove();
                 }
 
-                addMessage("bot", error.message || userFriendlyError(), { error: true });
+                addMessage("bot", error.userMessage || userFriendlyError(), { error: true });
             } finally {
                 setSending(false);
 
-                if (input && !panel.hidden) {
+                if (input && panel && !panel.hidden) {
                     input.focus();
                 }
             }
