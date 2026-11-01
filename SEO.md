@@ -27,10 +27,17 @@ paths, excludes source documents from indexing and caches versioned assets.
 
 Fonts are self-hosted with `font-display: swap` and their original OFL license.
 Service cards use WebP with PNG fallback, lazy decoding and intrinsic dimensions.
-For new images, install Sharp in a development environment and run
-`node scripts/optimize-images.mjs`; existing PNGs remain the source images. An
-unconverted new image safely uses its PNG. The script also regenerates the brand
-social cover from its SVG source.
+The Actions workflow re-optimizes refreshed source images before rendering and
+testing the final pages. For a manual refresh without adding project dependencies:
+
+```sh
+npm exec --yes --package=sharp@0.35.5 -- node scripts/optimize-images.mjs --services-only
+node build-static.mjs --cache-only
+```
+
+Existing PNGs remain the source images. An unconverted new image safely uses its
+PNG. Without `--services-only`, the script also regenerates the brand social
+cover from its SVG source.
 
 ## Search Console measurement
 

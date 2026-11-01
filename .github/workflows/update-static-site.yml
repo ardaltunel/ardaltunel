@@ -29,6 +29,12 @@ jobs:
       - name: Rebuild static site
         run: node build-static.mjs
 
+      - name: Optimize refreshed service images
+        run: npm exec --yes --package=sharp@0.35.5 -- node scripts/optimize-images.mjs --services-only
+
+      - name: Re-render pages with optimized images
+        run: node build-static.mjs --cache-only
+
       - name: Test website SEO and chatbot failover
         run: node --test
 

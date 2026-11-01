@@ -8,7 +8,8 @@ const root = process.cwd();
 const year = new Date().getFullYear();
 const versionAssetLinks = (html) => html.replace(/((?:href|src)=")((?:\.\.\/|\/)?assets\/(?:css\/[^"?]+\.css|font\/fonts\.css|js\/main\.js))(")/g, (_match, before, asset, after) => {
   const localPath = path.join(root, asset.replace(/^(?:\.\.\/|\/)/, ""));
-  const version = createHash("sha256").update(fs.readFileSync(localPath)).digest("hex").slice(0, 12);
+  const source = fs.readFileSync(localPath, "utf8").replaceAll("\r\n", "\n");
+  const version = createHash("sha256").update(source).digest("hex").slice(0, 12);
   return `${before}${asset}?v=${version}${after}`;
 }).replace(/[\t ]+$/gm, "");
 const serviceDescriptionLimit = 110;

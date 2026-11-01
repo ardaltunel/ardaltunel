@@ -6,7 +6,24 @@ import { fileURLToPath } from "node:url";
 // Requires sharp. ARDA_SHARP_MODULE_PATH can point to an existing installation,
 // allowing asset generation without adding dependencies to the static website.
 const require = createRequire(import.meta.url);
-const sharp = require(process.env.ARDA_SHARP_MODULE_PATH || "sharp");
+const resolveSharp = () => {
+  if (process.env.ARDA_SHARP_MODULE_PATH) return require(process.env.ARDA_SHARP_MODULE_PATH);
+
+  // npm exec adds its temporary node_modules/.bin directory to PATH. Packages
+  // there are not ancestors of this script, so normal require() cannot find them.
+  const npmExecPaths = (process.env.PATH || process.env.Path || "")
+    .split(path.delimiter)
+    .map((entry) => entry.replace(/^"|"$/g, ""))
+    .filter((entry) => path.basename(entry).toLowerCase() === ".bin"
+      && path.basename(path.dirname(entry)).toLowerCase() === "node_modules")
+    .map((entry) => path.dirname(entry));
+  const resolved = require.resolve("sharp", {
+    paths: [path.dirname(fileURLToPath(import.meta.url)), ...npmExecPaths],
+  });
+  return require(resolved);
+};
+const sharp = resolveSharp();
+const servicesOnly = process.argv.includes("--services-only");
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const serviceDirectory = path.join(root, "assets", "img", "services");
 const originals = (await fs.readdir(serviceDirectory)).filter((file) => file.endsWith(".png")).sort();
@@ -34,10 +51,14 @@ for (const file of originals) {
   }));
 }
 
-const coverDirectory = path.join(root, "assets", "img");
-const cover = await sharp(path.join(coverDirectory, "og-arda-altunel.svg"))
-  .png({ compressionLevel: 9, adaptiveFiltering: true })
-  .toFile(path.join(coverDirectory, "og-arda-altunel.png"));
+let socialCover;
+if (!servicesOnly) {
+  const coverDirectory = path.join(root, "assets", "img");
+  const cover = await sharp(path.join(coverDirectory, "og-arda-altunel.svg"))
+    .png({ compressionLevel: 9, adaptiveFiltering: true })
+    .toFile(path.join(coverDirectory, "og-arda-altunel.png"));
+  socialCover = { width: cover.width, height: cover.height, bytes: cover.size };
+}
 console.log(JSON.stringify({
   serviceImages: {
     count: originals.length,
@@ -45,5 +66,5 @@ console.log(JSON.stringify({
     optimizedBytes,
     reductionPercent: Number(((1 - optimizedBytes / originalBytes) * 100).toFixed(1)),
   },
-  socialCover: { width: cover.width, height: cover.height, bytes: cover.size },
+  ...(socialCover ? { socialCover } : {}),
 }));
