@@ -65,7 +65,7 @@ body {
     min-height: 100vh;
     background: var(--page-bg);
     color: var(--text);
-    font-family: "Inter", "Open Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-family: "Open Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     line-height: 1.6;
     overflow-x: hidden;
 }
@@ -339,7 +339,6 @@ h3 {
     border: 1px solid transparent;
     font-weight: 800;
     transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
-    will-change: transform;
 }
 
 .btn-primary {
@@ -570,7 +569,6 @@ h3 {
 .tilt-card {
     position: relative;
     transform-style: preserve-3d;
-    will-change: transform;
 }
 
 .tilt-card::before {
@@ -819,6 +817,12 @@ h3 {
     object-fit: cover;
     object-position: top;
     transition: transform 700ms ease, filter 700ms ease;
+}
+
+.service-media picture {
+    display: block;
+    width: 100%;
+    height: 100%;
 }
 
 .service-card:hover .service-media img {
@@ -2342,7 +2346,7 @@ h3 {
 /* stable-nav-active-fix */
 .nav-links a:hover:not(.is-active) {
     background: transparent !important;
-    color: var(--muted) !important;
+    color: var(--text) !important;
     transform: none !important;
 }
 
@@ -2351,4 +2355,64 @@ h3 {
     color: var(--text) !important;
     background: var(--surface-hover) !important;
     transform: translateY(-1px) !important;
+}
+
+a:focus-visible,
+button:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 4px;
+}
+
+@media (max-width: 900px) {
+    .has-navigation .nav-links {
+        visibility: hidden;
+    }
+
+    .has-navigation .nav-links.is-open {
+        visibility: visible;
+    }
+
+    html:not(.has-navigation) .nav-shell {
+        grid-template-columns: minmax(0, 1fr);
+        padding: 14px 0;
+    }
+
+    html:not(.has-navigation) .nav-links {
+        position: static;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        width: auto;
+        height: auto;
+        min-height: 0;
+        gap: 6px;
+        padding: 0;
+        background: none;
+        backdrop-filter: none;
+        box-shadow: none;
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: none;
+    }
+
+    html:not(.has-navigation) .nav-links a {
+        min-height: 38px;
+        padding: 6px 10px;
+        font-size: 14px;
+        opacity: 1;
+        transform: none;
+    }
+
+    html:not(.has-navigation) .theme-toggle,
+    html:not(.has-navigation) .nav-toggle {
+        display: none;
+    }
+}
+
+@media (hover: none), (pointer: coarse) {
+    .cursor-glow {
+        display: none;
+    }
 }

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title description">
+  <title id="title">Arda Altunel — Full Stack Developer</title>
+  <desc id="description">React, JavaScript, PHP, MySQL ve Supabase. İstanbul, Türkiye. ardaltunel.vercel.app</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0d181b"/>
+      <stop offset="0.55" stop-color="#090b10"/>
+      <stop offset="1" stop-color="#101d28"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#3ddc97"/>
+      <stop offset="1" stop-color="#4cc9f0"/>
+    </linearGradient>
+    <radialGradient id="glow">
+      <stop stop-color="#4cc9f0" stop-opacity="0.1"/>
+      <stop offset="1" stop-color="#4cc9f0" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="44" height="44" patternUnits="userSpaceOnUse">
+      <path d="M44 0H0V44" fill="none" stroke="#ffffff" stroke-opacity="0.035"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#background)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <ellipse cx="1070" cy="180" rx="480" ry="420" fill="url(#glow)"/>
+  <rect x="24" y="24" width="1152" height="582" rx="22" fill="none" stroke="#ffffff" stroke-opacity="0.1"/>
+  <path d="M65 24H280" stroke="url(#accent)" stroke-width="3"/>
+
+  <g font-family="Segoe UI, Arial, sans-serif">
+    <rect x="64" y="64" width="72" height="72" rx="14" fill="url(#accent)"/>
+    <text x="100" y="111" text-anchor="middle" font-size="29" font-weight="800" fill="#061015">AA</text>
+    <path d="M162 100H244" stroke="#3ddc97" stroke-opacity="0.65" stroke-width="2"/>
+
+    <text x="62" y="292" font-size="82" font-weight="700" letter-spacing="-2.5" fill="#f4f7fb">Arda Altunel</text>
+    <text x="66" y="357" font-size="36" font-weight="400" fill="#c7d1de">Full Stack Developer</text>
+    <text x="66" y="426" font-size="25" font-weight="400" fill="#a6b0bf">React · JavaScript · PHP · MySQL · Supabase</text>
+
+    <g transform="translate(910 164)">
+      <rect width="226" height="252" rx="18" fill="#101b24" stroke="#ffffff" stroke-opacity="0.13"/>
+      <path d="M0 50H226" stroke="#ffffff" stroke-opacity="0.08"/>
+      <circle cx="24" cy="25" r="4" fill="#3ddc97"/>
+      <circle cx="42" cy="25" r="4" fill="#4cc9f0"/>
+      <circle cx="60" cy="25" r="4" fill="#748093"/>
+      <path d="M66 94L35 124L66 154M160 94L191 124L160 154M131 84L95 164" fill="none" stroke="url(#accent)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M35 200H130" stroke="#3ddc97" stroke-opacity="0.35" stroke-width="5" stroke-linecap="round"/>
+      <path d="M35 218H190" stroke="#4cc9f0" stroke-opacity="0.2" stroke-width="5" stroke-linecap="round"/>
+    </g>
+
+    <path d="M64 500H1136" stroke="#ffffff" stroke-opacity="0.13"/>
+    <circle cx="72" cy="556" r="5" fill="#3ddc97"/>
+    <text x="92" y="564" font-size="23" fill="#a6b0bf">İstanbul, Türkiye</text>
+    <text x="1136" y="564" text-anchor="end" font-size="23" font-weight="600" fill="#4cc9f0">ardaltunel.vercel.app</text>
+  </g>
+</svg>

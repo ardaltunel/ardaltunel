@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /cache/
+Disallow: /lib/
+Disallow: /content/
+Disallow: /tests/
+Disallow: /cloudflare/
+Disallow: /scripts/
+Disallow: /index.template.html
+Disallow: /build-static.mjs
+
+Sitemap: https://ardaltunel.vercel.app/sitemap.xml

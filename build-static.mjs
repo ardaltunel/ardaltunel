@@ -1,8 +1,16 @@
 import fs from "node:fs";
 import path from "node:path";
+import { createHash } from "node:crypto";
+import { seoPages } from "./content/seo-pages.mjs";
+import { HOME_PAGE, renderSeoHead, renderDetailPage, renderSitemap, renderRobots } from "./lib/seo.mjs";
 
 const root = process.cwd();
 const year = new Date().getFullYear();
+const versionAssetLinks = (html) => html.replace(/((?:href|src)=")((?:\.\.\/|\/)?assets\/(?:css\/[^"?]+\.css|font\/fonts\.css|js\/main\.js))(")/g, (_match, before, asset, after) => {
+  const localPath = path.join(root, asset.replace(/^(?:\.\.\/|\/)/, ""));
+  const version = createHash("sha256").update(fs.readFileSync(localPath)).digest("hex").slice(0, 12);
+  return `${before}${asset}?v=${version}${after}`;
+}).replace(/[\t ]+$/gm, "");
 const serviceDescriptionLimit = 110;
 const bionlukHeaders = {
   "Content-Type": "application/x-www-form-urlencoded; Charset=utf-8",
@@ -340,7 +348,8 @@ const localizeServiceImages = async (services) => {
   );
 
   for (const fileName of fs.readdirSync(imageDirectory)) {
-    if (!expectedFiles.has(fileName)) {
+    const isOptimizedVariant = fileName.endsWith(".webp") && expectedFiles.has(fileName.replace(/\.webp$/, ".png"));
+    if (!expectedFiles.has(fileName) && !isOptimizedVariant) {
       fs.unlinkSync(path.join(imageDirectory, fileName));
     }
   }
@@ -410,14 +419,19 @@ const renderServices = (services) => {
     .map((service) => {
       const duration = Number(service.duration) || 0;
       const revision = Number(service.revision) || 0;
+      const optimizedImage = String(service.image || "").replace(/\.png$/, ".webp");
+      const hasOptimizedImage = optimizedImage !== service.image && fs.existsSync(path.join(root, optimizedImage));
 
       return `                        <article class="service-card">
                             ${
                               service.image
                                 ? `<a class="service-media" href="${htmlEscape(service.url)}" target="_blank"
                                    rel="nofollow" aria-label="${htmlEscape(service.title)}">
-                                    <img src="${htmlEscape(service.image)}"
-                                         alt="${htmlEscape(service.title)}" loading="lazy" referrerpolicy="no-referrer">
+                                    <picture>
+                                        ${hasOptimizedImage ? `<source srcset="${htmlEscape(optimizedImage)}" type="image/webp">` : ""}
+                                        <img src="${htmlEscape(service.image)}" width="526" height="296"
+                                             alt="${htmlEscape(service.title)}" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+                                    </picture>
                                 </a>`
                                 : ""
                             }
@@ -543,7 +557,7 @@ const buildChatbotContext = (services, projects) => ({
     {
       name: "Blog Platformu",
       description: "JavaScript ve Supabase ile kayit, kimlik dogrulama, admin paneli, icerik ve gorsel yonetimi sunan platform.",
-      url: "https://blog.ardaltunel.com",
+      url: "https://ardaltunel.github.io/blog/",
     },
     {
       name: "Emlak Kraliceleri",
@@ -573,22 +587,21 @@ const buildChatbotContext = (services, projects) => ({
     {
       title: "DevOps Nedir?",
       topic: "DevOps",
-      url: "https://ardaltunel.github.io/blog/post.html?id=15",
+      url: "https://ardaltunel.github.io/blog/devops-nedir/",
     },
     {
       title: "PHP Nedir?",
       topic: "Backend",
-      url: "https://ardaltunel.github.io/blog/post.html?id=19",
+      url: "https://ardaltunel.github.io/blog/php-nedir/",
     },
     {
       title: "CMS Nedir?",
       topic: "CMS",
-      url: "https://ardaltunel.github.io/blog/post.html?id=17",
+      url: "https://ardaltunel.github.io/blog/cms-nedir/",
     },
   ],
   sourceUrls: [
     "https://ardaltunel.vercel.app/",
-    "https://www.ardaltunel.com/",
     "https://www.linkedin.com/in/ardaltunel/",
     "https://github.com/ardaltunel/",
     "https://bionluk.com/ardaltunel",
@@ -618,12 +631,29 @@ writeJson("cache/last-updated.json", {
   bionlukServices: bionlukServices.length,
   githubPinnedProjects: githubPinnedProjects.length,
 });
-writeJson("cache/chatbot-context.json", buildChatbotContext(bionlukServices, githubPinnedProjects));
+const knowledgeBase = buildChatbotContext(bionlukServices, githubPinnedProjects);
+writeJson("cache/chatbot-context.json", knowledgeBase);
 
 output = output
+  .replace("<!-- SEO_HEAD -->", renderSeoHead(HOME_PAGE, knowledgeBase))
   .replace("{{CURRENT_YEAR}}", String(year))
   .replace("<!-- GITHUB_PROJECTS -->", renderGithubProjects(githubPinnedProjects))
   .replace("<!-- BIONLUK_SERVICES -->", renderServices(bionlukServices));
 
-fs.writeFileSync(path.join(root, "index.html"), output, "utf8");
+fs.writeFileSync(path.join(root, "index.html"), versionAssetLinks(output), "utf8");
+for (const page of seoPages) {
+  const directory = path.join(root, page.path.slice(1));
+  fs.mkdirSync(directory, { recursive: true });
+  fs.writeFileSync(path.join(directory, "index.html"), versionAssetLinks(renderDetailPage(template, page, knowledgeBase, year)), "utf8");
+}
+fs.writeFileSync(path.join(root, "sitemap.xml"), renderSitemap([HOME_PAGE, ...seoPages]), "utf8");
+fs.writeFileSync(path.join(root, "robots.txt"), renderRobots(), "utf8");
+const notFound = output
+  .replace(/<title>[\s\S]*?<\/title>/, "<title>Sayfa bulunamadı | Arda Altunel</title>")
+  .replace(/<meta name="robots"[^>]+>/, '<meta name="robots" content="noindex, follow">')
+  .replace(/<link rel="canonical"[^>]+>/, "")
+  .replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/, "")
+  .replace(/<main id="main-content"[^>]*>[\s\S]*?<\/main>/, '<main id="main-content" tabindex="-1"><div class="container not-found"><p class="eyebrow">404</p><h1>Bu sayfa bulunamadı.</h1><p>Aradığınız içerik taşınmış olabilir. Portfolyo ve iletişim bilgileri için ana sayfaya dönebilirsiniz.</p><a class="btn-primary" href="/">Ana sayfaya dön</a></div></main>')
+  .replace(/(href|src)="assets\//g, '$1="/assets/');
+fs.writeFileSync(path.join(root, "404.html"), versionAssetLinks(notFound), "utf8");
 fs.writeFileSync(path.join(root, ".nojekyll"), "", "utf8");

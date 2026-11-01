@@ -1,31 +1,19 @@
 (function () {
     "use strict";
 
-    const navFixStyle = document.createElement("style");
-    navFixStyle.textContent = `
-        .nav-links a:hover:not(.is-active) {
-            background: transparent !important;
-            color: var(--text) !important;
-            transform: none !important;
-        }
-
-        .nav-links a.is-active {
-            color: var(--text) !important;
-            background: var(--surface-hover) !important;
-            transform: translateY(-1px) !important;
-        }
-    `;
-    document.head.appendChild(navFixStyle);
-
     const navToggle = document.querySelector(".nav-toggle");
     const navLinks = document.querySelector(".nav-links");
     const themeToggle = document.querySelector(".theme-toggle");
     const siteHeader = document.querySelector(".site-header");
-    const codeBlock = document.querySelector(".code-window code");
     const links = document.querySelectorAll(".nav-links a");
-    const anchorLinks = document.querySelectorAll('a[href^="#"]');
+    const anchorLinks = document.querySelectorAll('a[href^="#"]:not(.skip-link)');
     const sections = [...document.querySelectorAll("main section[id]")];
-    const storedTheme = localStorage.getItem("theme");
+    let storedTheme = null;
+    try {
+        storedTheme = localStorage.getItem("theme");
+    } catch {
+        // Theme persistence is optional when browser storage is unavailable.
+    }
     const prefersLight = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches;
     const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const finePointer = window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
@@ -94,13 +82,26 @@
     };
 
     updateScrollState();
-    window.addEventListener("scroll", updateScrollState, { passive: true });
+    let scrollFrame = null;
+    window.addEventListener("scroll", () => {
+        if (scrollFrame !== null) {
+            return;
+        }
+        scrollFrame = window.requestAnimationFrame(() => {
+            updateScrollState();
+            scrollFrame = null;
+        });
+    }, { passive: true });
 
     if (themeToggle) {
         themeToggle.addEventListener("click", () => {
             const nextTheme = document.body.dataset.theme === "light" ? "dark" : "light";
-            localStorage.setItem("theme", nextTheme);
             setTheme(nextTheme);
+            try {
+                localStorage.setItem("theme", nextTheme);
+            } catch {
+                // The selected theme still applies for this visit.
+            }
         });
     }
 
@@ -111,7 +112,11 @@
             navToggle.setAttribute("aria-expanded", String(isOpen));
             navToggle.setAttribute("aria-label", isOpen ? "Menüyü kapat" : "Menüyü aç");
             navToggle.innerHTML = isOpen ? '<i class="bi bi-x"></i>' : '<i class="bi bi-list"></i>';
+            if (isOpen) {
+                links[0]?.focus();
+            }
         });
+        document.documentElement.classList.add("has-navigation");
     }
 
     const closeMobileNav = () => {
@@ -126,6 +131,30 @@
         navToggle.innerHTML = '<i class="bi bi-list"></i>';
     };
 
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && navLinks?.classList.contains("is-open")) {
+            closeMobileNav();
+            navToggle?.focus();
+        }
+    });
+
+    window.addEventListener("resize", () => {
+        if (window.innerWidth > 900) {
+            closeMobileNav();
+        }
+    }, { passive: true });
+
+    const getAnchorTarget = (hash) => {
+        if (hash === "#top") {
+            return document.body;
+        }
+        try {
+            return hash && hash !== "#" ? document.getElementById(decodeURIComponent(hash.slice(1))) : null;
+        } catch {
+            return null;
+        }
+    };
+
     const cleanHash = () => {
         if (window.location.hash) {
             history.replaceState(null, "", `${window.location.pathname}${window.location.search}`);
@@ -134,13 +163,13 @@
 
     const scrollToTarget = (target) => {
         const top = target === document.body ? 0 : target.getBoundingClientRect().top + window.scrollY - headerOffset();
-        window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+        window.scrollTo({ top: Math.max(0, top), behavior: reduceMotion ? "auto" : "smooth" });
     };
 
     anchorLinks.forEach((link) => {
         link.addEventListener("click", (event) => {
             const targetId = link.getAttribute("href");
-            const target = targetId === "#top" ? document.body : document.querySelector(targetId);
+            const target = getAnchorTarget(targetId);
 
             if (!target) {
                 return;
@@ -156,7 +185,7 @@
     });
 
     if (window.location.hash) {
-        const initialTarget = document.querySelector(window.location.hash);
+        const initialTarget = getAnchorTarget(window.location.hash);
 
         if (initialTarget) {
             window.setTimeout(() => {
@@ -170,7 +199,7 @@
     }
 
     window.addEventListener("hashchange", () => {
-        const hashTarget = window.location.hash ? document.querySelector(window.location.hash) : null;
+        const hashTarget = getAnchorTarget(window.location.hash);
 
         if (hashTarget) {
             scrollToTarget(hashTarget);
@@ -481,7 +510,7 @@
         });
     }
 
-    if (!reduceMotion) {
+    if (!reduceMotion && typeof IntersectionObserver === "function") {
         const revealItems = [
             ".section-heading",
             ".lead-block",
@@ -581,7 +610,7 @@
         revealPassedItems();
 
         const interactiveCards = document.querySelectorAll(".github-card, .service-card, .note-grid a, .hero-panel");
-        const enablePointerEffects = !reduceMotion && !isDesktopSafari;
+        const enablePointerEffects = finePointer && !isDesktopSafari;
 
         if (enablePointerEffects) {
             interactiveCards.forEach((card) => {
@@ -634,22 +663,6 @@
             }, { passive: true });
         }
 
-        if (codeBlock) {
-            const originalCode = codeBlock.textContent;
-            codeBlock.textContent = "";
-
-            let index = 0;
-            const typeCode = () => {
-                codeBlock.textContent = originalCode.slice(0, index);
-                index += 1;
-
-                if (index <= originalCode.length) {
-                    window.setTimeout(typeCode, index < 24 ? 22 : 11);
-                }
-            };
-
-            window.setTimeout(typeCode, 420);
-        }
     } else {
         document.querySelectorAll(".reveal").forEach((item) => item.classList.add("is-visible"));
     }

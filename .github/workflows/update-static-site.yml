@@ -26,14 +26,14 @@ jobs:
         with:
           node-version: 22
 
-      - name: Test chatbot failover
-        run: node --test
-
       - name: Rebuild static site
         run: node build-static.mjs
+
+      - name: Test website SEO and chatbot failover
+        run: node --test
 
       - name: Commit updated data
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "Update portfolio data"
-          file_pattern: "index.html index.template.html assets/css/style.css cache/*.json"
+          file_pattern: "index.html index.template.html 404.html robots.txt sitemap.xml hakkimda/index.html projeler/index.html hizmetler/index.html assets/img/services/* cache/*.json"

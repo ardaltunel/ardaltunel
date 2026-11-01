@@ -175,6 +175,10 @@ Vercel hosts the primary chatbot endpoint; the independent Cloudflare Worker pro
 
 # 🔄 Automated Data Update System
 
+Search metadata, canonical pages, sitemap and performance assets are documented
+in [SEO.md](SEO.md). Update the source template or editorial data, then rebuild
+and run `node --test` before publishing.
+
 The following GitHub Actions workflow manages automated content updates:
 
 ```text

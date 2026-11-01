@@ -3,20 +3,12 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Arda Altunel | Full Stack Developer</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-          content="Arda Altunel - React, JavaScript, PHP, MySQL ve Supabase ile responsive web uygulamaları geliştiren İstanbul merkezli Full Stack Developer.">
-    <meta name="robots" content="index, follow">
-    <meta name="author" content="Arda Altunel">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Arda Altunel | Full Stack Developer">
-    <meta property="og:description"
-          content="React, JavaScript, PHP, MySQL ve Supabase ile responsive web uygulamaları geliştiren Full Stack Developer.">
-    <meta name="twitter:card" content="summary_large_image">
+    <!-- SEO_HEAD -->
     <meta name="google-site-verification" content="IKQZppVFgKz3yuioh6ZYzdu_vtUVYJ2z0E28i6QLvSA" />
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" sizes="any" href="assets/favicon/favicon.svg">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-icon-180x180.png">
 
     <link rel="stylesheet" type="text/css" href="assets/font/fonts.css">
@@ -24,12 +16,18 @@
           href="assets/vendor/bootstrap-icons/bootstrap-icons.css">
     <link rel="stylesheet" type="text/css"
           href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/pages.css">
 </head>
 
 <body>
 <script>
-    document.body.dataset.theme = localStorage.getItem("theme") || (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+    try {
+        document.body.dataset.theme = localStorage.getItem("theme") || (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+    } catch {
+        document.body.dataset.theme = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+    }
 </script>
+<a class="skip-link" href="#main-content">Ana içeriğe geç</a>
 <div class="cursor-glow" aria-hidden="true"></div>
 <header class="site-header" id="top">
     <nav class="nav-shell" aria-label="Ana navigasyon">
@@ -57,13 +55,13 @@
     </nav>
 </header>
 
-<main>
+<main id="main-content" tabindex="-1">
     <section class="hero section-band" aria-labelledby="hero-title">
         <div class="container">
             <div class="hero-grid">
                 <div class="hero-copy">
-                    <p class="eyebrow">Full Stack Developer · İstanbul</p>
-                    <h1 id="hero-title">Modern, hızlı ve yönetilebilir web siteleri geliştiriyorum.</h1>
+                    <p class="eyebrow">Web Geliştirme · İstanbul</p>
+                    <h1 id="hero-title">Arda Altunel<br>Full Stack Developer</h1>
                     <p class="hero-text">
                         React, JavaScript, PHP, MySQL ve Supabase ile responsive arayüzler ve uçtan uca web
                         uygulamaları geliştiriyorum; REST API entegrasyonundan yayına kadar süreci yönetiyorum.
@@ -74,7 +72,7 @@
                                 <i class="bi bi-window-stack"></i>
                                 Projeleri İncele
                             </a>
-                            <a class="btn-secondary" href="/assets/pdf/arda-altunel-cv.pdf" target="_blank" rel="nofollow">
+                            <a class="btn-secondary" href="assets/pdf/arda-altunel-cv.pdf" target="_blank" rel="noopener">
                                 <i class="bi bi-file-earmark-person"></i>
                                 CV
                             </a>
@@ -151,6 +149,7 @@
                         yayın süreçleri ve temel UI/UX prensiplerinde uygulamalı deneyime sahibim. İstanbul Okan
                         Üniversitesi Mobil Teknolojileri programında eğitimime devam ediyorum.
                     </p>
+                    <a class="text-link" href="hakkimda/">Arda Altunel hakkında daha fazla bilgi <span aria-hidden="true">↗</span></a>
                 </div>
 
                 <div class="value-grid">
@@ -188,6 +187,7 @@
             </div>
 
                 <!-- GITHUB_PROJECTS -->
+            <a class="text-link section-detail-link" href="projeler/">Projelerin özellikleri ve kullanılan teknolojiler <span aria-hidden="true">↗</span></a>
         </div>
     </section>
 
@@ -205,6 +205,7 @@
             </div>
 
                 <!-- BIONLUK_SERVICES -->
+            <a class="text-link section-detail-link" href="hizmetler/">Web geliştirme hizmetleri ve proje kapsamı <span aria-hidden="true">↗</span></a>
         </div>
     </section>
 
@@ -405,7 +406,7 @@
             </div>
 
             <div class="note-grid">
-                <a href="https://ardaltunel.github.io/blog/post.html?id=15" target="_blank" rel="nofollow">
+                <a href="https://ardaltunel.github.io/blog/devops-nedir/" target="_blank" rel="noopener">
                     <div class="note-icon"><i class="bi bi-diagram-3"></i></div>
                     <span>DevOps</span>
                     <strong>DevOps Nedir?</strong>
@@ -413,7 +414,7 @@
                         anlatıyorum.</p>
                     <em>Oku <i class="bi bi-arrow-right"></i></em>
                 </a>
-                <a href="https://ardaltunel.github.io/blog/post.html?id=19" target="_blank" rel="nofollow">
+                <a href="https://ardaltunel.github.io/blog/php-nedir/" target="_blank" rel="noopener">
                     <div class="note-icon"><i class="bi bi-filetype-php"></i></div>
                     <span>Backend</span>
                     <strong>PHP Nedir?</strong>
@@ -421,7 +422,7 @@
                         özetliyorum.</p>
                     <em>Oku <i class="bi bi-arrow-right"></i></em>
                 </a>
-                <a href="https://ardaltunel.github.io/blog/post.html?id=17" target="_blank" rel="nofollow">
+                <a href="https://ardaltunel.github.io/blog/cms-nedir/" target="_blank" rel="noopener">
                     <div class="note-icon"><i class="bi bi-layout-text-sidebar-reverse"></i></div>
                     <span>CMS</span>
                     <strong>CMS Nedir?</strong>
@@ -471,6 +472,11 @@
 <footer class="site-footer">
     <div class="container footer-inner">
         <span>&copy; {{CURRENT_YEAR}} Arda Altunel</span>
+        <nav class="footer-links" aria-label="Portfolyo sayfaları">
+            <a href="hakkimda/">Hakkımda</a>
+            <a href="projeler/">Projeler</a>
+            <a href="hizmetler/">Hizmetler</a>
+        </nav>
         <a href="#top">Yukarı dön</a>
     </div>
 </footer>

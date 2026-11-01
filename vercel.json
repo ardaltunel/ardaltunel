@@ -1,8 +1,21 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "functions": {
     "api/chat.js": {
       "includeFiles": "cache/chatbot-context.json",
       "maxDuration": 30
     }
-  }
+  },
+  "redirects": [
+    { "source": "/index.html", "destination": "/", "permanent": true },
+    { "source": "/:page(hakkimda|projeler|hizmetler)/index.html", "destination": "/:page/", "permanent": true },
+    { "source": "/:page(hakkimda|projeler|hizmetler)", "destination": "/:page/", "permanent": true }
+  ],
+  "headers": [
+    { "source": "/assets/(.*)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=604800" }] },
+    { "source": "/:source(api|cache|lib|content|tests|cloudflare|scripts)/(.*)", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }] },
+    { "source": "/index.template.html", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }] },
+    { "source": "/build-static.mjs", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }] },
+    { "source": "/:document(README|CONTRIBUTING|SECURITY|SUPPORT|CODE_OF_CONDUCT|SEO).md", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }] }
+  ]
 }

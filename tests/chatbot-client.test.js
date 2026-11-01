@@ -34,16 +34,20 @@ const visibleText = (element) => element.textContent + element.children.map(visi
 const flush = () => new Promise((resolve) => setImmediate(resolve));
 const ok = (answer = "Arda bir geliştiricidir.") => ({ ok: true, json: async () => ({ answer }) });
 
-function createChat({ hostname = "ardaltunel.vercel.app", metaEndpoint, override, metaFallbackEndpoint, fallbackOverride, fetchImpl = async () => ok() } = {}) {
+function createChat({ hostname = "ardaltunel.vercel.app", metaEndpoint, override, metaFallbackEndpoint, fallbackOverride, fetchImpl = async () => ok(), storageThrows = false, reducedMotion = true, observerAvailable = false, finePointer = false, hash = "" } = {}) {
     const panel = new Element();
     const messages = new Element();
     const input = new Element();
     const submitButton = new Element();
     const form = new Element();
     const chatbot = new Element();
+    const themeToggle = new Element();
+    const heroCode = new Element();
     const timers = new Map();
     const requests = [];
+    const windowHandlers = {};
     let timerId = 0;
+    heroCode.textContent = "const developer = { name: 'Arda Altunel' };";
     panel.hidden = false;
     form.querySelector = () => submitButton;
     const elements = {
@@ -61,9 +65,12 @@ function createChat({ hostname = "ardaltunel.vercel.app", metaEndpoint, override
         createElement: () => new Element(),
         createTextNode: (text) => Object.assign(new Element(), { textContent: text }),
         addEventListener() {},
+        getElementById: () => null,
         querySelectorAll: () => [],
         querySelector: (selector) => {
             if (selector === "[data-chatbot]") return chatbot;
+            if (selector === ".theme-toggle") return themeToggle;
+            if (selector === ".code-window code") return heroCode;
             if (selector === 'meta[name="chat-api-url"]' && metaEndpoint) {
                 return { getAttribute: () => metaEndpoint };
             }
@@ -74,11 +81,11 @@ function createChat({ hostname = "ardaltunel.vercel.app", metaEndpoint, override
         },
     };
     const window = {
-        location: { hostname, hash: "" },
+        location: { hostname, hash, pathname: "/", search: "" },
         ARDA_CHAT_API_URL: override,
         ARDA_CHAT_FALLBACK_API_URL: fallbackOverride,
-        matchMedia: (query) => ({ matches: query.includes("prefers-reduced-motion") }),
-        addEventListener() {},
+        matchMedia: (query) => ({ matches: query.includes("prefers-reduced-motion") ? reducedMotion : query.includes("pointer: fine") && finePointer }),
+        addEventListener(event, handler) { windowHandlers[event] = handler; },
         setTimeout: (callback, delay) => {
             timers.set(++timerId, { callback, delay });
             return timerId;
@@ -89,7 +96,12 @@ function createChat({ hostname = "ardaltunel.vercel.app", metaEndpoint, override
         document,
         window,
         navigator: { userAgent: "test", maxTouchPoints: 0 },
-        localStorage: { getItem: () => null },
+        localStorage: {
+            getItem: () => { if (storageThrows) throw new Error("storage blocked"); return null; },
+            setItem: () => { if (storageThrows) throw new Error("storage blocked"); },
+        },
+        history: { replaceState() {} },
+        ...(observerAvailable ? { IntersectionObserver: class { observe() {} unobserve() {} } } : {}),
         AbortController,
         fetch: (url, options) => {
             requests.push({ url, options });
@@ -98,7 +110,7 @@ function createChat({ hostname = "ardaltunel.vercel.app", metaEndpoint, override
     });
 
     return {
-        input, submitButton, messages, requests, timers,
+        input, submitButton, messages, requests, timers, themeToggle, heroCode, windowHandlers, body: document.body,
         submit(message = "Arda kimdir?") {
             input.value = message;
             form.handlers.submit({ preventDefault() {} });
@@ -277,3 +289,40 @@ test("recovers the UI when both primary and fallback requests time out", async (
     assert.equal(chat.messages.children.length, 2);
     assert.equal(chat.timers.size, 0);
 });
+
+test("blocked browser storage does not prevent theme changes or chatbot initialization", async () => {
+    const chat = createChat({ storageThrows: true });
+    assert.equal(chat.body.dataset.theme, "dark");
+    chat.themeToggle.handlers.click();
+    assert.equal(chat.body.dataset.theme, "light");
+    chat.submit();
+    await chat.settle();
+    assert.equal(visibleText(chat.messages.children.at(-1)), "Arda bir geliştiricidir.");
+});
+
+for (const hash of ["#%ZZ", "#[invalid-selector", "#"]) {
+    test(`an unknown or malformed fragment ${hash} cannot break the chatbot`, async () => {
+        const chat = createChat({ hash });
+        chat.submit();
+        await chat.settle();
+        assert.equal(chat.input.disabled, false);
+        assert.equal(visibleText(chat.messages.children.at(-1)), "Arda bir geliştiricidir.");
+    });
+}
+
+test("missing IntersectionObserver keeps static content and the chatbot usable", async () => {
+    const chat = createChat({ reducedMotion: false });
+    assert.equal(chat.heroCode.textContent, "const developer = { name: 'Arda Altunel' };");
+    assert.equal(chat.timers.size, 0);
+    chat.submit();
+    await chat.settle();
+    assert.equal(visibleText(chat.messages.children.at(-1)), "Arda bir geliştiricidir.");
+});
+
+for (const finePointer of [false, true]) {
+    test(`pointer effects ${finePointer ? "run for a mouse" : "remain disabled on touch"}`, () => {
+        const chat = createChat({ reducedMotion: false, observerAvailable: true, finePointer });
+        assert.equal(typeof chat.windowHandlers.pointermove === "function", finePointer);
+        assert.equal(chat.heroCode.textContent, "const developer = { name: 'Arda Altunel' };");
+    });
+}
