@@ -30,17 +30,17 @@ function webpDimensions(bytes) {
   assert.fail("WebP contains no image dimension header");
 }
 
-test("each redesigned page has one main heading and three usable section links with its own current state", () => {
+test("each redesigned page has one main heading and three usable portfolio links in its footer", () => {
   for (const page of pages) {
     const html = htmlFor(page);
     assert.equal([...html.matchAll(/<main\b/gi)].length, 1, page);
     assert.equal([...html.matchAll(/<h1\b/gi)].length, 1, page);
     assert.match(html, /<main\b[^>]*id="main-content"[^>]*tabindex="-1"/);
-    const tabs = [...html.matchAll(/<nav\b([^>]*)>([\s\S]*?)<\/nav>/gi)].find((m) => attrs(m[1])["aria-label"] === "Portfolyo bölümleri");
-    assert.ok(tabs, page);
-    const links = anchors(tabs[2], page);
+    const footer = html.match(/<footer\b[^>]*>([\s\S]*?)<\/footer>/i)?.[1] || "";
+    const navigation = [...footer.matchAll(/<nav\b([^>]*)>([\s\S]*?)<\/nav>/gi)].find((m) => attrs(m[1])["aria-label"] === "Portfolyo sayfaları");
+    assert.ok(navigation, page);
+    const links = anchors(navigation[2], page);
     assert.deepEqual(links.map((link) => link.url.href), pages.map((target) => site + target));
-    assert.deepEqual(links.filter((link) => link["aria-current"] === "page").map((link) => link.url.pathname), [page]);
     for (const match of html.matchAll(/aria-labelledby="([^"]+)"/g)) {
       for (const id of match[1].split(/\s+/)) assert.ok(html.includes(`id="${id}"`), `missing label ${id}`);
     }

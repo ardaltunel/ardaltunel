@@ -27,71 +27,6 @@ body[data-theme="light"] .portfolio-page {
     overflow-wrap: break-word;
 }
 
-.portfolio-topline {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 18px 32px;
-    min-height: 94px;
-    padding-block: 20px;
-    border-bottom: 1px solid var(--line);
-}
-
-.portfolio-tabs {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 6px;
-}
-
-.portfolio-tabs a {
-    display: inline-flex;
-    align-items: center;
-    min-height: 40px;
-    padding: 8px 14px;
-    border: 1px solid transparent;
-    border-radius: var(--radius);
-    color: var(--muted);
-    font-size: 13px;
-    font-weight: 700;
-    transition: background 160ms ease, color 160ms ease, border-color 160ms ease;
-}
-
-.portfolio-tabs a:hover {
-    background: var(--surface-hover);
-    color: var(--text);
-}
-
-.portfolio-tabs a[aria-current="page"] {
-    border-color: var(--line-strong);
-    background: var(--surface);
-    color: var(--portfolio-accent);
-}
-
-.portfolio-breadcrumbs {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 8px 12px;
-    color: var(--quiet);
-    font-size: 12px;
-    line-height: 1.5;
-    overflow-wrap: anywhere;
-}
-
-.portfolio-breadcrumbs a {
-    color: var(--muted);
-}
-
-.portfolio-breadcrumbs a:hover {
-    color: var(--portfolio-accent);
-}
-
-.portfolio-breadcrumbs [aria-current="page"] {
-    color: var(--text);
-}
-
 .portfolio-hero {
     display: grid;
     grid-template-columns: minmax(0, 1.55fr) minmax(290px, 0.9fr);
@@ -928,26 +863,6 @@ body[data-theme="light"] .portfolio-page {
         width: calc(100% - 28px);
     }
 
-    .portfolio-topline {
-        min-height: 0;
-        gap: 15px;
-        padding-block: 20px;
-    }
-
-    .portfolio-tabs {
-        gap: 4px;
-    }
-
-    .portfolio-tabs a {
-        padding: 8px 11px;
-        font-size: 12px;
-    }
-
-    .portfolio-breadcrumbs {
-        flex-basis: 100%;
-        font-size: 11px;
-    }
-
     .portfolio-hero {
         padding-block: 38px 42px;
     }
@@ -1053,11 +968,6 @@ body[data-theme="light"] .portfolio-page {
     --portfolio-art-line: rgba(19, 110, 148, 0.2);
     --portfolio-art-green: rgba(10, 166, 106, 0.11);
     --portfolio-art-cyan: rgba(30, 136, 183, 0.1);
-}
-
-.portfolio-tabs a[aria-current="page"] {
-    border-color: color-mix(in srgb, var(--green) 38%, transparent);
-    background: var(--portfolio-art-green);
 }
 
 .portfolio-hero {
