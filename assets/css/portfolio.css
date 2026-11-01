@@ -2477,3 +2477,189 @@ body[data-theme="light"] .portfolio-page {
         scroll-behavior: auto !important;
     }
 }
+
+/* Small refinements to the two supporting cards on the About page. */
+.portfolio-page.is-about .portfolio-detail-card {
+    position: relative;
+    background:
+        radial-gradient(ellipse at 100% 0, var(--portfolio-art-green), transparent 62%),
+        var(--surface);
+}
+
+.portfolio-page.is-about .portfolio-detail-card.is-connections {
+    background:
+        radial-gradient(ellipse at 100% 0, var(--portfolio-art-cyan), transparent 62%),
+        var(--surface);
+}
+
+.portfolio-page.is-about .portfolio-detail-card::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 28px;
+    right: 28px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--green), var(--cyan), transparent);
+    opacity: 0.65;
+    pointer-events: none;
+}
+
+.portfolio-detail-heading {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin-bottom: 24px;
+}
+
+.portfolio-detail-icon {
+    display: grid;
+    flex: 0 0 42px;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border: 1px solid var(--line-strong);
+    border-radius: 10px;
+    background: var(--portfolio-art-green);
+    color: var(--portfolio-accent);
+    font-size: 18px;
+}
+
+.is-connections .portfolio-detail-icon {
+    background: var(--portfolio-art-cyan);
+    color: var(--cyan);
+}
+
+.portfolio-page .portfolio-detail-heading .portfolio-kicker {
+    margin: 0 0 4px;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+}
+
+.portfolio-page .portfolio-detail-heading h3 {
+    margin: 0;
+    font-size: 19px;
+    line-height: 1.4;
+}
+
+.portfolio-tool-groups {
+    display: grid;
+}
+
+.portfolio-tool-group {
+    display: grid;
+    grid-template-columns: 76px minmax(0, 1fr);
+    align-items: start;
+    gap: 12px;
+    padding-block: 16px;
+    border-bottom: 1px solid var(--line);
+}
+
+.portfolio-tool-group:first-child {
+    padding-top: 0;
+}
+
+.portfolio-tool-group:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+}
+
+.portfolio-tool-group h4 {
+    margin: 6px 0 0;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.portfolio-tool-group .portfolio-tags {
+    gap: 6px;
+    margin: 0;
+}
+
+.portfolio-tool-group .portfolio-tags li {
+    padding: 5px 8px;
+    background: var(--surface-inner);
+    color: var(--text);
+    font-size: 11px;
+}
+
+.portfolio-profile-links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.portfolio-profile-link {
+    display: grid;
+    grid-template-columns: 18px minmax(0, 1fr) 11px;
+    align-items: center;
+    gap: 9px;
+    min-width: 0;
+    min-height: 74px;
+    padding: 13px 12px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--surface-inner);
+    transition: border-color 160ms ease, background 160ms ease;
+}
+
+.portfolio-profile-link:hover,
+.portfolio-profile-link:focus-visible {
+    border-color: color-mix(in srgb, var(--cyan) 55%, var(--line));
+    background: var(--surface-hover);
+}
+
+.portfolio-profile-link > .bi:first-child {
+    color: var(--portfolio-accent);
+    font-size: 16px;
+}
+
+.portfolio-profile-link > .bi:last-child {
+    color: var(--quiet);
+    font-size: 11px;
+}
+
+.portfolio-profile-link > span {
+    display: grid;
+    gap: 3px;
+    min-width: 0;
+}
+
+.portfolio-profile-link strong {
+    color: var(--text);
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.45;
+}
+
+.portfolio-profile-link small {
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.portfolio-page.is-about .portfolio-detail-note {
+    margin: 22px 0 0;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.85;
+}
+
+@media (max-width: 480px) {
+    .portfolio-profile-links {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .portfolio-profile-link {
+        min-height: 64px;
+        padding: 12px 14px;
+    }
+
+    .portfolio-tool-group {
+        grid-template-columns: 65px minmax(0, 1fr);
+        gap: 8px;
+    }
+}
