@@ -2,11 +2,11 @@
   {
     "name": "ardaltunel",
     "description": "A modern, responsive personal portfolio website with dynamic content support, prepared for deployment on Vercel.",
-    "language": "CSS",
-    "color": "#563d7c",
+    "language": "JavaScript",
+    "color": "#f1e05a",
     "stars": 28,
     "forks": 2,
-    "updated": "27.10.2026",
+    "updated": "01.11.2026",
     "url": "https://github.com/ardaltunel/ardaltunel",
     "homepage": "https://ardaltunel.vercel.app"
   },
@@ -17,7 +17,7 @@
     "color": "#f1e05a",
     "stars": 32,
     "forks": 1,
-    "updated": "15.10.2026",
+    "updated": "01.11.2026",
     "url": "https://github.com/ardaltunel/omni-tools",
     "homepage": "https://ardaltunel.github.io/omni-tools/"
   },
